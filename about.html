@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | Vivek Polymers - Engineering Polymers Since 2016</title>
+    <meta name="description" content="Learn about Vivek Polymers - ISO 9001:2015 certified manufacturer of engineering polymers, established in 2016 under Mr. Dilip Mishra's leadership.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: { 50: '#eff6ff', 100: '#dbeafe', 200: '#bfdbfe', 300: '#93c5fd', 400: '#60a5fa', 500: '#3b82f6', 600: '#1e40af', 700: '#1e3a8a', 800: '#1e3a5f', 900: '#0f172a' },
+                        accent: { 400: '#22d3ee', 500: '#06b6d4', 600: '#0891b2' },
+                        emerald: { 400: '#34d399', 500: '#10b981', 600: '#059669' }
+                    },
+                    fontFamily: { sans: ['Inter', 'sans-serif'], display: ['Space Grotesk', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-slate-950 text-white font-sans antialiased">
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500">
+        <div class="max-w-7xl mx-auto px-6 py-4">
+            <div class="glass-nav rounded-2xl px-6 py-4 flex items-center justify-between">
+                <a href="index.html" class="flex items-center gap-3">
+                    <div class="logo-hexagon w-12 h-12 flex items-center justify-center text-white font-bold text-sm">VP</div>
+                    <span class="font-display font-bold text-lg text-white">VIVEK POLYMERS</span>
+                </a>
+                <ul class="nav-links hidden lg:flex items-center gap-8">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="about.html" class="nav-link active">About Us</a></li>
+                    <li><a href="products.html" class="nav-link">Products</a></li>
+                    <li><a href="quality.html" class="nav-link">Quality & R&D</a></li>
+                    <li><a href="contact.html" class="nav-link">Contact</a></li>
+                </ul>
+                <div class="flex items-center gap-4">
+                    <a href="contact.html#quote" class="hidden md:inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-cyan-500 to-emerald-500 text-white font-semibold text-sm rounded-xl hover:shadow-lg hover:shadow-cyan-500/30 transition-all">
+                        <span>Request Quote</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                    <button id="hamburger" class="lg:hidden flex flex-col gap-1.5 p-2" aria-label="Menu">
+                        <span class="w-6 h-0.5 bg-white transition-all"></span>
+                        <span class="w-6 h-0.5 bg-white transition-all"></span>
+                        <span class="w-4 h-0.5 bg-white transition-all"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="mobileMenu" class="lg:hidden hidden absolute top-full left-0 right-0 px-6 pb-6">
+            <div class="glass-nav rounded-2xl p-6 flex flex-col gap-4">
+                <a href="index.html" class="nav-link-mobile">Home</a>
+                <a href="about.html" class="nav-link-mobile active">About Us</a>
+                <a href="products.html" class="nav-link-mobile">Products</a>
+                <a href="quality.html" class="nav-link-mobile">Quality & R&D</a>
+                <a href="contact.html" class="nav-link-mobile">Contact</a>
+                <a href="contact.html#quote" class="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-gradient-to-r from-cyan-500 to-emerald-500 text-white font-semibold text-sm rounded-xl mt-2">Request Quote</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="pt-40 pb-20 bg-gradient-to-b from-slate-900 to-slate-800 relative">
+        <div class="absolute inset-0 grid-pattern opacity-20"></div>
+        <div class="max-w-7xl mx-auto px-6 relative z-10 text-center">
+            <span class="inline-block text-cyan-400 text-sm font-semibold tracking-widest uppercase mb-4">Our Story</span>
+            <h1 class="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4">Our Story</h1>
+            <p class="text-slate-400 text-lg max-w-2xl mx-auto">Pioneering excellence in engineering polymers since 2016</p>
+        </div>
+    </section>
+
+    <!-- Company Overview -->
+    <section class="py-24 relative">
+        <div class="absolute inset-0 bg-gradient-to-b from-slate-900 to-slate-950"></div>
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div>
+                    <span class="section-badge">Who We Are</span>
+                    <h2 class="font-display text-3xl md:text-4xl font-bold text-white mb-6">A Legacy of Quality & Innovation</h2>
+                    <div class="space-y-4 text-slate-400">
+                        <p>Established in the year 2016, Vivek Polymers has emerged as a prominent manufacturer and supplier of all types of engineering polymers.</p>
+                        <p>Under the adept leadership of <strong class="text-white">Mr. Dilip Mishra</strong>, we have established a strong presence in the market. His visionary approach and unwavering motivation have enabled us to consistently meet and exceed our clients' expectations with efficiency.</p>
+                        <p>Our firm has become one of the fastest growing Plastic Granules manufacturers and suppliers of plastic raw material including Polyethylene Granules, Polypropylene Granules, PPCP Granules, ABS Granules, Polycarbonate Granules, TPE Granules, Nylon Granules, PMMA Granules, SAN Granules and reprocessed plastic.</p>
+                    </div>
+                    <div class="mt-8 flex flex-wrap gap-4">
+                        <div class="glass-badge px-4 py-2 rounded-full">
+                            <span class="text-cyan-400 font-semibold">ISO 9001:2015</span>
+                        </div>
+                        <div class="glass-badge px-4 py-2 rounded-full">
+                            <span class="text-emerald-400 font-semibold">Est. 2016</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="relative">
+                    <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600&h=500&fit=crop" alt="Manufacturing Excellence" class="rounded-3xl shadow-2xl">
+                    <div class="absolute -bottom-6 -left-6 glass-card p-6 rounded-2xl">
+                        <div class="flex items-center gap-4">
+                            <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-cyan-500 to-emerald-500 flex items-center justify-center">
+                                <i class="fas fa-award text-white text-xl"></i>
+                            </div>
+                            <div>
+                                <p class="text-2xl font-bold text-white">8+ Years</p>
+                                <p class="text-slate-400 text-sm">Industry Experience</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission, Vision, Values -->
+    <section class="py-24 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-primary-900 via-slate-900 to-slate-950"></div>
+        <div class="absolute inset-0 grid-pattern opacity-10"></div>
+        
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <div class="text-center mb-16">
+                <span class="section-badge">Our Foundation</span>
+                <h2 class="font-display text-4xl md:text-5xl font-bold text-white">Mission, Vision & Values</h2>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8 mb-16">
+                <!-- Mission -->
+                <div class="glass-card p-8 rounded-3xl text-center hover-lift">
+                    <div class="w-20 h-20 rounded-2xl bg-gradient-to-br from-cyan-500 to-cyan-600 flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-bullseye text-white text-3xl"></i>
+                    </div>
+                    <h3 class="font-display text-2xl font-bold text-white mb-4">Our Mission</h3>
+                    <p class="text-slate-400">Creating value for all stakeholders in a win-win environment.</p>
+                </div>
+                
+                <!-- Vision -->
+                <div class="glass-card p-8 rounded-3xl text-center hover-lift">
+                    <div class="w-20 h-20 rounded-2xl bg-gradient-to-br from-emerald-500 to-emerald-600 flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-eye text-white text-3xl"></i>
+                    </div>
+                    <h3 class="font-display text-2xl font-bold text-white mb-4">Our Vision</h3>
+                    <p class="text-slate-400">Keep moving by providing quality, innovative, and sustainable solutions.</p>
+                </div>
+                
+                <!-- Philosophy -->
+                <div class="glass-card p-8 rounded-3xl text-center hover-lift">
+                    <div class="w-20 h-20 rounded-2xl bg-gradient-to-br from-primary-500 to-primary-600 flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-users text-white text-3xl"></i>
+                    </div>
+                    <h3 class="font-display text-2xl font-bold text-white mb-4">Our Philosophy</h3>
+                    <p class="text-slate-400">At Vivek Polymers, everyone is a salesperson, entrepreneur, and family member.</p>
+                </div>
+            </div>
+            
+            <!-- Core Values -->
+            <div class="glass-card p-8 md:p-12 rounded-3xl">
+                <h3 class="font-display text-2xl font-bold text-white text-center mb-8">Our Core Values</h3>
+                <div class="grid grid-cols-2 md:grid-cols-5 gap-6">
+                    <div class="text-center">
+                        <div class="w-16 h-16 rounded-full bg-gradient-to-br from-cyan-500/20 to-cyan-600/20 flex items-center justify-center mx-auto mb-3">
+                            <i class="fas fa-shield-alt text-cyan-400 text-2xl"></i>
+                        </div>
+                        <h5 class="font-semibold text-white">Integrity</h5>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-16 h-16 rounded-full bg-gradient-to-br from-emerald-500/20 to-emerald-600/20 flex items-center justify-center mx-auto mb-3">
+                            <i class="fas fa-rocket text-emerald-400 text-2xl"></i>
+                        </div>
+                        <h5 class="font-semibold text-white">Speed & Scalability</h5>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-16 h-16 rounded-full bg-gradient-to-br from-primary-500/20 to-primary-600/20 flex items-center justify-center mx-auto mb-3">
+                            <i class="fas fa-chart-line text-primary-400 text-2xl"></i>
+                        </div>
+                        <h5 class="font-semibold text-white">Growth Mindset</h5>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-16 h-16 rounded-full bg-gradient-to-br from-amber-500/20 to-amber-600/20 flex items-center justify-center mx-auto mb-3">
+                            <i class="fas fa-trophy text-amber-400 text-2xl"></i>
+                        </div>
+                        <h5 class="font-semibold text-white">Peak Performance</h5>
+                    </div>
+                    <div class="text-center col-span-2 md:col-span-1">
+                        <div class="w-16 h-16 rounded-full bg-gradient-to-br from-rose-500/20 to-rose-600/20 flex items-center justify-center mx-auto mb-3">
+                            <i class="fas fa-heart text-rose-400 text-2xl"></i>
+                        </div>
+                        <h5 class="font-semibold text-white">Customer Delight</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Competitive Advantage -->
+    <section class="py-24 relative">
+        <div class="absolute inset-0 bg-slate-950"></div>
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <div class="text-center mb-16">
+                <span class="section-badge">Why Choose Us</span>
+                <h2 class="font-display text-4xl md:text-5xl font-bold text-white mb-4">Our Competitive Advantage</h2>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="glass-card p-8 rounded-3xl hover-lift">
+                    <div class="flex items-start gap-4">
+                        <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-cyan-500 to-cyan-600 flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-users-cog text-white text-xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-display text-xl font-bold text-white mb-2">Efficient Sales & Commercial Team</h4>
+                            <p class="text-slate-400">Dedicated professionals ensuring seamless transactions and customer satisfaction.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="glass-card p-8 rounded-3xl hover-lift">
+                    <div class="flex items-start gap-4">
+                        <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-emerald-500 to-emerald-600 flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-network-wired text-white text-xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-display text-xl font-bold text-white mb-2">Wide Network of OEM Customers</h4>
+                            <p class="text-slate-400">Established relationships with OEM, Tier-I and Tier-II customers across industries.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="glass-card p-8 rounded-3xl hover-lift">
+                    <div class="flex items-start gap-4">
+                        <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-primary-500 to-primary-600 flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-handshake text-white text-xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-display text-xl font-bold text-white mb-2">Strong Customer Relationships</h4>
+                            <p class="text-slate-400">High touch time ensuring personalized service and lasting partnerships.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="glass-card p-8 rounded-3xl hover-lift">
+                    <div class="flex items-start gap-4">
+                        <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-amber-500 to-amber-600 flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-flask text-white text-xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-display text-xl font-bold text-white mb-2">R&D Center for Material Testing</h4>
+                            <p class="text-slate-400">Quality backed by our principals with in-house testing capabilities.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- People & Infrastructure -->
+    <section class="py-24 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-r from-primary-900 via-primary-800 to-cyan-900"></div>
+        <div class="absolute inset-0 grid-pattern opacity-10"></div>
+        
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <div class="text-center mb-16">
+                <span class="inline-block text-cyan-300 text-sm font-semibold tracking-widest uppercase mb-4">Our Foundation</span>
+                <h2 class="font-display text-4xl md:text-5xl font-bold text-white mb-4">People & Infrastructure</h2>
+            </div>
+            
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="text-white">
+                    <p class="text-lg text-slate-200 mb-6">Utilizing hard-earned experience and talent of our professionals, we have carved a descent niche for ourselves in market.</p>
+                    <p class="text-slate-300 mb-6">We have selected only skilled and experienced professionals who possess years of experience in their respective domain. These professionals are selected on the basis of their working experience, creativity and ability to meet demands of our clients after a set of practical examination.</p>
+                    <p class="text-slate-300 mb-8">Moreover, we also conduct various training sessions and seminars to keep them abreast with emerging market norms.</p>
+                    
+                    <div class="grid grid-cols-2 gap-6">
+                        <div class="text-center p-6 bg-white/10 backdrop-blur rounded-2xl">
+                            <div class="text-3xl font-bold text-white">444<span class="text-lg">sq.m</span></div>
+                            <p class="text-cyan-200 text-sm mt-1">Manufacturing Facility</p>
+                        </div>
+                        <div class="text-center p-6 bg-white/10 backdrop-blur rounded-2xl">
+                            <div class="text-3xl font-bold text-white">IMT Bawal</div>
+                            <p class="text-cyan-200 text-sm mt-1">HSIIDC Industrial Area</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <img src="https://images.unsplash.com/photo-1565793298595-6a879b1d9492?w=600&h=450&fit=crop" alt="Manufacturing Facility" class="rounded-3xl shadow-2xl">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-24 relative">
+        <div class="absolute inset-0 bg-slate-950"></div>
+        <div class="max-w-4xl mx-auto px-6 relative z-10 text-center">
+            <h2 class="font-display text-3xl md:text-4xl font-bold text-white mb-6">Ready to Partner with Us?</h2>
+            <p class="text-slate-400 text-lg mb-8">Discover how our premium engineering polymers can elevate your manufacturing processes.</p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="products.html" class="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-cyan-500 to-emerald-500 text-white font-semibold rounded-xl hover:shadow-lg hover:shadow-cyan-500/30 transition-all">
+                    <span>Explore Products</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+                <a href="contact.html" class="inline-flex items-center gap-2 px-6 py-3 border-2 border-slate-600 text-white font-semibold rounded-xl hover:border-cyan-500 hover:bg-cyan-500/10 transition-all">
+                    <i class="fas fa-envelope"></i>
+                    <span>Contact Us</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-950 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-6 py-16">
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+                <div class="lg:col-span-1">
+                    <a href="index.html" class="flex items-center gap-3 mb-6">
+                        <div class="logo-hexagon w-12 h-12 flex items-center justify-center text-white font-bold text-sm">VP</div>
+                        <div class="flex flex-col">
+                            <span class="font-display font-bold text-lg text-white">VIVEK POLYMERS</span>
+                            <span class="text-[10px] text-cyan-400 tracking-widest">ISO 9001:2015 CERTIFIED</span>
+                        </div>
+                    </a>
+                    <p class="text-slate-400 text-sm mb-6">Where quality inspires trust. Manufacturing premium engineering polymers since 2016.</p>
+                    <div class="flex gap-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 hover:bg-cyan-500 hover:text-white transition-all"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 hover:bg-cyan-500 hover:text-white transition-all"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://wa.me/918690800135" class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 hover:bg-emerald-500 hover:text-white transition-all"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="font-display font-bold text-white mb-6">Quick Links</h4>
+                    <ul class="space-y-3">
+                        <li><a href="index.html" class="text-slate-400 hover:text-cyan-400 transition-colors">Home</a></li>
+                        <li><a href="about.html" class="text-slate-400 hover:text-cyan-400 transition-colors">About Us</a></li>
+                        <li><a href="products.html" class="text-slate-400 hover:text-cyan-400 transition-colors">Products</a></li>
+                        <li><a href="quality.html" class="text-slate-400 hover:text-cyan-400 transition-colors">Quality & R&D</a></li>
+                        <li><a href="contact.html" class="text-slate-400 hover:text-cyan-400 transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-display font-bold text-white mb-6">Our Products</h4>
+                    <ul class="space-y-3">
+                        <li><a href="products.html#abs" class="text-slate-400 hover:text-cyan-400 transition-colors">ABS Granules</a></li>
+                        <li><a href="products.html#ppcp" class="text-slate-400 hover:text-cyan-400 transition-colors">PPCP Granules</a></li>
+                        <li><a href="products.html#pc" class="text-slate-400 hover:text-cyan-400 transition-colors">Polycarbonate</a></li>
+                        <li><a href="products.html#nylon" class="text-slate-400 hover:text-cyan-400 transition-colors">Nylon Granules</a></li>
+                        <li><a href="products.html#pmma" class="text-slate-400 hover:text-cyan-400 transition-colors">PMMA Granules</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-display font-bold text-white mb-6">Contact Info</h4>
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-3">
+                            <i class="fas fa-map-marker-alt text-cyan-400 mt-1"></i>
+                            <span class="text-slate-400 text-sm">Plot No. 109, Sector-03, HSIIDC IMT Bawal, Rewari, Haryana - 123501</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fas fa-phone text-cyan-400"></i>
+                            <a href="tel:+918690800135" class="text-slate-400 hover:text-cyan-400 transition-colors">+91-8690800135</a>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fas fa-envelope text-cyan-400"></i>
+                            <a href="mailto:vivekpolymers24@gmail.com" class="text-slate-400 hover:text-cyan-400 transition-colors">vivekpolymers24@gmail.com</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-slate-500 text-sm">&copy; 2024 Vivek Polymers. All Rights Reserved.</p>
+                <p class="text-slate-600 text-xs">Under the leadership of Mr. Dilip Mishra</p>
+            </div>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/918690800135" target="_blank" class="whatsapp-float" aria-label="Chat on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script src="script.js"></script>
+</body>
+</html>

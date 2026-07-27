@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | Vivek Polymers - Get in Touch</title>
+    <meta name="description" content="Contact Vivek Polymers for premium plastic granules. Located at HSIIDC IMT Bawal, Haryana. Call +91-8690800135 or email vivekpolymers24@gmail.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: { 50: '#eff6ff', 100: '#dbeafe', 200: '#bfdbfe', 300: '#93c5fd', 400: '#60a5fa', 500: '#3b82f6', 600: '#1e40af', 700: '#1e3a8a', 800: '#1e3a5f', 900: '#0f172a' },
+                        accent: { 400: '#22d3ee', 500: '#06b6d4', 600: '#0891b2' },
+                        emerald: { 400: '#34d399', 500: '#10b981', 600: '#059669' }
+                    },
+                    fontFamily: { sans: ['Inter', 'sans-serif'], display: ['Space Grotesk', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-slate-950 text-white font-sans antialiased">
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500">
+        <div class="max-w-7xl mx-auto px-6 py-4">
+            <div class="glass-nav rounded-2xl px-6 py-4 flex items-center justify-between">
+                <a href="index.html" class="flex items-center gap-3">
+                    <div class="logo-hexagon w-12 h-12 flex items-center justify-center text-white font-bold text-sm">VP</div>
+                    <span class="font-display font-bold text-lg text-white">VIVEK POLYMERS</span>
+                </a>
+                <ul class="nav-links hidden lg:flex items-center gap-8">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="about.html" class="nav-link">About Us</a></li>
+                    <li><a href="products.html" class="nav-link">Products</a></li>
+                    <li><a href="quality.html" class="nav-link">Quality & R&D</a></li>
+                    <li><a href="contact.html" class="nav-link active">Contact</a></li>
+                </ul>
+                <div class="flex items-center gap-4">
+                    <a href="#quote" class="hidden md:inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-cyan-500 to-emerald-500 text-white font-semibold text-sm rounded-xl hover:shadow-lg hover:shadow-cyan-500/30 transition-all">
+                        <span>Request Quote</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                    <button id="hamburger" class="lg:hidden flex flex-col gap-1.5 p-2" aria-label="Menu">
+                        <span class="w-6 h-0.5 bg-white transition-all"></span>
+                        <span class="w-6 h-0.5 bg-white transition-all"></span>
+                        <span class="w-4 h-0.5 bg-white transition-all"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="mobileMenu" class="lg:hidden hidden absolute top-full left-0 right-0 px-6 pb-6">
+            <div class="glass-nav rounded-2xl p-6 flex flex-col gap-4">
+                <a href="index.html" class="nav-link-mobile">Home</a>
+                <a href="about.html" class="nav-link-mobile">About Us</a>
+                <a href="products.html" class="nav-link-mobile">Products</a>
+                <a href="quality.html" class="nav-link-mobile">Quality & R&D</a>
+                <a href="contact.html" class="nav-link-mobile active">Contact</a>
+                <a href="#quote" class="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-gradient-to-r from-cyan-500 to-emerald-500 text-white font-semibold text-sm rounded-xl mt-2">Request Quote</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="pt-40 pb-20 bg-gradient-to-b from-slate-900 to-slate-800 relative">
+        <div class="absolute inset-0 grid-pattern opacity-20"></div>
+        <div class="max-w-7xl mx-auto px-6 relative z-10 text-center">
+            <span class="inline-block text-cyan-400 text-sm font-semibold tracking-widest uppercase mb-4">Get In Touch</span>
+            <h1 class="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4">Contact Us</h1>
+            <p class="text-slate-400 text-lg max-w-2xl mx-auto">Let's discuss how we can meet your polymer requirements</p>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="py-24 relative">
+        <div class="absolute inset-0 bg-gradient-to-b from-slate-900 to-slate-950"></div>
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-16">
+                <!-- Contact Info -->
+                <div>
+                    <span class="section-badge">Reach Out</span>
+                    <h2 class="font-display text-3xl md:text-4xl font-bold text-white mb-6">We're Here to Help</h2>
+                    <p class="text-slate-400 mb-10">Have questions about our products or need a custom polymer solution? Our team is ready to assist you.</p>
+                    
+                    <div class="space-y-6 mb-10">
+                        <div class="flex items-start gap-4 p-5 bg-slate-800/50 rounded-2xl border border-slate-700/50 hover:border-cyan-500/30 transition-all">
+                            <div class="w-12 h-12 min-w-[48px] bg-gradient-to-br from-cyan-500 to-emerald-500 rounded-xl flex items-center justify-center">
+                                <i class="fas fa-map-marker-alt text-white text-lg"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-white mb-1">Factory Address</h4>
+                                <p class="text-slate-400">Plot No. 109, Sector-03, HSIIDC IMT Bawal, Rewari, Haryana - 123501</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start gap-4 p-5 bg-slate-800/50 rounded-2xl border border-slate-700/50 hover:border-cyan-500/30 transition-all">
+                            <div class="w-12 h-12 min-w-[48px] bg-gradient-to-br from-cyan-500 to-emerald-500 rounded-xl flex items-center justify-center">
+                                <i class="fas fa-phone text-white text-lg"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-white mb-1">Phone Number</h4>
+                                <a href="tel:+918690800135" class="text-cyan-400 hover:text-cyan-300 transition-colors text-lg">+91-8690800135</a>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start gap-4 p-5 bg-slate-800/50 rounded-2xl border border-slate-700/50 hover:border-cyan-500/30 transition-all">
+                            <div class="w-12 h-12 min-w-[48px] bg-gradient-to-br from-cyan-500 to-emerald-500 rounded-xl flex items-center justify-center">
+                                <i class="fas fa-envelope text-white text-lg"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-white mb-1">Email Address</h4>
+                                <a href="mailto:vivekpolymers24@gmail.com" class="text-cyan-400 hover:text-cyan-300 transition-colors">vivekpolymers24@gmail.com</a>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start gap-4 p-5 bg-slate-800/50 rounded-2xl border border-slate-700/50 hover:border-emerald-500/30 transition-all">
+                            <div class="w-12 h-12 min-w-[48px] bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-xl flex items-center justify-center">
+                                <i class="fab fa-whatsapp text-white text-lg"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-white mb-1">WhatsApp</h4>
+                                <a href="https://wa.me/918690800135" class="text-emerald-400 hover:text-emerald-300 transition-colors">Chat with us on WhatsApp</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Map -->
+                    <div class="map-container h-64 rounded-2xl overflow-hidden">
+                        <iframe 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3523.456!2d76.579!3d28.082!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjjCsDA0JzU1LjIiTiA3NsKwMzQnNDQuNCJF!5e0!3m2!1sen!2sin!4v1700000000000" 
+                            width="100%" 
+                            height="100%" 
+                            style="border:0;" 
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div id="quote" class="glass-card p-8 md:p-10 rounded-3xl">
+                    <h3 class="font-display text-2xl font-bold text-white mb-2">Send Us a Message</h3>
+                    <p class="text-slate-400 mb-8">Fill out the form below and we'll get back to you shortly.</p>
+                    
+                    <form id="contactForm" class="space-y-6">
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-slate-400 text-sm font-medium mb-2">Your Name *</label>
+                                <input type="text" class="w-full px-4 py-3 bg-slate-800 border border-slate-600 rounded-xl text-white placeholder-slate-500 focus:border-cyan-500 focus:outline-none focus:ring-1 focus:ring-cyan-500" placeholder="John Doe" required>
+                            </div>
+                            <div>
+                                <label class="block text-slate-400 text-sm font-medium mb-2">Company Name</label>
+                                <input type="text" class="w-full px-4 py-3 bg-slate-800 border border-slate-600 rounded-xl text-white placeholder-slate-500 focus:border-cyan-500 focus:outline-none focus:ring-1 focus:ring-cyan-500" placeholder="Your Company">
+                            </div>
+                        </div>
+                        
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-slate-400 text-sm font-medium mb-2">Email Address *</label>
+                                <input type="email" class="w-full px-4 py-3 bg-slate-800 border border-slate-600 rounded-xl text-white placeholder-slate-500 focus:border-cyan-500 focus:outline-none focus:ring-1 focus:ring-cyan-500" placeholder="email@company.com" required>
+                            </div>
+                            <div>
+                                <label class="block text-slate-400 text-sm font-medium mb-2">Phone Number *</label>
+                                <input type="tel" class="w-full px-4 py-3 bg-slate-800 border border-slate-600 rounded-xl text-white placeholder-slate-500 focus:border-cyan-500 focus:outline-none focus:ring-1 focus:ring-cyan-500" placeholder="+91 XXXXX XXXXX" required>
+                            </div>
+                        </div>
+                        
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-slate-400 text-sm font-medium mb-2">Required Polymer</label>
+                                <select class="w-full px-4 py-3 bg-slate-800 border border-slate-600 rounded-xl text-white text-sm focus:border-cyan-500 focus:outline-none focus:ring-1 focus:ring-cyan-500 appearance-none cursor-pointer" style="background-image: url('data:image/svg+xml;charset=UTF-8,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%2394a3b8%27 stroke-width=%272%27%3E%3Cpath d=%27M6 9l6 6 6-6%27/%3E%3C/svg%3E'); background-repeat: no-repeat; background-position: right 12px center; background-size: 20px;">
+                                    <option value="">Select polymer type</option>
+                                    <optgroup label="ABS Granules">
+                                        <option value="abs-black">ABS Black</option>
+                                        <option value="abs-milky">ABS Milky</option>
+                                        <option value="abs-grey">ABS Grey</option>
+                                        <option value="abs-natural">ABS Natural</option>
+                                    </optgroup>
+                                    <optgroup label="PPCP Granules">
+                                        <option value="ppcp-black">PPCP Black</option>
+                                        <option value="ppcp-plain">PPCP Plain</option>
+                                        <option value="ppcp-grey">PPCP Grey</option>
+                                    </optgroup>
+                                    <optgroup label="Polypropylene">
+                                        <option value="ppgf-30">PPGF 30%</option>
+                                        <option value="pptf-30">PPTF 30%</option>
+                                        <option value="pptf-20">PPTF 20%</option>
+                                    </optgroup>
+                                    <optgroup label="Polycarbonate">
+                                        <option value="pc-black">Polycarbonate Black</option>
+                                        <option value="pc-natural">Polycarbonate Natural</option>
+                                        <option value="pc-white">Polycarbonate White</option>
+                                        <option value="pc-grey">Polycarbonate Grey</option>
+                                    </optgroup>
+                                    <optgroup label="Nylon">
+                                        <option value="nylon-6">Nylon 6</option>
+                                        <option value="nylon-66">Nylon 66</option>
+                                        <option value="nylon-plain">Nylon Plain</option>
+                                        <option value="nylon-gf">Nylon GF</option>
+                                    </optgroup>
+                                    <optgroup label="PMMA">
+                                        <option value="pmma-red">PMMA Red</option>
+                                        <option value="pmma-natural">PMMA Natural</option>
+                                        <option value="pmma-amber">PMMA Amber</option>
+                                    </optgroup>
+                                    <optgroup label="SAN Granules">
+                                        <option value="san-natural">SAN Natural</option>
+                                        <option value="san-gf-blue">SAN GF Blue</option>
+                                        <option value="san-gf-black">SAN GF Black</option>
+                                    </optgroup>
+                                    <option value="other">Other / Custom Requirement</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-slate-400 text-sm font-medium mb-2">Quantity (in Tons)</label>
+                                <input type="number" class="w-full px-4 py-3 bg-slate-800 border border-slate-600 rounded-xl text-white placeholder-slate-500 focus:border-cyan-500 focus:outline-none focus:ring-1 focus:ring-cyan-500" placeholder="Enter quantity" min="1">
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-slate-400 text-sm font-medium mb-2">Message *</label>
+                            <textarea class="w-full px-4 py-3 bg-slate-800 border border-slate-600 rounded-xl text-white placeholder-slate-500 focus:border-cyan-500 focus:outline-none focus:ring-1 focus:ring-cyan-500 resize-none" rows="5" placeholder="Describe your requirements, specifications, or any questions..." required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="w-full inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-cyan-500 to-emerald-500 text-white font-semibold rounded-xl hover:shadow-lg hover:shadow-cyan-500/30 transition-all">
+                            <span>Send Message</span>
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Contact CTA -->
+    <section class="py-16 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-r from-primary-900 via-primary-800 to-cyan-900"></div>
+        <div class="max-w-5xl mx-auto px-6 relative z-10 text-center">
+            <h3 class="font-display text-2xl md:text-3xl font-bold text-white mb-4">Prefer a Quick Call?</h3>
+            <p class="text-slate-300 mb-6">Our team is available to assist you during business hours.</p>
+            <a href="tel:+918690800135" class="inline-flex items-center gap-2 px-6 py-3 bg-white text-slate-900 font-semibold rounded-xl hover:bg-slate-100 hover:shadow-lg transition-all">
+                <i class="fas fa-phone-alt"></i>
+                <span>Call +91-8690800135</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-950 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-6 py-16">
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+                <div class="lg:col-span-1">
+                    <a href="index.html" class="flex items-center gap-3 mb-6">
+                        <div class="logo-hexagon w-12 h-12 flex items-center justify-center text-white font-bold text-sm">VP</div>
+                        <div class="flex flex-col">
+                            <span class="font-display font-bold text-lg text-white">VIVEK POLYMERS</span>
+                            <span class="text-[10px] text-cyan-400 tracking-widest">ISO 9001:2015 CERTIFIED</span>
+                        </div>
+                    </a>
+                    <p class="text-slate-400 text-sm mb-6">Where quality inspires trust. Manufacturing premium engineering polymers since 2016.</p>
+                    <div class="flex gap-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 hover:bg-cyan-500 hover:text-white transition-all"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 hover:bg-cyan-500 hover:text-white transition-all"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://wa.me/918690800135" class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 hover:bg-emerald-500 hover:text-white transition-all"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="font-display font-bold text-white mb-6">Quick Links</h4>
+                    <ul class="space-y-3">
+                        <li><a href="index.html" class="text-slate-400 hover:text-cyan-400 transition-colors">Home</a></li>
+                        <li><a href="about.html" class="text-slate-400 hover:text-cyan-400 transition-colors">About Us</a></li>
+                        <li><a href="products.html" class="text-slate-400 hover:text-cyan-400 transition-colors">Products</a></li>
+                        <li><a href="quality.html" class="text-slate-400 hover:text-cyan-400 transition-colors">Quality & R&D</a></li>
+                        <li><a href="contact.html" class="text-slate-400 hover:text-cyan-400 transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-display font-bold text-white mb-6">Our Products</h4>
+                    <ul class="space-y-3">
+                        <li><a href="products.html#abs" class="text-slate-400 hover:text-cyan-400 transition-colors">ABS Granules</a></li>
+                        <li><a href="products.html#ppcp" class="text-slate-400 hover:text-cyan-400 transition-colors">PPCP Granules</a></li>
+                        <li><a href="products.html#pc" class="text-slate-400 hover:text-cyan-400 transition-colors">Polycarbonate</a></li>
+                        <li><a href="products.html#nylon" class="text-slate-400 hover:text-cyan-400 transition-colors">Nylon Granules</a></li>
+                        <li><a href="products.html#pmma" class="text-slate-400 hover:text-cyan-400 transition-colors">PMMA Granules</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-display font-bold text-white mb-6">Contact Info</h4>
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-3">
+                            <i class="fas fa-map-marker-alt text-cyan-400 mt-1"></i>
+                            <span class="text-slate-400 text-sm">Plot No. 109, Sector-03, HSIIDC IMT Bawal, Rewari, Haryana - 123501</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fas fa-phone text-cyan-400"></i>
+                            <a href="tel:+918690800135" class="text-slate-400 hover:text-cyan-400 transition-colors">+91-8690800135</a>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fas fa-envelope text-cyan-400"></i>
+                            <a href="mailto:vivekpolymers24@gmail.com" class="text-slate-400 hover:text-cyan-400 transition-colors">vivekpolymers24@gmail.com</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-slate-500 text-sm">&copy; 2024 Vivek Polymers. All Rights Reserved.</p>
+                <p class="text-slate-600 text-xs">Under the leadership of Mr. Dilip Mishra</p>
+            </div>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/918690800135" target="_blank" class="whatsapp-float" aria-label="Chat on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script src="script.js"></script>
+</body>
+</html>

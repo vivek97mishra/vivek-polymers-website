@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vivek Polymers | Engineering Precision in Every Granule</title>
+    <meta name="description" content="ISO 9001:2015 certified manufacturer of premium plastic granules and engineering polymers. ABS, PPCP, Polycarbonate, Nylon, PMMA & more.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: { 50: '#eff6ff', 100: '#dbeafe', 200: '#bfdbfe', 300: '#93c5fd', 400: '#60a5fa', 500: '#3b82f6', 600: '#1e40af', 700: '#1e3a8a', 800: '#1e3a5f', 900: '#0f172a' },
+                        accent: { 400: '#22d3ee', 500: '#06b6d4', 600: '#0891b2' },
+                        emerald: { 400: '#34d399', 500: '#10b981', 600: '#059669' }
+                    },
+                    fontFamily: { sans: ['Inter', 'sans-serif'], display: ['Space Grotesk', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-slate-950 text-white font-sans antialiased">
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500">
+        <div class="max-w-7xl mx-auto px-6 py-4">
+            <div class="glass-nav rounded-2xl px-6 py-4 flex items-center justify-between">
+                <a href="index.html" class="flex items-center gap-3">
+                    <div class="logo-hexagon w-12 h-12 flex items-center justify-center text-white font-bold text-sm">VP</div>
+                    <span class="font-display font-bold text-lg text-white">VIVEK POLYMERS</span>
+                </a>
+                <ul class="nav-links hidden lg:flex items-center gap-8">
+                    <li><a href="index.html" class="nav-link active">Home</a></li>
+                    <li><a href="about.html" class="nav-link">About Us</a></li>
+                    <li><a href="products.html" class="nav-link">Products</a></li>
+                    <li><a href="quality.html" class="nav-link">Quality & R&D</a></li>
+                    <li><a href="contact.html" class="nav-link">Contact</a></li>
+                </ul>
+                <div class="flex items-center gap-4">
+                    <a href="#quote" class="hidden md:flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-cyan-500 to-emerald-500 text-white font-semibold text-sm rounded-xl hover:shadow-lg hover:shadow-cyan-500/30 transition-all">
+                        <span>Request Quote</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                    <button id="hamburger" class="lg:hidden flex flex-col gap-1.5 p-2" aria-label="Menu">
+                        <span class="w-6 h-0.5 bg-white transition-all"></span>
+                        <span class="w-6 h-0.5 bg-white transition-all"></span>
+                        <span class="w-4 h-0.5 bg-white transition-all"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="lg:hidden hidden absolute top-full left-0 right-0 px-6 pb-6">
+            <div class="bg-slate-900/95 backdrop-blur-lg rounded-2xl p-6 flex flex-col gap-4 border border-slate-700/50">
+                <a href="index.html" class="nav-link-mobile active">Home</a>
+                <a href="about.html" class="nav-link-mobile">About Us</a>
+                <a href="products.html" class="nav-link-mobile">Products</a>
+                <a href="quality.html" class="nav-link-mobile">Quality & R&D</a>
+                <a href="contact.html" class="nav-link-mobile">Contact</a>
+                <a href="#quote" class="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-gradient-to-r from-cyan-500 to-emerald-500 text-white font-semibold text-sm rounded-xl mt-2">Request Quote</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section min-h-screen relative flex items-center overflow-hidden pt-32 pb-20">
+        <!-- Animated Background -->
+        <div class="absolute inset-0 hero-gradient"></div>
+        <div class="absolute inset-0 grid-pattern opacity-20"></div>
+        <div class="floating-particles"></div>
+        
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="hero-content" data-aos="fade-right">
+                    <div class="inline-flex items-center gap-2 glass-badge px-4 py-2 rounded-full mb-6">
+                        <span class="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></span>
+                        <span class="text-sm text-slate-300">ISO 9001:2015 Certified Excellence</span>
+                    </div>
+                    <h1 class="font-display text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6">
+                        <span class="gradient-text">Engineering</span><br>
+                        <span class="gradient-text">Precision in</span><br>
+                        <span class="gradient-text">Every Granule</span>
+                    </h1>
+                    <p class="text-2xl text-slate-300 font-medium mb-2">Where Quality Inspires Trust</p>
+                    <p class="text-xl text-slate-400 mb-8 max-w-lg">
+                        India's fastest-growing manufacturer of premium plastic granules and engineering polymers for OEM, Tier-I & Tier-II customers.
+                    </p>
+                    <div class="flex flex-wrap gap-4 mb-12">
+                        <a href="products.html" class="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-cyan-500 to-emerald-500 text-white font-semibold rounded-xl hover:shadow-lg hover:shadow-cyan-500/30 transition-all">
+                            <span>Explore Products</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                        <a href="#quote" class="inline-flex items-center gap-2 px-6 py-3 border-2 border-slate-600 text-white font-semibold rounded-xl hover:border-cyan-500 hover:bg-cyan-500/10 transition-all">
+                            <i class="fas fa-file-invoice"></i>
+                            <span>Get Quote</span>
+                        </a>
+                    </div>
+                    <!-- Stats Counter -->
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div class="text-center p-4 bg-slate-800/50 rounded-xl border border-slate-700/50">
+                            <div class="text-2xl font-bold text-white" data-target="2016">2016</div>
+                            <div class="text-xs text-slate-400 mt-1">Established</div>
+                        </div>
+                        <div class="text-center p-4 bg-slate-800/50 rounded-xl border border-slate-700/50">
+                            <div class="text-2xl font-bold text-white"><span data-target="444">0</span><small class="text-sm text-slate-400">sq.m</small></div>
+                            <div class="text-xs text-slate-400 mt-1">Facility Size</div>
+                        </div>
+                        <div class="text-center p-4 bg-slate-800/50 rounded-xl border border-slate-700/50">
+                            <div class="text-2xl font-bold text-white"><span data-target="10">0</span><small class="text-sm text-slate-400">+</small></div>
+                            <div class="text-xs text-slate-400 mt-1">Polymer Types</div>
+                        </div>
+                        <div class="text-center p-4 bg-slate-800/50 rounded-xl border border-slate-700/50">
+                            <div class="text-2xl font-bold text-white"><span data-target="100">0</span><small class="text-sm text-slate-400">+</small></div>
+                            <div class="text-xs text-slate-400 mt-1">OEM Clients</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Hero Visual -->
+                <div class="hero-visual relative hidden lg:block" data-aos="fade-left">
+                    <div class="hero-image-container relative">
+                        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&h=700&fit=crop" alt="Colorful Plastic Granules" class="w-full h-auto max-h-[500px] object-cover rounded-3xl shadow-2xl">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Feature Badges Row -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-12">
+                <div class="flex items-center gap-4 p-5 bg-slate-800/50 rounded-xl border border-slate-700/50">
+                    <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-cyan-500/20 to-cyan-600/20 flex items-center justify-center flex-shrink-0">
+                        <i class="fas fa-award text-cyan-400 text-xl"></i>
+                    </div>
+                    <div>
+                        <p class="font-semibold text-white">ISO Certified</p>
+                        <p class="text-xs text-slate-400">Quality Assured</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-4 p-5 bg-slate-800/50 rounded-xl border border-slate-700/50">
+                    <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-emerald-500/20 to-emerald-600/20 flex items-center justify-center flex-shrink-0">
+                        <i class="fas fa-flask text-emerald-400 text-xl"></i>
+                    </div>
+                    <div>
+                        <p class="font-semibold text-white">R&D Center</p>
+                        <p class="text-xs text-slate-400">In-house Testing</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-4 p-5 bg-slate-800/50 rounded-xl border border-slate-700/50">
+                    <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500/20 to-blue-600/20 flex items-center justify-center flex-shrink-0">
+                        <i class="fas fa-industry text-blue-400 text-xl"></i>
+                    </div>
+                    <div>
+                        <p class="font-semibold text-white">IMT Bawal</p>
+                        <p class="text-xs text-slate-400">Manufacturing Hub</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+
+    </section>
+
+    <!-- Products Showcase Section -->
+    <section class="py-24 relative overflow-hidden" id="products-showcase">
+        <div class="absolute inset-0 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950"></div>
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <div class="text-center mb-16">
+                <span class="inline-block text-cyan-400 text-sm font-semibold tracking-widest uppercase mb-4">Our Product Range</span>
+                <h2 class="font-display text-4xl md:text-5xl font-bold text-white mb-4">Premium Engineering Polymers</h2>
+                <p class="text-slate-400 max-w-2xl mx-auto">Delivering excellence across diverse polymer categories to meet your manufacturing needs</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                <!-- ABS Granules -->
+                <div class="p-4 bg-slate-800/60 border border-slate-700/50 rounded-xl hover:border-cyan-500/40 transition-all group">
+                    <div class="w-12 h-12 rounded-lg mb-3 bg-gradient-to-br from-gray-600 to-gray-800 flex items-center justify-center">
+                        <span class="text-white text-xs font-bold">ABS</span>
+                    </div>
+                    <h3 class="font-semibold text-white text-sm mb-1">ABS Granules</h3>
+                    <p class="text-slate-500 text-xs mb-2">High-impact thermoplastic</p>
+                    <div class="flex flex-wrap gap-1 mb-3">
+                        <span class="px-2 py-0.5 bg-slate-700/50 rounded text-[10px] text-slate-400">Black</span>
+                        <span class="px-2 py-0.5 bg-slate-700/50 rounded text-[10px] text-slate-400">Milky</span>
+                        <span class="px-2 py-0.5 bg-slate-700/50 rounded text-[10px] text-slate-400">Grey</span>
+                        <span class="px-2 py-0.5 bg-slate-700/50 rounded text-[10px] text-slate-400">Natural</span>
+                    </div>
+                    <a href="products.html#abs" class="text-cyan-400 text-xs font-medium hover:text-cyan-300">View Details →</a>
+                </div>
+                
+                <!-- PPCP Granules -->
+                <div class="p-4 bg-slate-800/60 border border-slate-700/50 rounded-xl hover:border-cyan-500/40 transition-all group">
+                    <div class="w-12 h-12 rounded-lg mb-3 bg-gradient-to-br from-blue-600 to-blue-800 flex items-center justify-center">
+                        <span class="text-white text-xs font-bold">PPCP</span>
+                    </div>
+                    <h3 class="font-semibold text-white text-sm mb-1">PPCP Granules</h3>
+                    <p class="text-slate-500 text-xs mb-2">Polypropylene copolymer</p>
+                    <div class="flex flex-wrap gap-1 mb-3">
+                        <span class="px-2 py-0.5 bg-slate-700/50 rounded text-[10px] text-slate-400">Black</span>
+                        <span class="px-2 py-0.5 bg-slate-700/50 rounded text-[10px] text-slate-400">Plain</span>
+                        <span class="px-2 py-0.5 bg-slate-700/50 rounded text-[10px] text-slate-400">Grey</span>
+                    </div>
+                    <a href="products.html#ppcp" class="text-cyan-400 text-xs font-medium hover:text-cyan-300">View Details →</a>
+                </div>
+
+                <!-- Polypropylene -->
+                <div class="p-4 bg-slate-800/60 border border-slate-700/50 rounded-xl hover:border-cyan-500/40 transition-all group">
+                    <div class="w-12 h-12 rounded-lg mb-3 bg-gradient-to-br from-amber-600 to-amber-800 flex items-center justify-center">
+                        <span class="text-white text-xs font-bold">PP</span>
+                    </div>
+                    <h3 class="font-semibold text-white text-sm mb-1">Polypropylene</h3>
+                    <p class="text-slate-500 text-xs mb-2">Glass-filled grades</p>
+                    <div class="flex flex-wrap gap-1 mb-3">
+                        <span class="px-2 py-0.5 bg-slate-700/50 rounded text-[10px] text-slate-400">PPGF 30%</span>
+                        <span class="px-2 py-0.5 bg-slate-700/50 rounded text-[10px] text-slate-400">PPTF 30%</span>
+                        <span class="px-2 py-0.5 bg-slate-700/50 rounded text-[10px] text-slate-400">PPTF 20%</span>
+                    </div>
+                    <a href="products.html#pp" class="text-cyan-400 text-xs font-medium hover:text-cyan-300">View Details →</a>
+                </div>
+                
+                <!-- Polycarbonate -->
+                <div class="p-4 bg-slate-800/60 border border-slate-700/50 rounded-xl hover:border-cyan-500/40 transition-all group">
+                    <div class="w-12 h-12 rounded-lg mb-3 bg-gradient-to-br from-cyan-600 to-teal-800 flex items-center justify-center">
+                        <span class="text-white text-xs font-bold">PC</span>
+                    </div>
+                    <h3 class="font-semibold text-white text-sm mb-1">Polycarbonate</h3>
+                    <p class="text-slate-500 text-xs mb-2">Crystal clear transparency</p>
+                    <div class="flex flex-wrap gap-1 mb-3">
+                        <span class="px-2 py-0.5 bg-slate-700/50 rounded text-[10px] text-slate-400">Black</span>
+                        <span class="px-2 py-0.5 bg-slate-700/50 rounded text-[10px] text-slate-400">Natural</span>
+                        <span class="px-2 py-0.5 bg-slate-700/50 rounded text-[10px] text-slate-400">White</span>
+                        <span class="px-2 py-0.5 bg-slate-700/50 rounded text-[10px] text-slate-400">Grey</span>
+                    </div>
+                    <a href="products.html#pc" class="text-cyan-400 text-xs font-medium hover:text-cyan-300">View Details →</a>
+                </div>
+                
+                <!-- Nylon -->
+                <div class="p-4 bg-slate-800/60 border border-slate-700/50 rounded-xl hover:border-cyan-500/40 transition-all group">
+                    <div class="w-12 h-12 rounded-lg mb-3 bg-gradient-to-br from-green-600 to-emerald-800 flex items-center justify-center">
+                        <span class="text-white text-xs font-bold">PA</span>
+                    </div>
+                    <h3 class="font-semibold text-white text-sm mb-1">Nylon Granules</h3>
+                    <p class="text-slate-500 text-xs mb-2">Engineering polyamides</p>
+                    <div class="flex flex-wrap gap-1 mb-3">
+                        <span class="px-2 py-0.5 bg-slate-700/50 rounded text-[10px] text-slate-400">Nylon 6</span>
+                        <span class="px-2 py-0.5 bg-slate-700/50 rounded text-[10px] text-slate-400">Nylon 66</span>
+                        <span class="px-2 py-0.5 bg-slate-700/50 rounded text-[10px] text-slate-400">Plain</span>
+                        <span class="px-2 py-0.5 bg-slate-700/50 rounded text-[10px] text-slate-400">GF</span>
+                    </div>
+                    <a href="products.html#nylon" class="text-cyan-400 text-xs font-medium hover:text-cyan-300">View Details →</a>
+                </div>
+
+                <!-- PMMA -->
+                <div class="p-4 bg-slate-800/60 border border-slate-700/50 rounded-xl hover:border-cyan-500/40 transition-all group">
+                    <div class="w-12 h-12 rounded-lg mb-3 bg-gradient-to-br from-red-600 to-rose-800 flex items-center justify-center">
+                        <span class="text-white text-[10px] font-bold">PMMA</span>
+                    </div>
+                    <h3 class="font-semibold text-white text-sm mb-1">PMMA Granules</h3>
+                    <p class="text-slate-500 text-xs mb-2">Acrylic optical clarity</p>
+                    <div class="flex flex-wrap gap-1 mb-3">
+                        <span class="px-2 py-0.5 bg-slate-700/50 rounded text-[10px] text-slate-400">Red</span>
+                        <span class="px-2 py-0.5 bg-slate-700/50 rounded text-[10px] text-slate-400">Natural</span>
+                        <span class="px-2 py-0.5 bg-slate-700/50 rounded text-[10px] text-slate-400">Amber</span>
+                    </div>
+                    <a href="products.html#pmma" class="text-cyan-400 text-xs font-medium hover:text-cyan-300">View Details →</a>
+                </div>
+                
+                <!-- SAN -->
+                <div class="p-4 bg-slate-800/60 border border-slate-700/50 rounded-xl hover:border-cyan-500/40 transition-all group">
+                    <div class="w-12 h-12 rounded-lg mb-3 bg-gradient-to-br from-purple-600 to-violet-800 flex items-center justify-center">
+                        <span class="text-white text-xs font-bold">SAN</span>
+                    </div>
+                    <h3 class="font-semibold text-white text-sm mb-1">SAN Granules</h3>
+                    <p class="text-slate-500 text-xs mb-2">Styrene acrylonitrile</p>
+                    <div class="flex flex-wrap gap-1 mb-3">
+                        <span class="px-2 py-0.5 bg-slate-700/50 rounded text-[10px] text-slate-400">Natural</span>
+                        <span class="px-2 py-0.5 bg-slate-700/50 rounded text-[10px] text-slate-400">GF Blue</span>
+                        <span class="px-2 py-0.5 bg-slate-700/50 rounded text-[10px] text-slate-400">GF Black</span>
+                    </div>
+                    <a href="products.html#san" class="text-cyan-400 text-xs font-medium hover:text-cyan-300">View Details →</a>
+                </div>
+                
+                <!-- View All CTA -->
+                <div class="p-4 bg-gradient-to-br from-cyan-500/10 to-emerald-500/10 border border-cyan-500/30 rounded-xl flex items-center justify-center">
+                    <a href="products.html" class="text-center">
+                        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-cyan-500 to-emerald-500 flex items-center justify-center mx-auto mb-3">
+                            <i class="fas fa-arrow-right text-lg text-white"></i>
+                        </div>
+                        <h3 class="font-semibold text-white text-sm mb-1">View All Products</h3>
+                        <p class="text-slate-500 text-xs">Explore catalog</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section class="py-24 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-primary-900 via-slate-900 to-slate-950"></div>
+        <div class="absolute inset-0 grid-pattern opacity-10"></div>
+        
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div>
+                    <span class="inline-block text-cyan-400 text-sm font-semibold tracking-widest uppercase mb-4">Why Vivek Polymers</span>
+                    <h2 class="font-display text-4xl md:text-5xl font-bold text-white mb-6">Your Trusted Partner in Polymer Excellence</h2>
+                    <p class="text-slate-400 text-lg mb-8">Since 2016, we've been delivering quality engineering polymers backed by cutting-edge R&D and unwavering commitment to customer satisfaction.</p>
+                    
+                    <div class="space-y-6">
+                        <div class="feature-item glass-card p-6 rounded-2xl">
+                            <div class="flex items-start gap-4">
+                                <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-cyan-500 to-cyan-600 flex items-center justify-center flex-shrink-0">
+                                    <i class="fas fa-flask text-white text-lg"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-display font-bold text-white mb-2">In-House R&D Center</h4>
+                                    <p class="text-slate-400 text-sm">Advanced material testing with IZOD, MFI, UTM and Color Spectrophotometer equipment</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="feature-item glass-card p-6 rounded-2xl">
+                            <div class="flex items-start gap-4">
+                                <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-emerald-500 to-emerald-600 flex items-center justify-center flex-shrink-0">
+                                    <i class="fas fa-network-wired text-white text-lg"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-display font-bold text-white mb-2">Wide OEM Network</h4>
+                                    <p class="text-slate-400 text-sm">Strong relationships with OEM, Tier-I and Tier-II customers across industries</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="feature-item glass-card p-6 rounded-2xl">
+                            <div class="flex items-start gap-4">
+                                <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-primary-500 to-primary-600 flex items-center justify-center flex-shrink-0">
+                                    <i class="fas fa-handshake text-white text-lg"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-display font-bold text-white mb-2">Customer-Centric Approach</h4>
+                                    <p class="text-slate-400 text-sm">Customized polymer solutions with tailored packaging for complete satisfaction</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="relative">
+                    <div class="values-grid">
+                        <h3 class="font-display text-2xl font-bold text-white mb-8 text-center">Our Core Values</h3>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="value-card glass-card p-6 rounded-2xl text-center hover-lift">
+                                <div class="w-14 h-14 rounded-full bg-gradient-to-br from-cyan-500/20 to-cyan-600/20 flex items-center justify-center mx-auto mb-4">
+                                    <i class="fas fa-shield-alt text-cyan-400 text-xl"></i>
+                                </div>
+                                <h5 class="font-semibold text-white mb-1">Integrity</h5>
+                                <p class="text-xs text-slate-500">Honest partnerships</p>
+                            </div>
+                            <div class="value-card glass-card p-6 rounded-2xl text-center hover-lift">
+                                <div class="w-14 h-14 rounded-full bg-gradient-to-br from-emerald-500/20 to-emerald-600/20 flex items-center justify-center mx-auto mb-4">
+                                    <i class="fas fa-rocket text-emerald-400 text-xl"></i>
+                                </div>
+                                <h5 class="font-semibold text-white mb-1">Speed & Scale</h5>
+                                <p class="text-xs text-slate-500">Rapid delivery</p>
+                            </div>
+                            <div class="value-card glass-card p-6 rounded-2xl text-center hover-lift">
+                                <div class="w-14 h-14 rounded-full bg-gradient-to-br from-primary-500/20 to-primary-600/20 flex items-center justify-center mx-auto mb-4">
+                                    <i class="fas fa-chart-line text-primary-400 text-xl"></i>
+                                </div>
+                                <h5 class="font-semibold text-white mb-1">Growth Mindset</h5>
+                                <p class="text-xs text-slate-500">Continuous improvement</p>
+                            </div>
+                            <div class="value-card glass-card p-6 rounded-2xl text-center hover-lift">
+                                <div class="w-14 h-14 rounded-full bg-gradient-to-br from-amber-500/20 to-amber-600/20 flex items-center justify-center mx-auto mb-4">
+                                    <i class="fas fa-trophy text-amber-400 text-xl"></i>
+                                </div>
+                                <h5 class="font-semibold text-white mb-1">Peak Performance</h5>
+                                <p class="text-xs text-slate-500">Excellence always</p>
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <div class="value-card glass-card p-6 rounded-2xl text-center hover-lift">
+                                <div class="w-14 h-14 rounded-full bg-gradient-to-br from-rose-500/20 to-rose-600/20 flex items-center justify-center mx-auto mb-4">
+                                    <i class="fas fa-heart text-rose-400 text-xl"></i>
+                                </div>
+                                <h5 class="font-semibold text-white mb-1">Customer Delight</h5>
+                                <p class="text-xs text-slate-500">Beyond expectations</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quote Calculator Section -->
+    <section class="py-24 relative overflow-hidden" id="quote">
+        <div class="absolute inset-0 bg-slate-950"></div>
+        <div class="absolute inset-0 bg-gradient-to-r from-cyan-500/5 via-transparent to-emerald-500/5"></div>
+        
+        <div class="max-w-5xl mx-auto px-6 relative z-10">
+            <div class="text-center mb-12">
+                <span class="inline-block text-emerald-400 text-sm font-semibold tracking-widest uppercase mb-4">Quick Inquiry</span>
+                <h2 class="font-display text-4xl md:text-5xl font-bold text-white mb-4">Request a Quote</h2>
+                <p class="text-slate-400 max-w-2xl mx-auto">Select your polymer type and quantity for a personalized quotation</p>
+            </div>
+            
+            <div class="bg-slate-800/50 border border-slate-700/50 p-8 md:p-12 rounded-3xl">
+                <form id="quoteForm" class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-slate-400 text-sm font-medium mb-2">Company Name</label>
+                        <input type="text" class="w-full px-4 py-3 bg-slate-800 border border-slate-600 rounded-xl text-white placeholder-slate-500 focus:border-cyan-500 focus:outline-none focus:ring-1 focus:ring-cyan-500" placeholder="Your company name" required>
+                    </div>
+                    <div>
+                        <label class="block text-slate-400 text-sm font-medium mb-2">Contact Person</label>
+                        <input type="text" class="w-full px-4 py-3 bg-slate-800 border border-slate-600 rounded-xl text-white placeholder-slate-500 focus:border-cyan-500 focus:outline-none focus:ring-1 focus:ring-cyan-500" placeholder="Your name" required>
+                    </div>
+                    <div>
+                        <label class="block text-slate-400 text-sm font-medium mb-2">Email Address</label>
+                        <input type="email" class="w-full px-4 py-3 bg-slate-800 border border-slate-600 rounded-xl text-white placeholder-slate-500 focus:border-cyan-500 focus:outline-none focus:ring-1 focus:ring-cyan-500" placeholder="email@company.com" required>
+                    </div>
+                    <div>
+                        <label class="block text-slate-400 text-sm font-medium mb-2">Phone Number</label>
+                        <input type="tel" class="w-full px-4 py-3 bg-slate-800 border border-slate-600 rounded-xl text-white placeholder-slate-500 focus:border-cyan-500 focus:outline-none focus:ring-1 focus:ring-cyan-500" placeholder="+91 XXXXX XXXXX" required>
+                    </div>
+                    <div>
+                        <label class="block text-slate-400 text-sm font-medium mb-2">Polymer Type</label>
+                        <select class="w-full px-4 py-3 bg-slate-800 border border-slate-600 rounded-xl text-white focus:border-cyan-500 focus:outline-none focus:ring-1 focus:ring-cyan-500 appearance-none cursor-pointer" style="background-image: url('data:image/svg+xml;charset=UTF-8,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%2394a3b8%27 stroke-width=%272%27%3E%3Cpath d=%27M6 9l6 6 6-6%27/%3E%3C/svg%3E'); background-repeat: no-repeat; background-position: right 12px center; background-size: 20px;" required>
+                            <option value="">Select polymer type</option>
+                            <optgroup label="ABS Granules">
+                                <option value="abs-black">ABS Black</option>
+                                <option value="abs-milky">ABS Milky</option>
+                                <option value="abs-grey">ABS Grey</option>
+                                <option value="abs-natural">ABS Natural</option>
+                            </optgroup>
+                            <optgroup label="PPCP Granules">
+                                <option value="ppcp-black">PPCP Black</option>
+                                <option value="ppcp-plain">PPCP Plain</option>
+                                <option value="ppcp-grey">PPCP Grey</option>
+                            </optgroup>
+                            <optgroup label="Polypropylene">
+                                <option value="ppgf-30">PPGF 30%</option>
+                                <option value="pptf-30">PPTF 30%</option>
+                                <option value="pptf-20">PPTF 20%</option>
+                            </optgroup>
+                            <optgroup label="Polycarbonate">
+                                <option value="pc-black">Polycarbonate Black</option>
+                                <option value="pc-natural">Polycarbonate Natural</option>
+                                <option value="pc-white">Polycarbonate White</option>
+                                <option value="pc-grey">Polycarbonate Grey</option>
+                            </optgroup>
+                            <optgroup label="Nylon">
+                                <option value="nylon-6">Nylon 6</option>
+                                <option value="nylon-66">Nylon 66</option>
+                                <option value="nylon-plain">Nylon Plain</option>
+                                <option value="nylon-gf">Nylon GF</option>
+                            </optgroup>
+                            <optgroup label="PMMA">
+                                <option value="pmma-red">PMMA Red</option>
+                                <option value="pmma-natural">PMMA Natural</option>
+                                <option value="pmma-amber">PMMA Amber</option>
+                            </optgroup>
+                            <optgroup label="SAN Granules">
+                                <option value="san-natural">SAN Natural</option>
+                                <option value="san-gf-blue">SAN GF Blue</option>
+                                <option value="san-gf-black">SAN GF Black</option>
+                            </optgroup>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-slate-400 text-sm font-medium mb-2">Quantity (in Tons)</label>
+                        <input type="number" class="w-full px-4 py-3 bg-slate-800 border border-slate-600 rounded-xl text-white placeholder-slate-500 focus:border-cyan-500 focus:outline-none focus:ring-1 focus:ring-cyan-500" placeholder="Enter quantity" min="1" required>
+                    </div>
+                    <div class="md:col-span-2">
+                        <label class="block text-slate-400 text-sm font-medium mb-2">Additional Requirements</label>
+                        <textarea class="w-full px-4 py-3 bg-slate-800 border border-slate-600 rounded-xl text-white placeholder-slate-500 focus:border-cyan-500 focus:outline-none focus:ring-1 focus:ring-cyan-500 resize-none" rows="4" placeholder="Describe any specific requirements or specifications..."></textarea>
+                    </div>
+                    <div class="md:col-span-2">
+                        <button type="submit" class="w-full inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-cyan-500 to-emerald-500 text-white font-semibold rounded-xl hover:shadow-lg hover:shadow-cyan-500/30 transition-all">
+                            <span>Submit Quote Request</span>
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Infrastructure Preview -->
+    <section class="py-24 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-slate-950 via-primary-950 to-slate-950"></div>
+        
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <div class="text-center mb-16">
+                <span class="inline-block text-cyan-400 text-sm font-semibold tracking-widest uppercase mb-4">Our Facility</span>
+                <h2 class="font-display text-4xl md:text-5xl font-bold text-white mb-4">World-Class Infrastructure</h2>
+                <p class="text-slate-400 max-w-2xl mx-auto">State-of-the-art manufacturing and testing facilities at HSIIDC IMT Bawal</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+                <div class="infra-card glass-card p-8 rounded-2xl text-center hover-lift">
+                    <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-cyan-500 to-cyan-600 flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-industry text-white text-2xl"></i>
+                    </div>
+                    <h3 class="font-display text-3xl font-bold text-white mb-2">444<span class="text-lg">sq.m</span></h3>
+                    <p class="text-slate-400">Manufacturing Facility</p>
+                </div>
+                
+                <div class="infra-card glass-card p-8 rounded-2xl text-center hover-lift">
+                    <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-emerald-500 to-emerald-600 flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-flask text-white text-2xl"></i>
+                    </div>
+                    <h3 class="font-display text-3xl font-bold text-white mb-2">R&D</h3>
+                    <p class="text-slate-400">In-House Laboratory</p>
+                </div>
+                
+                <div class="infra-card glass-card p-8 rounded-2xl text-center hover-lift">
+                    <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary-500 to-primary-600 flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-truck text-white text-2xl"></i>
+                    </div>
+                    <h3 class="font-display text-3xl font-bold text-white mb-2">Robust</h3>
+                    <p class="text-slate-400">Logistics Network</p>
+                </div>
+                
+                <div class="infra-card glass-card p-8 rounded-2xl text-center hover-lift">
+                    <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-amber-500 to-amber-600 flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-cogs text-white text-2xl"></i>
+                    </div>
+                    <h3 class="font-display text-3xl font-bold text-white mb-2">Modern</h3>
+                    <p class="text-slate-400">Extrusion Machinery</p>
+                </div>
+            </div>
+            
+            <div class="text-center">
+                <a href="quality.html" class="inline-flex items-center gap-2 px-6 py-3 border-2 border-slate-600 text-white font-semibold rounded-xl hover:border-cyan-500 hover:bg-cyan-500/10 transition-all">
+                    <span>Explore Our Facility</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact CTA Section -->
+    <section class="py-24 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-r from-primary-900 via-primary-800 to-cyan-900"></div>
+        <div class="absolute inset-0 grid-pattern opacity-10"></div>
+        
+        <div class="max-w-5xl mx-auto px-6 relative z-10 text-center">
+            <h2 class="font-display text-4xl md:text-5xl font-bold text-white mb-6">Ready to Partner with Us?</h2>
+            <p class="text-xl text-slate-300 mb-8 max-w-2xl mx-auto">Get in touch with our team to discuss your polymer requirements and receive a customized solution.</p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="contact.html" class="inline-flex items-center gap-2 px-6 py-3 bg-white text-slate-900 font-semibold rounded-xl hover:bg-slate-100 hover:shadow-lg transition-all">
+                    <i class="fas fa-envelope"></i>
+                    <span>Contact Us</span>
+                </a>
+                <a href="tel:+918690800135" class="inline-flex items-center gap-2 px-6 py-3 border-2 border-white text-white font-semibold rounded-xl hover:bg-white hover:text-slate-900 transition-all">
+                    <i class="fas fa-phone"></i>
+                    <span>+91-8690800135</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-950 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-6 py-16">
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+                <!-- Brand -->
+                <div class="lg:col-span-1">
+                    <a href="index.html" class="flex items-center gap-3 mb-6">
+                        <div class="logo-hexagon w-12 h-12 flex items-center justify-center text-white font-bold text-sm">VP</div>
+                        <div class="flex flex-col">
+                            <span class="font-display font-bold text-lg text-white">VIVEK POLYMERS</span>
+                            <span class="text-[10px] text-cyan-400 tracking-widest">ISO 9001:2015 CERTIFIED</span>
+                        </div>
+                    </a>
+                    <p class="text-slate-400 text-sm mb-6">Where quality inspires trust. Manufacturing premium engineering polymers since 2016.</p>
+                    <div class="flex gap-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 hover:bg-cyan-500 hover:text-white transition-all">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 hover:bg-cyan-500 hover:text-white transition-all">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://wa.me/918690800135" class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 hover:bg-emerald-500 hover:text-white transition-all">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="font-display font-bold text-white mb-6">Quick Links</h4>
+                    <ul class="space-y-3">
+                        <li><a href="index.html" class="text-slate-400 hover:text-cyan-400 transition-colors">Home</a></li>
+                        <li><a href="about.html" class="text-slate-400 hover:text-cyan-400 transition-colors">About Us</a></li>
+                        <li><a href="products.html" class="text-slate-400 hover:text-cyan-400 transition-colors">Products</a></li>
+                        <li><a href="quality.html" class="text-slate-400 hover:text-cyan-400 transition-colors">Quality & R&D</a></li>
+                        <li><a href="contact.html" class="text-slate-400 hover:text-cyan-400 transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Products -->
+                <div>
+                    <h4 class="font-display font-bold text-white mb-6">Our Products</h4>
+                    <ul class="space-y-3">
+                        <li><a href="products.html#abs" class="text-slate-400 hover:text-cyan-400 transition-colors">ABS Granules</a></li>
+                        <li><a href="products.html#ppcp" class="text-slate-400 hover:text-cyan-400 transition-colors">PPCP Granules</a></li>
+                        <li><a href="products.html#pc" class="text-slate-400 hover:text-cyan-400 transition-colors">Polycarbonate</a></li>
+                        <li><a href="products.html#nylon" class="text-slate-400 hover:text-cyan-400 transition-colors">Nylon Granules</a></li>
+                        <li><a href="products.html#pmma" class="text-slate-400 hover:text-cyan-400 transition-colors">PMMA Granules</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Contact -->
+                <div>
+                    <h4 class="font-display font-bold text-white mb-6">Contact Info</h4>
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-3">
+                            <i class="fas fa-map-marker-alt text-cyan-400 mt-1"></i>
+                            <span class="text-slate-400 text-sm">Plot No. 109, Sector-03, HSIIDC IMT Bawal, Rewari, Haryana - 123501</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fas fa-phone text-cyan-400"></i>
+                            <a href="tel:+918690800135" class="text-slate-400 hover:text-cyan-400 transition-colors">+91-8690800135</a>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fas fa-envelope text-cyan-400"></i>
+                            <a href="mailto:vivekpolymers24@gmail.com" class="text-slate-400 hover:text-cyan-400 transition-colors">vivekpolymers24@gmail.com</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Bottom Bar -->
+            <div class="border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-slate-500 text-sm">&copy; 2024 Vivek Polymers. All Rights Reserved.</p>
+                <p class="text-slate-600 text-xs">Under the leadership of Mr. Dilip Mishra</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Float -->
+    <a href="https://wa.me/918690800135" target="_blank" class="whatsapp-float" aria-label="Chat on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Quote Modal -->
+    <div id="quoteModal" class="modal hidden">
+        <div class="modal-overlay"></div>
+        <div class="modal-content glass-card">
+            <button class="modal-close">&times;</button>
+            <h3 class="font-display text-2xl font-bold text-white mb-4">Quick Quote Request</h3>
+            <form class="space-y-4">
+                <input type="text" class="form-input" placeholder="Company Name" required>
+                <input type="email" class="form-input" placeholder="Email Address" required>
+                <input type="tel" class="form-input" placeholder="Phone Number" required>
+                <select class="form-input" required>
+                    <option value="">Select Polymer Type</option>
+                    <option value="abs">ABS Granules</option>
+                    <option value="ppcp">PPCP Granules</option>
+                    <option value="pc">Polycarbonate</option>
+                    <option value="nylon">Nylon Granules</option>
+                    <option value="pmma">PMMA Granules</option>
+                    <option value="san">SAN Granules</option>
+                </select>
+                <button type="submit" class="btn-primary w-full justify-center">Submit Request</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
