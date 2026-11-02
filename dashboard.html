@@ -220,6 +220,11 @@
             currentUser = null;
             document.getElementById('loginScreen').classList.remove('hidden');
             document.getElementById('dashboardScreen').classList.add('hidden');
+            // Reset login button state
+            const btn = document.querySelector('#loginForm button[type="submit"]');
+            btn.disabled = false;
+            btn.innerHTML = 'Login <i class="fas fa-arrow-right ml-2"></i>';
+            document.getElementById('passwordInput').value = '';
         }
 
         // Load Batches from Supabase
