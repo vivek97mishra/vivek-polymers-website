@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vivek Polymers - Granule Lifecycle Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: { 600: '#1e40af', 700: '#1e3a8a', 900: '#0f172a' },
+                        accent: { 400: '#22d3ee', 500: '#06b6d4' },
+                        emerald: { 500: '#10b981', 600: '#059669' }
+                    },
+                    fontFamily: { sans: ['Inter', 'sans-serif'], display: ['Space Grotesk', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .glass-card { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(20px); border: 1px solid rgba(71, 85, 105, 0.4); }
+        .glass-nav { background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(20px); border: 1px solid rgba(100, 116, 139, 0.3); }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 min-h-screen">
+    
+    <!-- Login Screen -->
+    <div id="loginScreen" class="min-h-screen flex items-center justify-center p-6">
+        <div class="glass-card rounded-2xl p-8 max-w-md w-full">
+            <div class="text-center mb-8">
+                <div class="w-16 h-16 bg-gradient-to-br from-primary-600 to-primary-700 rounded-xl flex items-center justify-center mx-auto mb-4">
+                    <span class="text-white font-bold text-2xl">VP</span>
+                </div>
+                <h1 class="text-2xl font-bold text-white mb-2">Vivek Polymers</h1>
+                <p class="text-slate-400 text-sm">Granule Lifecycle Management</p>
+            </div>
+            
+            <form id="loginForm" class="space-y-4">
+                <div>
+                    <label class="block text-slate-300 text-sm font-medium mb-2">Select Role</label>
+                    <select id="roleSelect" class="w-full px-4 py-3 bg-slate-800 border border-slate-600 rounded-xl text-white focus:border-cyan-500 focus:outline-none">
+                        <option value="store_admin">Store Manager</option>
+                        <option value="prod_admin">Production Manager</option>
+                        <option value="qc_admin">Quality Inspector</option>
+                        <option value="sales_admin">Sales Manager</option>
+                    </select>
+                </div>
+                
+                <div>
+                    <label class="block text-slate-300 text-sm font-medium mb-2">Password</label>
+                    <input type="password" id="passwordInput" value="admin123" class="w-full px-4 py-3 bg-slate-800 border border-slate-600 rounded-xl text-white focus:border-cyan-500 focus:outline-none" placeholder="Enter password">
+                </div>
+                
+                <button type="submit" class="w-full py-3 bg-gradient-to-r from-cyan-500 to-emerald-500 text-white font-semibold rounded-xl hover:shadow-lg hover:shadow-cyan-500/30 transition-all">
+                    Login <i class="fas fa-arrow-right ml-2"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Dashboard -->
+    <div id="dashboardScreen" class="hidden min-h-screen">
+        <!-- Top Navigation -->
+        <nav class="glass-nav border-b border-slate-800">
+            <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 bg-gradient-to-br from-primary-600 to-primary-700 rounded-xl flex items-center justify-center">
+                        <span class="text-white font-bold text-sm">VP</span>
+                    </div>
+                    <div>
+                        <h1 class="text-white font-bold text-lg">VIVEK POLYMERS</h1>
+                        <p class="text-cyan-400 text-xs">Lifecycle Dashboard</p>
+                    </div>
+                </div>
+                
+                <div class="flex items-center gap-4">
+                    <div class="text-right">
+                        <p class="text-white text-sm font-semibold" id="userFullName">Store Manager</p>
+                        <p class="text-slate-400 text-xs" id="userRole">Store Admin</p>
+                    </div>
+                    <button onclick="logout()" class="px-4 py-2 bg-slate-700 hover:bg-slate-600 text-white rounded-lg text-sm transition-all">
+                        <i class="fas fa-sign-out-alt mr-2"></i>Logout
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <div class="max-w-7xl mx-auto px-6 py-8">
+            <!-- Header Actions -->
+            <div class="flex items-center justify-between mb-8">
+                <div>
+                    <h2 class="text-3xl font-bold text-white mb-2">Batch Management</h2>
+                    <p class="text-slate-400">Track granule batches through lifecycle stages</p>
+                </div>
+                <button id="newBatchBtn" class="px-6 py-3 bg-gradient-to-r from-cyan-500 to-emerald-500 text-white font-semibold rounded-xl hover:shadow-lg transition-all">
+                    <i class="fas fa-plus mr-2"></i>New Batch
+                </button>
+            </div>
+
+            <!-- Batches Grid -->
+            <div id="batchesGrid" class="grid gap-6">
+                <!-- Batches will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- New Batch Modal -->
+    <div id="newBatchModal" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center p-6 z-50">
+        <div class="glass-card rounded-2xl p-8 max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            <div class="flex items-center justify-between mb-6">
+                <h3 class="text-2xl font-bold text-white">Create New Batch</h3>
+                <button onclick="closeModal()" class="text-slate-400 hover:text-white">
+                    <i class="fas fa-times text-2xl"></i>
+                </button>
+            </div>
+            
+            <form id="newBatchForm" class="space-y-6">
+                <!-- Form content will be loaded based on user role -->
+            </form>
+        </div>
+    </div>
+
+    <!-- Edit Batch Modal -->
+    <div id="editBatchModal" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center p-6 z-50">
+        <div class="glass-card rounded-2xl p-8 max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            <div class="flex items-center justify-between mb-6">
+                <h3 class="text-2xl font-bold text-white">Update Batch</h3>
+                <button onclick="closeEditModal()" class="text-slate-400 hover:text-white">
+                    <i class="fas fa-times text-2xl"></i>
+                </button>
+            </div>
+            
+            <form id="editBatchForm" class="space-y-6">
+                <!-- Form content will be loaded dynamically -->
+            </form>
+        </div>
+    </div>
+
+    <!-- Supabase JS Client -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script>
+        // ========== SUPABASE CONFIG ==========
+        // TODO: Replace these with your Supabase project credentials
+        // Find them at: https://supabase.com/dashboard > Your Project > Settings > API
+        const SUPABASE_URL = 'https://YOUR_PROJECT_ID.supabase.co';
+        const SUPABASE_ANON_KEY = 'YOUR_ANON_KEY_HERE';
+        // =====================================
+
+        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        let batches = [];
+        let currentUser = null;
+        let editingBatchId = null;
+
+        // User Roles
+        const roles = {
+            store_admin: { name: 'Store Manager', stage: 'STORE' },
+            prod_admin: { name: 'Production Manager', stage: 'PRODUCTION' },
+            qc_admin: { name: 'Quality Inspector', stage: 'QUALITY' },
+            sales_admin: { name: 'Sales Manager', stage: 'SALES' }
+        };
+
+        // Login — validates against Supabase users table
+        document.getElementById('loginForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const role = document.getElementById('roleSelect').value;
+            const password = document.getElementById('passwordInput').value;
+
+            const { data, error } = await supabase
+                .from('users')
+                .select('*')
+                .eq('username', role)
+                .eq('password', password)
+                .eq('is_active', true)
+                .single();
+
+            if (error || !data) {
+                alert('Invalid credentials');
+                return;
+            }
+
+            currentUser = { username: data.username, role: data.role, full_name: data.full_name };
+            document.getElementById('loginScreen').classList.add('hidden');
+            document.getElementById('dashboardScreen').classList.remove('hidden');
+            document.getElementById('userFullName').textContent = currentUser.full_name;
+            document.getElementById('userRole').textContent = data.role.replace('_', ' ').toUpperCase();
+            loadBatches();
+            setupNewBatchForm();
+        });
+
+        // Logout
+        function logout() {
+            currentUser = null;
+            document.getElementById('loginScreen').classList.remove('hidden');
+            document.getElementById('dashboardScreen').classList.add('hidden');
+        }
+
+        // Load Batches from Supabase
+        async function loadBatches() {
+            const grid = document.getElementById('batchesGrid');
+            grid.innerHTML = '<div class="glass-card rounded-xl p-8 text-center"><p class="text-slate-400"><i class="fas fa-spinner fa-spin mr-2"></i>Loading batches...</p></div>';
+
+            const { data, error } = await supabase
+                .from('granule_batches')
+                .select('*')
+                .order('created_at', { ascending: false });
+
+            if (error) {
+                grid.innerHTML = '<div class="glass-card rounded-xl p-8 text-center"><p class="text-red-400">Error loading batches: ' + error.message + '</p></div>';
+                return;
+            }
+
+            batches = data || [];
+
+            // Filter based on user role
+            let filteredBatches = batches.filter(b => {
+                if (currentUser.role === 'store_admin') return true;
+                if (currentUser.role === 'prod_admin') return ['STORE', 'PRODUCTION'].includes(b.current_stage);
+                if (currentUser.role === 'qc_admin') return ['PRODUCTION', 'QUALITY'].includes(b.current_stage);
+                if (currentUser.role === 'sales_admin') return ['QUALITY', 'SALES', 'COMPLETED'].includes(b.current_stage);
+                return false;
+            });
+
+            if (filteredBatches.length === 0) {
+                grid.innerHTML = '<div class="glass-card rounded-xl p-8 text-center"><p class="text-slate-400">No batches found</p></div>';
+                return;
+            }
+
+            grid.innerHTML = filteredBatches.map(batch => renderBatchCard(batch)).join('');
+        }
+
+        // Render Batch Card
+        function renderBatchCard(batch) {
+            const stages = ['STORE', 'PRODUCTION', 'QUALITY', 'SALES'];
+            const currentStageIndex = stages.indexOf(batch.current_stage);
+            const canEdit = roles[currentUser.role].stage === batch.current_stage;
+
+            return `
+                <div class="glass-card rounded-xl p-6">
+                    <div class="flex items-start justify-between mb-4">
+                        <div>
+                            <h3 class="text-xl font-bold text-white mb-1">${batch.batch_code}</h3>
+                            <p class="text-slate-400 text-sm">${batch.store_product || 'N/A'}</p>
+                        </div>
+                        <span class="px-3 py-1 bg-${getStageColor(batch.current_stage)}-500/20 text-${getStageColor(batch.current_stage)}-400 rounded-full text-xs font-semibold">
+                            ${batch.current_stage}
+                        </span>
+                    </div>
+
+                    <!-- Progress Bar -->
+                    <div class="mb-6">
+                        <div class="flex items-center justify-between mb-2">
+                            ${stages.map((stage, idx) => `
+                                <div class="flex flex-col items-center flex-1">
+                                    <div class="w-8 h-8 rounded-full ${idx <= currentStageIndex ? 'bg-cyan-500' : 'bg-slate-700'} flex items-center justify-center mb-1">
+                                        ${idx < currentStageIndex ? '<i class="fas fa-check text-white text-xs"></i>' : 
+                                          idx === currentStageIndex ? '<i class="fas fa-circle text-white text-xs"></i>' : 
+                                          '<span class="text-slate-500 text-xs">' + (idx + 1) + '</span>'}
+                                    </div>
+                                    <span class="text-xs ${idx <= currentStageIndex ? 'text-cyan-400' : 'text-slate-500'}">${stage}</span>
+                                </div>
+                                ${idx < stages.length - 1 ? '<div class="flex-1 h-0.5 ' + (idx < currentStageIndex ? 'bg-cyan-500' : 'bg-slate-700') + ' mt-4 mb-auto"></div>' : ''}
+                            `).join('')}
+                        </div>
+                    </div>
+
+                    <!-- Batch Details -->
+                    <div class="grid grid-cols-2 gap-4 mb-4">
+                        ${renderBatchDetails(batch)}
+                    </div>
+
+                    <!-- Actions -->
+                    ${canEdit ? `
+                        <button onclick="editBatch(${batch.id})" class="w-full py-2 bg-cyan-500 hover:bg-cyan-600 text-white rounded-lg font-medium transition-all">
+                            <i class="fas fa-edit mr-2"></i>Update ${batch.current_stage} Stage
+                        </button>
+                    ` : ''}
+                </div>
+            `;
+        }
+
+        function renderBatchDetails(batch) {
+            let details = [];
+            
+            if (batch.store_quantity) {
+                details.push(`<div><p class="text-slate-500 text-xs">Store Qty</p><p class="text-white font-semibold">${batch.store_quantity} kg</p></div>`);
+                details.push(`<div><p class="text-slate-500 text-xs">Store Rate</p><p class="text-white font-semibold">₹${batch.store_rate}</p></div>`);
+            }
+            
+            if (batch.fg_out_quantity) {
+                details.push(`<div><p class="text-slate-500 text-xs">FG Output</p><p class="text-white font-semibold">${batch.fg_out_quantity} kg</p></div>`);
+            }
+            
+            if (batch.qc_properties_check) {
+                details.push(`<div><p class="text-slate-500 text-xs">QC Status</p><p class="text-emerald-400 font-semibold">${batch.qc_status || 'PASS'}</p></div>`);
+            }
+            
+            if (batch.out_quantity) {
+                details.push(`<div><p class="text-slate-500 text-xs">Out Qty</p><p class="text-white font-semibold">${batch.out_quantity} kg</p></div>`);
+                details.push(`<div><p class="text-slate-500 text-xs">Out Rate</p><p class="text-white font-semibold">₹${batch.out_rate}</p></div>`);
+            }
+            
+            return details.join('') || '<div class="col-span-2"><p class="text-slate-500 text-sm">No details available</p></div>';
+        }
+
+        function getStageColor(stage) {
+            const colors = { STORE: 'blue', PRODUCTION: 'amber', QUALITY: 'purple', SALES: 'emerald', COMPLETED: 'gray' };
+            return colors[stage] || 'slate';
+        }
+
+        // Setup New Batch Form
+        function setupNewBatchForm() {
+            const form = document.getElementById('newBatchForm');
+            
+            if (currentUser.role === 'store_admin') {
+                form.innerHTML = `
+                    <div>
+                        <label class="block text-slate-300 text-sm font-medium mb-2">Batch Code</label>
+                        <input type="text" id="batch_code" class="w-full px-4 py-3 bg-slate-800 border border-slate-600 rounded-xl text-white focus:border-cyan-500 focus:outline-none" placeholder="VP-2026-XXX" required>
+                    </div>
+                    <div>
+                        <label class="block text-slate-300 text-sm font-medium mb-2">Product Name</label>
+                        <input type="text" id="store_product" class="w-full px-4 py-3 bg-slate-800 border border-slate-600 rounded-xl text-white focus:border-cyan-500 focus:outline-none" placeholder="e.g., ABS Black Granules" required>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-slate-300 text-sm font-medium mb-2">Quantity (kg)</label>
+                            <input type="number" step="0.01" id="store_quantity" class="w-full px-4 py-3 bg-slate-800 border border-slate-600 rounded-xl text-white focus:border-cyan-500 focus:outline-none" required>
+                        </div>
+                        <div>
+                            <label class="block text-slate-300 text-sm font-medium mb-2">Rate (₹/kg)</label>
+                            <input type="number" step="0.01" id="store_rate" class="w-full px-4 py-3 bg-slate-800 border border-slate-600 rounded-xl text-white focus:border-cyan-500 focus:outline-none" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="w-full py-3 bg-gradient-to-r from-cyan-500 to-emerald-500 text-white font-semibold rounded-xl hover:shadow-lg transition-all">
+                        Create Batch
+                    </button>
+                `;
+                
+                form.onsubmit = async function(e) {
+                    e.preventDefault();
+                    const btn = form.querySelector('button[type="submit"]');
+                    btn.disabled = true;
+                    btn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Creating...';
+
+                    const { error } = await supabase.from('granule_batches').insert({
+                        batch_code: document.getElementById('batch_code').value,
+                        current_stage: 'STORE',
+                        store_product: document.getElementById('store_product').value,
+                        store_quantity: parseFloat(document.getElementById('store_quantity').value),
+                        store_rate: parseFloat(document.getElementById('store_rate').value),
+                        store_date: new Date().toISOString(),
+                        store_user: currentUser.username
+                    });
+
+                    if (error) {
+                        alert('Error: ' + error.message);
+                        btn.disabled = false;
+                        btn.textContent = 'Create Batch';
+                        return;
+                    }
+
+                    closeModal();
+                    form.reset();
+                    btn.disabled = false;
+                    btn.textContent = 'Create Batch';
+                    loadBatches();
+                    alert('Batch created successfully!');
+                };
+            } else {
+                form.innerHTML = '<p class="text-slate-400 text-center py-8">Only Store Manager can create new batches</p>';
+            }
+        }
+
+        // Edit Batch
+        function editBatch(batchId) {
+            editingBatchId = batchId;
+            const batch = batches.find(b => b.id === batchId);
+            const form = document.getElementById('editBatchForm');
+            const modal = document.getElementById('editBatchModal');
+            
+            let formHTML = '';
+            
+            if (currentUser.role === 'prod_admin' && batch.current_stage === 'PRODUCTION') {
+                formHTML = `
+                    <div>
+                        <label class="block text-slate-300 text-sm font-medium mb-2">Processing Properties</label>
+                        <textarea id="prod_properties" rows="3" class="w-full px-4 py-3 bg-slate-800 border border-slate-600 rounded-xl text-white focus:border-cyan-500 focus:outline-none" placeholder="Temperature, Pressure, Additives..." required>${batch.prod_properties || ''}</textarea>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-slate-300 text-sm font-medium mb-2">Input Quantity (kg)</label>
+                            <input type="number" step="0.01" id="prod_quantity" value="${batch.prod_quantity || batch.store_quantity || ''}" class="w-full px-4 py-3 bg-slate-800 border border-slate-600 rounded-xl text-white focus:border-cyan-500 focus:outline-none" required>
+                        </div>
+                        <div>
+                            <label class="block text-slate-300 text-sm font-medium mb-2">Production Rate (₹/kg)</label>
+                            <input type="number" step="0.01" id="prod_rate" value="${batch.prod_rate || ''}" class="w-full px-4 py-3 bg-slate-800 border border-slate-600 rounded-xl text-white focus:border-cyan-500 focus:outline-none" required>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-slate-300 text-sm font-medium mb-2">FG Output Quantity (kg)</label>
+                        <input type="number" step="0.01" id="fg_out_quantity" value="${batch.fg_out_quantity || ''}" class="w-full px-4 py-3 bg-slate-800 border border-slate-600 rounded-xl text-white focus:border-cyan-500 focus:outline-none" required>
+                    </div>
+                    <button type="submit" class="w-full py-3 bg-gradient-to-r from-cyan-500 to-emerald-500 text-white font-semibold rounded-xl hover:shadow-lg transition-all">
+                        Complete Production & Move to Quality
+                    </button>
+                `;
+            } else if (currentUser.role === 'qc_admin' && batch.current_stage === 'QUALITY') {
+                formHTML = `
+                    <div>
+                        <label class="block text-slate-300 text-sm font-medium mb-2">Quality Check Result</label>
+                        <textarea id="qc_properties_check" rows="4" class="w-full px-4 py-3 bg-slate-800 border border-slate-600 rounded-xl text-white focus:border-cyan-500 focus:outline-none" placeholder="Lab test results, standards check..." required>${batch.qc_properties_check || ''}</textarea>
+                    </div>
+                    <div>
+                        <label class="block text-slate-300 text-sm font-medium mb-2">QC Status</label>
+                        <select id="qc_status" class="w-full px-4 py-3 bg-slate-800 border border-slate-600 rounded-xl text-white focus:border-cyan-500 focus:outline-none" required>
+                            <option value="PASS" ${batch.qc_status === 'PASS' ? 'selected' : ''}>PASS</option>
+                            <option value="FAIL" ${batch.qc_status === 'FAIL' ? 'selected' : ''}>FAIL</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="w-full py-3 bg-gradient-to-r from-cyan-500 to-emerald-500 text-white font-semibold rounded-xl hover:shadow-lg transition-all">
+                        Complete QC & Move to Sales
+                    </button>
+                `;
+            } else if (currentUser.role === 'sales_admin' && batch.current_stage === 'SALES') {
+                formHTML = `
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-slate-300 text-sm font-medium mb-2">Sales Quantity (kg)</label>
+                            <input type="number" step="0.01" id="sales_quantity" value="${batch.sales_quantity || batch.fg_out_quantity || ''}" class="w-full px-4 py-3 bg-slate-800 border border-slate-600 rounded-xl text-white focus:border-cyan-500 focus:outline-none" required>
+                        </div>
+                        <div>
+                            <label class="block text-slate-300 text-sm font-medium mb-2">Sales Rate (₹/kg)</label>
+                            <input type="number" step="0.01" id="sales_rate" value="${batch.sales_rate || ''}" class="w-full px-4 py-3 bg-slate-800 border border-slate-600 rounded-xl text-white focus:border-cyan-500 focus:outline-none" required>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-slate-300 text-sm font-medium mb-2">Outward Product Name</label>
+                        <input type="text" id="out_product" value="${batch.out_product || batch.store_product || ''}" class="w-full px-4 py-3 bg-slate-800 border border-slate-600 rounded-xl text-white focus:border-cyan-500 focus:outline-none" required>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-slate-300 text-sm font-medium mb-2">Out Quantity (kg)</label>
+                            <input type="number" step="0.01" id="out_quantity" value="${batch.out_quantity || ''}" class="w-full px-4 py-3 bg-slate-800 border border-slate-600 rounded-xl text-white focus:border-cyan-500 focus:outline-none" required>
+                        </div>
+                        <div>
+                            <label class="block text-slate-300 text-sm font-medium mb-2">Out Rate (₹/kg)</label>
+                            <input type="number" step="0.01" id="out_rate" value="${batch.out_rate || ''}" class="w-full px-4 py-3 bg-slate-800 border border-slate-600 rounded-xl text-white focus:border-cyan-500 focus:outline-none" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="w-full py-3 bg-gradient-to-r from-cyan-500 to-emerald-500 text-white font-semibold rounded-xl hover:shadow-lg transition-all">
+                        Complete Sales & Mark as Completed
+                    </button>
+                `;
+            }
+            
+            form.innerHTML = formHTML;
+            modal.classList.remove('hidden');
+            
+            form.onsubmit = function(e) {
+                e.preventDefault();
+                updateBatchStage(batch);
+            };
+        }
+
+        async function updateBatchStage(batch) {
+            let updateData = {};
+
+            if (currentUser.role === 'prod_admin') {
+                updateData = {
+                    prod_properties: document.getElementById('prod_properties').value,
+                    prod_quantity: parseFloat(document.getElementById('prod_quantity').value),
+                    prod_rate: parseFloat(document.getElementById('prod_rate').value),
+                    fg_out_quantity: parseFloat(document.getElementById('fg_out_quantity').value),
+                    prod_date: new Date().toISOString(),
+                    prod_user: currentUser.username,
+                    current_stage: 'QUALITY',
+                    updated_at: new Date().toISOString()
+                };
+            } else if (currentUser.role === 'qc_admin') {
+                const qcStatus = document.getElementById('qc_status').value;
+                updateData = {
+                    qc_properties_check: document.getElementById('qc_properties_check').value,
+                    qc_status: qcStatus,
+                    qc_date: new Date().toISOString(),
+                    qc_user: currentUser.username,
+                    current_stage: qcStatus === 'PASS' ? 'SALES' : 'PRODUCTION',
+                    updated_at: new Date().toISOString()
+                };
+            } else if (currentUser.role === 'sales_admin') {
+                updateData = {
+                    sales_quantity: parseFloat(document.getElementById('sales_quantity').value),
+                    sales_rate: parseFloat(document.getElementById('sales_rate').value),
+                    out_product: document.getElementById('out_product').value,
+                    out_quantity: parseFloat(document.getElementById('out_quantity').value),
+                    out_rate: parseFloat(document.getElementById('out_rate').value),
+                    sales_date: new Date().toISOString(),
+                    sales_user: currentUser.username,
+                    current_stage: 'COMPLETED',
+                    completed_at: new Date().toISOString(),
+                    updated_at: new Date().toISOString()
+                };
+            }
+
+            const { error } = await supabase
+                .from('granule_batches')
+                .update(updateData)
+                .eq('id', batch.id);
+
+            if (error) {
+                alert('Error updating batch: ' + error.message);
+                return;
+            }
+
+            closeEditModal();
+            loadBatches();
+            alert('Batch updated successfully!');
+        }
+
+        // Modal Controls
+        document.getElementById('newBatchBtn').addEventListener('click', () => {
+            document.getElementById('newBatchModal').classList.remove('hidden');
+        });
+
+        function closeModal() {
+            document.getElementById('newBatchModal').classList.add('hidden');
+        }
+
+        function closeEditModal() {
+            document.getElementById('editBatchModal').classList.add('hidden');
+            editingBatchId = null;
+        }
+    </script>
+</body>
+</html>
