@@ -3,482 +3,354 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vivek Polymers - Inventory Dashboard</title>
+    <title>Vivek Polymers - Operations Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: { 600: '#1e40af', 700: '#1e3a8a', 900: '#0f172a' },
-                        accent: { 400: '#22d3ee', 500: '#06b6d4' },
-                        emerald: { 500: '#10b981', 600: '#059669' }
-                    },
-                    fontFamily: { sans: ['Inter', 'sans-serif'], display: ['Space Grotesk', 'sans-serif'] }
-                }
-            }
-        }
+        tailwind.config = { theme: { extend: {
+            colors: { primary: { 600: '#1e40af', 700: '#1e3a8a', 900: '#0f172a' }, accent: { 400: '#22d3ee', 500: '#06b6d4' }, emerald: { 500: '#10b981' } },
+            fontFamily: { sans: ['Inter', 'sans-serif'], display: ['Space Grotesk', 'sans-serif'] }
+        }}}
     </script>
     <style>
         body { font-family: 'Inter', sans-serif; }
-        .glass-card { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(20px); border: 1px solid rgba(71, 85, 105, 0.4); }
-        .glass-nav { background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(20px); border: 1px solid rgba(100, 116, 139, 0.3); }
-        .low-stock { border-color: rgba(239, 68, 68, 0.5) !important; }
+        .glass-card { background: rgba(30,41,59,0.7); backdrop-filter: blur(20px); border: 1px solid rgba(71,85,105,0.4); }
+        .glass-nav { background: rgba(15,23,42,0.95); backdrop-filter: blur(20px); border: 1px solid rgba(100,116,139,0.3); }
+        .tab-active { background: linear-gradient(135deg, #06b6d4, #10b981); color: #fff; }
+        .tab-inactive { background: rgba(51,65,85,0.7); color: #94a3b8; }
+        .tab-inactive:hover { background: rgba(71,85,105,0.7); color: #e2e8f0; }
     </style>
 </head>
 <body class="bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 min-h-screen">
 
-    <!-- Login Screen -->
-    <div id="loginScreen" class="min-h-screen flex items-center justify-center p-6">
-        <div class="glass-card rounded-2xl p-8 max-w-md w-full">
-            <div class="text-center mb-8">
-                <div class="w-16 h-16 bg-gradient-to-br from-primary-600 to-primary-700 rounded-xl flex items-center justify-center mx-auto mb-4" style="clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);">
-                    <span class="text-white font-bold text-2xl">VP</span>
-                </div>
-                <h1 class="text-2xl font-bold text-white mb-2">Vivek Polymers</h1>
-                <p class="text-slate-400 text-sm">Inventory Management</p>
+<!-- LOGIN -->
+<div id="loginScreen" class="min-h-screen flex items-center justify-center p-6">
+    <div class="glass-card rounded-2xl p-8 max-w-md w-full">
+        <div class="text-center mb-6">
+            <div class="w-16 h-16 bg-gradient-to-br from-primary-600 to-primary-700 rounded-xl flex items-center justify-center mx-auto mb-4" style="clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%)">
+                <span class="text-white font-bold text-2xl">VP</span>
             </div>
-            <a href="./" class="inline-flex items-center gap-2 text-cyan-400 hover:text-cyan-300 text-sm mb-6 transition-colors">
-                <i class="fas fa-arrow-left"></i> Back to Home
-            </a>
-            <form id="loginForm" class="space-y-4">
-                <div>
-                    <label class="block text-slate-300 text-sm font-medium mb-2">Select Role</label>
-                    <select id="roleSelect" class="w-full px-4 py-3 bg-slate-800 border border-slate-600 rounded-xl text-white focus:border-cyan-500 focus:outline-none">
-                        <option value="admin">Administrator</option>
-                        <option value="store_admin">Store Manager</option>
-                        <option value="prod_admin">Production Manager</option>
-                        <option value="qc_admin">Quality Inspector</option>
-                        <option value="sales_admin">Sales Manager</option>
-                    </select>
-                </div>
-                <div>
-                    <label class="block text-slate-300 text-sm font-medium mb-2">Password</label>
-                    <input type="password" id="passwordInput" class="w-full px-4 py-3 bg-slate-800 border border-slate-600 rounded-xl text-white focus:border-cyan-500 focus:outline-none" placeholder="Enter password">
-                </div>
-                <button type="submit" class="w-full py-3 bg-gradient-to-r from-cyan-500 to-emerald-500 text-white font-semibold rounded-xl hover:shadow-lg hover:shadow-cyan-500/30 transition-all">
-                    Login <i class="fas fa-arrow-right ml-2"></i>
-                </button>
-            </form>
+            <h1 class="text-2xl font-bold text-white mb-1">Vivek Polymers</h1>
+            <p class="text-slate-400 text-sm">Operations Dashboard</p>
         </div>
+        <a href="./" class="inline-flex items-center gap-2 text-cyan-400 hover:text-cyan-300 text-sm mb-4 transition-colors"><i class="fas fa-arrow-left"></i> Back to Home</a>
+        <form id="loginForm" class="space-y-4">
+            <div>
+                <label class="block text-slate-300 text-sm font-medium mb-2">Select Role</label>
+                <select id="roleSelect" class="w-full px-4 py-3 bg-slate-800 border border-slate-600 rounded-xl text-white focus:border-cyan-500 focus:outline-none">
+                    <option value="admin">Administrator</option>
+                    <option value="store_admin">Store / Inward</option>
+                    <option value="prod_admin">Production</option>
+                    <option value="sales_admin">Sales / Outward</option>
+                    <option value="qc_admin">Job Work</option>
+                </select>
+            </div>
+            <div>
+                <label class="block text-slate-300 text-sm font-medium mb-2">Password</label>
+                <input type="password" id="passwordInput" class="w-full px-4 py-3 bg-slate-800 border border-slate-600 rounded-xl text-white focus:border-cyan-500 focus:outline-none" placeholder="Enter password">
+            </div>
+            <button type="submit" class="w-full py-3 bg-gradient-to-r from-cyan-500 to-emerald-500 text-white font-semibold rounded-xl hover:shadow-lg transition-all">Login <i class="fas fa-arrow-right ml-2"></i></button>
+        </form>
     </div>
+</div>
 
-    <!-- Dashboard -->
-    <div id="dashboardScreen" class="hidden min-h-screen">
-        <nav class="glass-nav border-b border-slate-800">
-            <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-                <div class="flex items-center gap-4">
-                    <div class="w-12 h-12 bg-gradient-to-br from-primary-600 to-primary-700 rounded-xl flex items-center justify-center" style="clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);">
-                        <span class="text-white font-bold text-sm">VP</span>
-                    </div>
-                    <div>
-                        <h1 class="text-white font-bold text-lg">VIVEK POLYMERS</h1>
-                        <p class="text-cyan-400 text-xs">Inventory Dashboard</p>
-                    </div>
+<!-- DASHBOARD -->
+<div id="dashboardScreen" class="hidden min-h-screen">
+    <nav class="glass-nav border-b border-slate-800 sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-gradient-to-br from-primary-600 to-primary-700 rounded-lg flex items-center justify-center" style="clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%)">
+                    <span class="text-white font-bold text-xs">VP</span>
                 </div>
-                <div class="flex items-center gap-4">
-                    <div class="text-right">
-                        <p class="text-white text-sm font-semibold" id="userFullName">-</p>
-                        <p class="text-slate-400 text-xs" id="userRole">-</p>
-                    </div>
-                    <button onclick="logout()" class="px-4 py-2 bg-slate-700 hover:bg-slate-600 text-white rounded-lg text-sm transition-all">
-                        <i class="fas fa-sign-out-alt mr-2"></i>Logout
-                    </button>
-                </div>
+                <div><h1 class="text-white font-bold text-sm">VIVEK POLYMERS</h1><p class="text-cyan-400 text-[10px]">Operations</p></div>
             </div>
-        </nav>
-
-        <div class="max-w-7xl mx-auto px-6 py-8">
-            <!-- Tab Navigation -->
-            <div class="flex gap-2 mb-8">
-                <button onclick="showTab('inventory')" id="tabInventory" class="tab-btn px-5 py-2.5 rounded-xl text-sm font-semibold bg-cyan-500 text-white transition-all">
-                    <i class="fas fa-boxes-stacked mr-2"></i>Inventory
-                </button>
-                <button onclick="showTab('usage')" id="tabUsage" class="tab-btn px-5 py-2.5 rounded-xl text-sm font-semibold bg-slate-700 text-slate-300 transition-all">
-                    <i class="fas fa-clipboard-list mr-2"></i>Usage Log
-                </button>
-            </div>
-
-            <!-- Inventory Tab -->
-            <div id="inventoryTab">
-                <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
-                    <h2 class="text-2xl font-bold text-white">Current Stock</h2>
-                    <div class="flex gap-3">
-                        <button onclick="loadInventory()" class="px-4 py-2.5 bg-slate-700 hover:bg-slate-600 text-white rounded-xl text-sm transition-all">
-                            <i class="fas fa-sync-alt"></i>
-                        </button>
-                        <button id="addStockBtn" onclick="openAddStockModal()" class="hidden px-5 py-2.5 bg-gradient-to-r from-cyan-500 to-emerald-500 text-white font-semibold rounded-xl text-sm hover:shadow-lg transition-all">
-                            <i class="fas fa-plus mr-2"></i>Add Stock
-                        </button>
-                    </div>
-                </div>
-                <div id="inventoryGrid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
-            </div>
-
-            <!-- Usage Log Tab -->
-            <div id="usageTab" class="hidden">
-                <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
-                    <h2 class="text-2xl font-bold text-white">Usage History</h2>
-                    <div class="flex items-center gap-3">
-                        <input type="date" id="usageDateFilter" onchange="loadUsageLog()" class="px-4 py-2 bg-slate-800 border border-slate-600 rounded-xl text-white text-sm focus:border-cyan-500 focus:outline-none">
-                        <button onclick="clearUsageDateFilter()" class="px-4 py-2 bg-slate-700 hover:bg-slate-600 text-slate-300 text-sm rounded-xl transition-all">Clear</button>
-                    </div>
-                </div>
-                <div id="usageGrid" class="space-y-3"></div>
+            <div class="flex items-center gap-3">
+                <div class="text-right hidden sm:block"><p class="text-white text-xs font-semibold" id="userFullName">-</p><p class="text-slate-400 text-[10px]" id="userRole">-</p></div>
+                <button onclick="logout()" class="px-3 py-1.5 bg-slate-700 hover:bg-slate-600 text-white rounded-lg text-xs transition-all"><i class="fas fa-sign-out-alt"></i></button>
             </div>
         </div>
-    </div>
+    </nav>
 
-    <!-- Add Stock Modal (Admin only) -->
-    <div id="addStockModal" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center p-6 z-50">
-        <div class="glass-card rounded-2xl p-8 max-w-lg w-full">
-            <div class="flex items-center justify-between mb-6">
-                <h3 class="text-xl font-bold text-white">Add / Update Stock</h3>
-                <button onclick="closeAddStockModal()" class="text-slate-400 hover:text-white"><i class="fas fa-times text-xl"></i></button>
+    <div class="max-w-7xl mx-auto px-4 py-6">
+        <!-- Summary Cards (Admin) -->
+        <div id="summaryCards" class="hidden grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
+            <div class="glass-card rounded-xl p-4 text-center">
+                <p class="text-slate-400 text-xs">Today Inward</p>
+                <p class="text-2xl font-bold text-cyan-400" id="sumInward">-</p><p class="text-slate-500 text-xs">KG</p>
             </div>
-            <form id="addStockForm" class="space-y-4">
-                <div>
-                    <label class="block text-slate-300 text-sm font-medium mb-2">Raw Material Name</label>
-                    <input type="text" id="rmName" class="w-full px-4 py-3 bg-slate-800 border border-slate-600 rounded-xl text-white focus:border-cyan-500 focus:outline-none" placeholder="e.g., ABS Black" required>
-                </div>
-                <div>
-                    <label class="block text-slate-300 text-sm font-medium mb-2">Party Name (Supplier)</label>
-                    <input type="text" id="partyName" class="w-full px-4 py-3 bg-slate-800 border border-slate-600 rounded-xl text-white focus:border-cyan-500 focus:outline-none" placeholder="e.g., Supreme Polymers" required>
-                </div>
-                <div class="grid grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-slate-300 text-sm font-medium mb-2">Bags</label>
-                        <input type="number" id="bags" class="w-full px-4 py-3 bg-slate-800 border border-slate-600 rounded-xl text-white focus:border-cyan-500 focus:outline-none" min="0" required>
-                    </div>
-                    <div>
-                        <label class="block text-slate-300 text-sm font-medium mb-2">Qty (KG)</label>
-                        <input type="number" step="0.01" id="qtyKg" class="w-full px-4 py-3 bg-slate-800 border border-slate-600 rounded-xl text-white focus:border-cyan-500 focus:outline-none" min="0" required>
-                    </div>
-                </div>
-                <p class="text-slate-500 text-xs"><i class="fas fa-info-circle mr-1"></i>If this material + party already exists, the quantity will be added to existing stock.</p>
-                <button type="submit" class="w-full py-3 bg-gradient-to-r from-cyan-500 to-emerald-500 text-white font-semibold rounded-xl hover:shadow-lg transition-all">
-                    Add Stock
-                </button>
-            </form>
-        </div>
-    </div>
-
-    <!-- Log Usage Modal -->
-    <div id="logUsageModal" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center p-6 z-50">
-        <div class="glass-card rounded-2xl p-8 max-w-lg w-full">
-            <div class="flex items-center justify-between mb-6">
-                <h3 class="text-xl font-bold text-white">Log Usage</h3>
-                <button onclick="closeLogUsageModal()" class="text-slate-400 hover:text-white"><i class="fas fa-times text-xl"></i></button>
+            <div class="glass-card rounded-xl p-4 text-center">
+                <p class="text-slate-400 text-xs">Today Production</p>
+                <p class="text-2xl font-bold text-emerald-400" id="sumProd">-</p><p class="text-slate-500 text-xs">KG</p>
             </div>
-            <form id="logUsageForm" class="space-y-4">
-                <input type="hidden" id="usageInventoryId">
-                <div>
-                    <label class="block text-slate-300 text-sm font-medium mb-2">Material</label>
-                    <p id="usageMaterialName" class="text-white font-semibold"></p>
-                </div>
-                <div>
-                    <label class="block text-slate-300 text-sm font-medium mb-2">Available Stock</label>
-                    <p id="usageAvailable" class="text-emerald-400 font-semibold"></p>
-                </div>
-                <div>
-                    <label class="block text-slate-300 text-sm font-medium mb-2">Qty Used (KG)</label>
-                    <input type="number" step="0.01" id="usageQty" class="w-full px-4 py-3 bg-slate-800 border border-slate-600 rounded-xl text-white focus:border-cyan-500 focus:outline-none" min="0.01" required>
-                </div>
-                <div>
-                    <label class="block text-slate-300 text-sm font-medium mb-2">Notes (optional)</label>
-                    <input type="text" id="usageNotes" class="w-full px-4 py-3 bg-slate-800 border border-slate-600 rounded-xl text-white focus:border-cyan-500 focus:outline-none" placeholder="e.g., Production batch #12">
-                </div>
-                <button type="submit" class="w-full py-3 bg-gradient-to-r from-amber-500 to-orange-500 text-white font-semibold rounded-xl hover:shadow-lg transition-all">
-                    Deduct from Stock
-                </button>
-            </form>
+            <div class="glass-card rounded-xl p-4 text-center">
+                <p class="text-slate-400 text-xs">Today Outward</p>
+                <p class="text-2xl font-bold text-amber-400" id="sumOutward">-</p><p class="text-slate-500 text-xs">KG</p>
+            </div>
+            <div class="glass-card rounded-xl p-4 text-center">
+                <p class="text-slate-400 text-xs">Today Job Work</p>
+                <p class="text-2xl font-bold text-purple-400" id="sumJob">-</p><p class="text-slate-500 text-xs">entries</p>
+            </div>
         </div>
+
+        <!-- Tabs -->
+        <div class="flex flex-wrap gap-2 mb-6" id="tabBar">
+            <button onclick="showTab('inward')" id="tabInward" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold transition-all tab-active"><i class="fas fa-arrow-down mr-1"></i>Inward</button>
+            <button onclick="showTab('production')" id="tabProduction" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold transition-all tab-inactive"><i class="fas fa-industry mr-1"></i>Production</button>
+            <button onclick="showTab('outward')" id="tabOutward" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold transition-all tab-inactive"><i class="fas fa-arrow-up mr-1"></i>Outward</button>
+            <button onclick="showTab('jobwork')" id="tabJobwork" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold transition-all tab-inactive"><i class="fas fa-exchange-alt mr-1"></i>Job Work</button>
+        </div>
+
+        <!-- Filter + Add -->
+        <div class="flex flex-wrap items-center gap-3 mb-6">
+            <input type="date" id="dateFilter" onchange="loadCurrentTab()" class="px-3 py-2 bg-slate-800 border border-slate-600 rounded-xl text-white text-sm focus:border-cyan-500 focus:outline-none">
+            <button onclick="clearFilter()" class="px-3 py-2 bg-slate-700 hover:bg-slate-600 text-slate-300 text-xs rounded-xl">Clear</button>
+            <button onclick="refresh()" class="px-3 py-2 bg-slate-700 hover:bg-slate-600 text-white text-sm rounded-xl"><i class="fas fa-sync-alt"></i></button>
+            <button id="addEntryBtn" onclick="openAddModal()" class="ml-auto px-4 py-2 bg-gradient-to-r from-cyan-500 to-emerald-500 text-white font-semibold rounded-xl text-sm hover:shadow-lg transition-all"><i class="fas fa-plus mr-2"></i>Add Entry</button>
+        </div>
+
+        <!-- Data Grid -->
+        <div id="dataGrid" class="space-y-3"></div>
     </div>
+</div>
 
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script>
-        const SUPABASE_URL = 'https://pooemfcjiopldnojlrso.supabase.co';
-        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBvb2VtZmNqaW9wbGRub2pscnNvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTM2MTM3NDIsImV4cCI6MjEwOTE4OTc0Mn0.qOImzrhI12HdaxTaAezUteH5nlQuucYHK8P8w1cdI5c';
-        const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+<!-- ADD ENTRY MODAL -->
+<div id="addModal" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 z-50">
+    <div class="glass-card rounded-2xl p-6 max-w-lg w-full max-h-[90vh] overflow-y-auto">
+        <div class="flex items-center justify-between mb-4">
+            <h3 class="text-lg font-bold text-white" id="modalTitle">Add Entry</h3>
+            <button onclick="closeAddModal()" class="text-slate-400 hover:text-white"><i class="fas fa-times text-lg"></i></button>
+        </div>
+        <form id="addForm" class="space-y-3"></form>
+    </div>
+</div>
 
-        let currentUser = null;
-        let inventoryData = [];
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const db = window.supabase.createClient(
+    'https://pooemfcjiopldnojlrso.supabase.co',
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBvb2VtZmNqaW9wbGRub2pscnNvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTM2MTM3NDIsImV4cCI6MjEwOTE4OTc0Mn0.qOImzrhI12HdaxTaAezUteH5nlQuucYHK8P8w1cdI5c'
+);
 
-        // === LOGIN ===
-        document.getElementById('loginForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            const role = document.getElementById('roleSelect').value;
-            const password = document.getElementById('passwordInput').value;
-            const btn = this.querySelector('button[type="submit"]');
-            btn.disabled = true;
-            btn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Logging in...';
+let currentUser = null;
+let currentTab = 'inward';
+const today = new Date().toISOString().split('T')[0];
 
-            try {
-                const { data, error } = await db.from('users').select('*')
-                    .eq('username', role).eq('password', password).eq('is_active', true);
+// === LOGIN ===
+document.getElementById('loginForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const role = document.getElementById('roleSelect').value;
+    const pw = document.getElementById('passwordInput').value;
+    const btn = this.querySelector('button[type="submit"]');
+    btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Logging in...';
 
-                if (error || !data || data.length === 0) {
-                    alert('Invalid credentials');
-                    btn.disabled = false;
-                    btn.innerHTML = 'Login <i class="fas fa-arrow-right ml-2"></i>';
-                    return;
-                }
+    const { data, error } = await db.from('users').select('*').eq('username', role).eq('password', pw).eq('is_active', true);
+    if (error || !data || data.length === 0) {
+        alert('Invalid credentials');
+        btn.disabled = false; btn.innerHTML = 'Login <i class="fas fa-arrow-right ml-2"></i>';
+        return;
+    }
+    const u = data[0];
+    currentUser = { username: u.username, role: u.role, full_name: u.full_name };
+    document.getElementById('loginScreen').classList.add('hidden');
+    document.getElementById('dashboardScreen').classList.remove('hidden');
+    document.getElementById('userFullName').textContent = u.full_name;
+    document.getElementById('userRole').textContent = u.role.replace(/_/g, ' ').toUpperCase();
 
-                const user = data[0];
-                currentUser = { username: user.username, role: user.role, full_name: user.full_name };
-                document.getElementById('loginScreen').classList.add('hidden');
-                document.getElementById('dashboardScreen').classList.remove('hidden');
-                document.getElementById('userFullName').textContent = currentUser.full_name;
-                document.getElementById('userRole').textContent = user.role.replace('_', ' ').toUpperCase();
+    // Show summary for admin
+    if (u.role === 'admin') document.getElementById('summaryCards').classList.remove('hidden');
 
-                // Show Add Stock button for admin
-                if (currentUser.role === 'admin') {
-                    document.getElementById('addStockBtn').classList.remove('hidden');
-                }
-                loadInventory();
-            } catch (err) {
-                alert('Connection error: ' + err.message);
-                btn.disabled = false;
-                btn.innerHTML = 'Login <i class="fas fa-arrow-right ml-2"></i>';
-            }
-        });
+    // Default tab based on role
+    const roleTab = { store_admin: 'inward', prod_admin: 'production', sales_admin: 'outward', qc_admin: 'jobwork', admin: 'inward' };
+    showTab(roleTab[u.role] || 'inward');
+    if (u.role === 'admin') loadSummary();
+});
 
-        function logout() {
-            currentUser = null;
-            document.getElementById('loginScreen').classList.remove('hidden');
-            document.getElementById('dashboardScreen').classList.add('hidden');
-            document.getElementById('addStockBtn').classList.add('hidden');
-            const btn = document.querySelector('#loginForm button[type="submit"]');
-            btn.disabled = false;
-            btn.innerHTML = 'Login <i class="fas fa-arrow-right ml-2"></i>';
-            document.getElementById('passwordInput').value = '';
+function logout() {
+    currentUser = null;
+    document.getElementById('loginScreen').classList.remove('hidden');
+    document.getElementById('dashboardScreen').classList.add('hidden');
+    document.getElementById('summaryCards').classList.add('hidden');
+    const btn = document.querySelector('#loginForm button[type="submit"]');
+    btn.disabled = false; btn.innerHTML = 'Login <i class="fas fa-arrow-right ml-2"></i>';
+    document.getElementById('passwordInput').value = '';
+}
+
+// === TABS ===
+function showTab(tab) {
+    currentTab = tab;
+    ['inward','production','outward','jobwork'].forEach(t => {
+        const btn = document.getElementById('tab' + t.charAt(0).toUpperCase() + t.slice(1));
+        btn.className = 'tab-btn px-4 py-2 rounded-xl text-xs font-semibold transition-all ' + (t === tab ? 'tab-active' : 'tab-inactive');
+    });
+    loadCurrentTab();
+}
+
+function clearFilter() { document.getElementById('dateFilter').value = ''; loadCurrentTab(); }
+function refresh() { loadCurrentTab(); if (currentUser.role === 'admin') loadSummary(); }
+
+// === SUMMARY (Admin) ===
+async function loadSummary() {
+    const { data: iw } = await db.from('inward').select('qty_kg').eq('entry_date', today);
+    const { data: pr } = await db.from('production').select('output_kg').eq('entry_date', today);
+    const { data: ow } = await db.from('outward').select('qty_kg').eq('entry_date', today);
+    const { data: jw } = await db.from('jobwork').select('id').eq('entry_date', today);
+    document.getElementById('sumInward').textContent = (iw || []).reduce((s, r) => s + parseFloat(r.qty_kg), 0).toFixed(0);
+    document.getElementById('sumProd').textContent = (pr || []).reduce((s, r) => s + parseFloat(r.output_kg), 0).toFixed(0);
+    document.getElementById('sumOutward').textContent = (ow || []).reduce((s, r) => s + parseFloat(r.qty_kg), 0).toFixed(0);
+    document.getElementById('sumJob').textContent = (jw || []).length;
+}
+
+// === LOAD DATA ===
+async function loadCurrentTab() {
+    const grid = document.getElementById('dataGrid');
+    grid.innerHTML = '<div class="glass-card rounded-xl p-8 text-center"><p class="text-slate-400"><i class="fas fa-spinner fa-spin mr-2"></i>Loading...</p></div>';
+    const dateVal = document.getElementById('dateFilter').value;
+
+    let query = db.from(currentTab).select('*').order('entry_date', { ascending: false }).order('created_at', { ascending: false });
+    if (dateVal) query = query.eq('entry_date', dateVal);
+    else query = query.limit(50);
+
+    const { data, error } = await query;
+    if (error) { grid.innerHTML = '<p class="text-red-400 p-8 text-center">' + error.message + '</p>'; return; }
+    if (!data || data.length === 0) { grid.innerHTML = '<div class="glass-card rounded-xl p-8 text-center"><p class="text-slate-400">No entries found</p></div>'; return; }
+
+    // Group by date
+    const grouped = {};
+    data.forEach(r => { const d = r.entry_date; if (!grouped[d]) grouped[d] = []; grouped[d].push(r); });
+
+    let html = '';
+    Object.keys(grouped).sort((a, b) => b.localeCompare(a)).forEach(date => {
+        const disp = new Date(date + 'T00:00:00').toLocaleDateString('en-IN', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' });
+        const rows = grouped[date];
+        const dayTotal = rows.reduce((s, r) => s + parseFloat(r.qty_kg || r.output_kg || 0), 0);
+        html += `<div class="mb-4"><div class="flex items-center justify-between mb-2"><span class="text-slate-400 text-sm font-semibold"><i class="fas fa-calendar-day text-cyan-500 mr-1"></i>${disp} (${rows.length})</span><span class="text-cyan-400 text-sm font-semibold">${dayTotal.toFixed(0)} kg</span></div>`;
+        rows.forEach(r => { html += renderRow(r); });
+        html += '</div>';
+    });
+    grid.innerHTML = html;
+}
+
+// === RENDER ROWS ===
+function renderRow(r) {
+    if (currentTab === 'inward') {
+        return `<div class="glass-card rounded-lg p-4 mb-2">
+            <div class="flex items-start justify-between">
+                <div>
+                    <p class="text-white font-semibold">${r.material}</p>
+                    <p class="text-slate-500 text-xs mt-1"><i class="fas fa-truck mr-1"></i>${r.supplier || '-'} ${r.vehicle_no ? '· ' + r.vehicle_no : ''} ${r.plot ? '· Plot ' + r.plot : ''}</p>
+                    <p class="text-slate-600 text-xs mt-1">by ${r.entered_by || '-'}${r.notes ? ' · ' + r.notes : ''}</p>
+                </div>
+                <div class="text-right flex-shrink-0 ml-4">
+                    <p class="text-cyan-400 font-bold text-lg">${parseFloat(r.qty_kg).toFixed(0)} kg</p>
+                    ${r.rate ? '<p class="text-slate-500 text-xs">@₹' + r.rate + '/kg</p>' : ''}
+                </div>
+            </div>
+        </div>`;
+    }
+    if (currentTab === 'production') {
+        return `<div class="glass-card rounded-lg p-4 mb-2">
+            <div class="flex items-start justify-between">
+                <div>
+                    <p class="text-white font-semibold">${r.material}</p>
+                    <p class="text-slate-500 text-xs mt-1"><i class="fas fa-cog mr-1"></i>${r.machine} · ${r.shift} shift</p>
+                    <p class="text-slate-600 text-xs mt-1">by ${r.entered_by || '-'}${r.notes ? ' · ' + r.notes : ''}</p>
+                </div>
+                <div class="text-right flex-shrink-0 ml-4">
+                    <p class="text-emerald-400 font-bold text-lg">${parseFloat(r.output_kg).toFixed(0)} kg</p>
+                    ${r.lums_kg > 0 ? '<p class="text-red-400 text-xs">Lums: ' + parseFloat(r.lums_kg).toFixed(0) + ' kg</p>' : ''}
+                </div>
+            </div>
+        </div>`;
+    }
+    if (currentTab === 'outward') {
+        return `<div class="glass-card rounded-lg p-4 mb-2">
+            <div class="flex items-start justify-between">
+                <div>
+                    <p class="text-white font-semibold">${r.material}</p>
+                    <p class="text-slate-500 text-xs mt-1"><i class="fas fa-user mr-1"></i>${r.customer || '-'} ${r.vehicle_no ? '· ' + r.vehicle_no : ''}</p>
+                    <p class="text-slate-600 text-xs mt-1">by ${r.entered_by || '-'}${r.notes ? ' · ' + r.notes : ''}</p>
+                </div>
+                <div class="text-right flex-shrink-0 ml-4">
+                    <p class="text-amber-400 font-bold text-lg">${parseFloat(r.qty_kg).toFixed(0)} kg</p>
+                    ${r.rate ? '<p class="text-slate-500 text-xs">@₹' + r.rate + '/kg</p>' : ''}
+                </div>
+            </div>
+        </div>`;
+    }
+    if (currentTab === 'jobwork') {
+        const isIn = r.direction === 'IN';
+        return `<div class="glass-card rounded-lg p-4 mb-2">
+            <div class="flex items-start justify-between">
+                <div>
+                    <p class="text-white font-semibold">${r.material} <span class="px-2 py-0.5 rounded text-[10px] font-bold ${isIn ? 'bg-cyan-500/20 text-cyan-400' : 'bg-amber-500/20 text-amber-400'}">${r.direction}</span></p>
+                    <p class="text-slate-500 text-xs mt-1"><i class="fas fa-handshake mr-1"></i>${r.party || '-'} ${r.vehicle_no ? '· ' + r.vehicle_no : ''} ${r.plot ? '· Plot ' + r.plot : ''}</p>
+                    <p class="text-slate-600 text-xs mt-1">by ${r.entered_by || '-'}${r.notes ? ' · ' + r.notes : ''}</p>
+                </div>
+                <div class="text-right flex-shrink-0 ml-4">
+                    <p class="${isIn ? 'text-cyan-400' : 'text-amber-400'} font-bold text-lg">${parseFloat(r.qty_kg).toFixed(0)} kg</p>
+                </div>
+            </div>
+        </div>`;
+    }
+    return '';
+}
+
+// === ADD ENTRY MODAL ===
+function openAddModal() {
+    document.getElementById('addModal').classList.remove('hidden');
+    const form = document.getElementById('addForm');
+    const title = document.getElementById('modalTitle');
+    const inp = (id, label, type='text', req=true, ph='') => `<div><label class="block text-slate-300 text-xs font-medium mb-1">${label}</label><input type="${type}" id="${id}" class="w-full px-3 py-2.5 bg-slate-800 border border-slate-600 rounded-xl text-white text-sm focus:border-cyan-500 focus:outline-none" placeholder="${ph}" ${req ? 'required' : ''} ${type==='number' ? 'step="0.01" min="0"' : ''}></div>`;
+    const sel = (id, label, opts) => `<div><label class="block text-slate-300 text-xs font-medium mb-1">${label}</label><select id="${id}" class="w-full px-3 py-2.5 bg-slate-800 border border-slate-600 rounded-xl text-white text-sm focus:border-cyan-500 focus:outline-none">${opts.map(o => '<option value="'+o+'">'+o+'</option>').join('')}</select></div>`;
+    const btn = (text, color='from-cyan-500 to-emerald-500') => `<button type="submit" class="w-full py-3 bg-gradient-to-r ${color} text-white font-semibold rounded-xl hover:shadow-lg transition-all">${text}</button>`;
+
+    if (currentTab === 'inward') {
+        title.textContent = 'Log Inward Entry';
+        form.innerHTML = inp('f_date','Date','date') + inp('f_material','Material Name','text',true,'e.g., PP BK cutting') + '<div class="grid grid-cols-2 gap-3">' + inp('f_qty','Qty (KG)','number') + inp('f_rate','Rate ₹/kg','number',false) + '</div>' + inp('f_supplier','Supplier / Party','text',false) + '<div class="grid grid-cols-2 gap-3">' + inp('f_vehicle','Vehicle No.','text',false) + inp('f_plot','Plot','text',false) + '</div>' + inp('f_notes','Notes','text',false) + btn('Save Inward Entry');
+        document.getElementById('f_date').value = today;
+    } else if (currentTab === 'production') {
+        title.textContent = 'Log Production Entry';
+        form.innerHTML = inp('f_date','Date','date') + '<div class="grid grid-cols-2 gap-3">' + sel('f_shift','Shift',['Day','Night']) + inp('f_machine','Machine','text',true,'e.g., Machine A') + '</div>' + inp('f_material','Material','text',true,'e.g., ABS black') + '<div class="grid grid-cols-2 gap-3">' + inp('f_output','Output (KG)','number') + inp('f_lums','Lums/Waste (KG)','number',false) + '</div>' + inp('f_notes','Notes','text',false) + btn('Save Production Entry','from-emerald-500 to-green-600');
+        document.getElementById('f_date').value = today;
+    } else if (currentTab === 'outward') {
+        title.textContent = 'Log Outward Entry';
+        form.innerHTML = inp('f_date','Date','date') + inp('f_material','Material','text',true,'e.g., PPCP 910 BK') + '<div class="grid grid-cols-2 gap-3">' + inp('f_qty','Qty (KG)','number') + inp('f_rate','Rate ₹/kg','number',false) + '</div>' + inp('f_customer','Customer','text',false) + inp('f_vehicle','Vehicle No.','text',false) + inp('f_notes','Notes','text',false) + btn('Save Outward Entry','from-amber-500 to-orange-500');
+        document.getElementById('f_date').value = today;
+    } else if (currentTab === 'jobwork') {
+        title.textContent = 'Log Job Work Entry';
+        form.innerHTML = inp('f_date','Date','date') + sel('f_direction','Direction',['IN','OUT']) + inp('f_material','Material','text',true,'e.g., Pmma Granding') + inp('f_qty','Qty (KG)','number') + inp('f_party','Party','text',false) + '<div class="grid grid-cols-2 gap-3">' + inp('f_vehicle','Vehicle No.','text',false) + inp('f_plot','Plot','text',false) + '</div>' + inp('f_notes','Notes','text',false) + btn('Save Job Work Entry','from-purple-500 to-violet-600');
+        document.getElementById('f_date').value = today;
+    }
+
+    form.onsubmit = async function(e) {
+        e.preventDefault();
+        const b = form.querySelector('button[type="submit"]');
+        b.disabled = true; b.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Saving...';
+        let row = {};
+
+        if (currentTab === 'inward') {
+            row = { entry_date: g('f_date'), material: g('f_material'), qty_kg: gn('f_qty'), rate: gn('f_rate') || null, supplier: g('f_supplier') || null, vehicle_no: g('f_vehicle') || null, plot: g('f_plot') || null, notes: g('f_notes') || null, entered_by: currentUser.full_name };
+        } else if (currentTab === 'production') {
+            row = { entry_date: g('f_date'), shift: g('f_shift'), machine: g('f_machine'), material: g('f_material'), output_kg: gn('f_output'), lums_kg: gn('f_lums') || 0, notes: g('f_notes') || null, entered_by: currentUser.full_name };
+        } else if (currentTab === 'outward') {
+            row = { entry_date: g('f_date'), material: g('f_material'), qty_kg: gn('f_qty'), rate: gn('f_rate') || null, customer: g('f_customer') || null, vehicle_no: g('f_vehicle') || null, notes: g('f_notes') || null, entered_by: currentUser.full_name };
+        } else if (currentTab === 'jobwork') {
+            row = { entry_date: g('f_date'), direction: g('f_direction'), material: g('f_material'), qty_kg: gn('f_qty'), party: g('f_party') || null, vehicle_no: g('f_vehicle') || null, plot: g('f_plot') || null, notes: g('f_notes') || null, entered_by: currentUser.full_name };
         }
 
-        // === TABS ===
-        function showTab(tab) {
-            document.getElementById('inventoryTab').classList.toggle('hidden', tab !== 'inventory');
-            document.getElementById('usageTab').classList.toggle('hidden', tab !== 'usage');
-            document.getElementById('tabInventory').className = 'tab-btn px-5 py-2.5 rounded-xl text-sm font-semibold transition-all ' + (tab === 'inventory' ? 'bg-cyan-500 text-white' : 'bg-slate-700 text-slate-300');
-            document.getElementById('tabUsage').className = 'tab-btn px-5 py-2.5 rounded-xl text-sm font-semibold transition-all ' + (tab === 'usage' ? 'bg-cyan-500 text-white' : 'bg-slate-700 text-slate-300');
-            if (tab === 'usage') loadUsageLog();
-        }
+        const { error } = await db.from(currentTab).insert(row);
+        if (error) { alert('Error: ' + error.message); b.disabled = false; b.textContent = 'Retry'; return; }
 
-        // === LOAD INVENTORY ===
-        async function loadInventory() {
-            const grid = document.getElementById('inventoryGrid');
-            grid.innerHTML = '<div class="col-span-full glass-card rounded-xl p-8 text-center"><p class="text-slate-400"><i class="fas fa-spinner fa-spin mr-2"></i>Loading...</p></div>';
+        closeAddModal();
+        loadCurrentTab();
+        if (currentUser.role === 'admin') loadSummary();
+    };
+}
 
-            const { data: items, error } = await db.from('inventory').select('*').order('raw_material');
-            if (error) { grid.innerHTML = '<p class="text-red-400 col-span-full text-center p-8">' + error.message + '</p>'; return; }
-
-            // Get total usage per inventory item
-            const { data: usages } = await db.from('usage_log').select('inventory_id, qty_used_kg');
-            const usageMap = {};
-            (usages || []).forEach(u => {
-                usageMap[u.inventory_id] = (usageMap[u.inventory_id] || 0) + parseFloat(u.qty_used_kg);
-            });
-
-            inventoryData = (items || []).map(item => ({
-                ...item,
-                total_used: usageMap[item.id] || 0,
-                remaining: parseFloat(item.qty_kg) - (usageMap[item.id] || 0)
-            }));
-
-            if (inventoryData.length === 0) {
-                grid.innerHTML = '<div class="col-span-full glass-card rounded-xl p-8 text-center"><p class="text-slate-400">No inventory items. Admin can add stock.</p></div>';
-                return;
-            }
-
-            grid.innerHTML = inventoryData.map(item => {
-                const pct = item.qty_kg > 0 ? (item.remaining / item.qty_kg * 100) : 0;
-                const isLow = pct < 20;
-                const barColor = isLow ? 'bg-red-500' : pct < 50 ? 'bg-amber-500' : 'bg-emerald-500';
-
-                return `
-                <div class="glass-card rounded-xl p-5 ${isLow ? 'low-stock' : ''}">
-                    <div class="flex items-start justify-between mb-3">
-                        <div>
-                            <h3 class="text-lg font-bold text-white">${item.raw_material}</h3>
-                            <p class="text-slate-400 text-sm">${item.party_name}</p>
-                        </div>
-                        <span class="px-2 py-1 rounded-lg text-xs font-semibold ${isLow ? 'bg-red-500/20 text-red-400' : 'bg-emerald-500/20 text-emerald-400'}">
-                            ${isLow ? 'LOW' : 'OK'}
-                        </span>
-                    </div>
-                    <div class="grid grid-cols-3 gap-3 mb-3">
-                        <div><p class="text-slate-500 text-xs">Total Stock</p><p class="text-white font-semibold text-sm">${parseFloat(item.qty_kg).toFixed(1)} kg</p></div>
-                        <div><p class="text-slate-500 text-xs">Used</p><p class="text-amber-400 font-semibold text-sm">${item.total_used.toFixed(1)} kg</p></div>
-                        <div><p class="text-slate-500 text-xs">Remaining</p><p class="${isLow ? 'text-red-400' : 'text-emerald-400'} font-semibold text-sm">${item.remaining.toFixed(1)} kg</p></div>
-                    </div>
-                    <div class="mb-3"><p class="text-slate-500 text-xs mb-1">Bags: ${item.bags}</p>
-                        <div class="w-full h-2 bg-slate-700 rounded-full overflow-hidden">
-                            <div class="${barColor} h-full rounded-full transition-all" style="width:${Math.max(pct,2)}%"></div>
-                        </div>
-                    </div>
-                    <button onclick="openLogUsageModal(${item.id})" class="w-full py-2 bg-amber-500/20 hover:bg-amber-500/30 text-amber-400 rounded-lg text-sm font-medium transition-all">
-                        <i class="fas fa-minus-circle mr-2"></i>Log Usage
-                    </button>
-                </div>`;
-            }).join('');
-        }
-
-        // === LOAD USAGE LOG ===
-        async function loadUsageLog() {
-            const grid = document.getElementById('usageGrid');
-            grid.innerHTML = '<div class="glass-card rounded-xl p-8 text-center"><p class="text-slate-400"><i class="fas fa-spinner fa-spin mr-2"></i>Loading...</p></div>';
-
-            let query = db.from('usage_log').select('*, inventory(raw_material, party_name)').order('used_at', { ascending: false });
-            
-            const dateFilter = document.getElementById('usageDateFilter').value;
-            if (dateFilter) {
-                query = query.gte('used_at', dateFilter + 'T00:00:00').lte('used_at', dateFilter + 'T23:59:59');
-            }
-
-            const { data, error } = await query;
-            if (error) { grid.innerHTML = '<p class="text-red-400 text-center p-8">' + error.message + '</p>'; return; }
-
-            if (!data || data.length === 0) {
-                grid.innerHTML = '<div class="glass-card rounded-xl p-8 text-center"><p class="text-slate-400">No usage entries found</p></div>';
-                return;
-            }
-
-            // Group by date
-            const grouped = {};
-            data.forEach(entry => {
-                const date = (entry.used_at || '').split('T')[0];
-                if (!grouped[date]) grouped[date] = [];
-                grouped[date].push(entry);
-            });
-
-            let html = '';
-            Object.keys(grouped).sort((a, b) => b.localeCompare(a)).forEach(date => {
-                const displayDate = new Date(date + 'T00:00:00').toLocaleDateString('en-IN', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' });
-                const dayTotal = grouped[date].reduce((sum, e) => sum + parseFloat(e.qty_used_kg), 0);
-
-                html += `<div class="mb-4">
-                    <div class="flex items-center justify-between mb-2">
-                        <h3 class="text-slate-400 text-sm font-semibold flex items-center gap-2"><i class="fas fa-calendar-day text-cyan-500"></i> ${displayDate}</h3>
-                        <span class="text-amber-400 text-sm font-semibold">${dayTotal.toFixed(1)} kg used</span>
-                    </div>`;
-
-                grouped[date].forEach(entry => {
-                    const mat = entry.inventory ? entry.inventory.raw_material : 'Unknown';
-                    const party = entry.inventory ? entry.inventory.party_name : '';
-                    const time = new Date(entry.used_at).toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' });
-                    html += `
-                    <div class="glass-card rounded-lg p-4 mb-2 flex items-center justify-between">
-                        <div>
-                            <p class="text-white font-semibold text-sm">${mat} <span class="text-slate-500 font-normal">· ${party}</span></p>
-                            <p class="text-slate-500 text-xs">${time} · by ${entry.used_by}${entry.notes ? ' · ' + entry.notes : ''}</p>
-                        </div>
-                        <span class="text-amber-400 font-bold text-lg">-${parseFloat(entry.qty_used_kg).toFixed(1)} kg</span>
-                    </div>`;
-                });
-                html += '</div>';
-            });
-
-            grid.innerHTML = html;
-        }
-
-        function clearUsageDateFilter() {
-            document.getElementById('usageDateFilter').value = '';
-            loadUsageLog();
-        }
-
-        // === ADD STOCK (Admin) ===
-        function openAddStockModal() { document.getElementById('addStockModal').classList.remove('hidden'); }
-        function closeAddStockModal() { document.getElementById('addStockModal').classList.add('hidden'); }
-
-        document.getElementById('addStockForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            const rm = document.getElementById('rmName').value.trim();
-            const party = document.getElementById('partyName').value.trim();
-            const bags = parseInt(document.getElementById('bags').value);
-            const qty = parseFloat(document.getElementById('qtyKg').value);
-            const btn = this.querySelector('button[type="submit"]');
-            btn.disabled = true;
-            btn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Saving...';
-
-            // Check if exists
-            const { data: existing } = await db.from('inventory').select('*')
-                .eq('raw_material', rm).eq('party_name', party);
-
-            if (existing && existing.length > 0) {
-                // Add to existing
-                const item = existing[0];
-                const { error } = await db.from('inventory').update({
-                    bags: item.bags + bags,
-                    qty_kg: parseFloat(item.qty_kg) + qty,
-                    updated_at: new Date().toISOString()
-                }).eq('id', item.id);
-
-                if (error) { alert('Error: ' + error.message); }
-                else { alert('Stock added to existing entry: ' + rm); }
-            } else {
-                // Create new
-                const { error } = await db.from('inventory').insert({
-                    raw_material: rm, party_name: party, bags: bags, qty_kg: qty, added_by: currentUser.username
-                });
-                if (error) { alert('Error: ' + error.message); }
-                else { alert('New stock entry created: ' + rm); }
-            }
-
-            btn.disabled = false;
-            btn.textContent = 'Add Stock';
-            this.reset();
-            closeAddStockModal();
-            loadInventory();
-        });
-
-        // === LOG USAGE ===
-        function openLogUsageModal(inventoryId) {
-            const item = inventoryData.find(i => i.id === inventoryId);
-            if (!item) return;
-            document.getElementById('usageInventoryId').value = inventoryId;
-            document.getElementById('usageMaterialName').textContent = item.raw_material + ' (' + item.party_name + ')';
-            document.getElementById('usageAvailable').textContent = item.remaining.toFixed(1) + ' kg';
-            document.getElementById('usageQty').max = item.remaining;
-            document.getElementById('logUsageModal').classList.remove('hidden');
-        }
-        function closeLogUsageModal() { document.getElementById('logUsageModal').classList.add('hidden'); }
-
-        document.getElementById('logUsageForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            const invId = parseInt(document.getElementById('usageInventoryId').value);
-            const qty = parseFloat(document.getElementById('usageQty').value);
-            const notes = document.getElementById('usageNotes').value.trim();
-            const item = inventoryData.find(i => i.id === invId);
-
-            if (qty > item.remaining) {
-                alert('Cannot use more than available stock (' + item.remaining.toFixed(1) + ' kg)');
-                return;
-            }
-
-            const btn = this.querySelector('button[type="submit"]');
-            btn.disabled = true;
-            btn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Saving...';
-
-            const { error } = await db.from('usage_log').insert({
-                inventory_id: invId,
-                qty_used_kg: qty,
-                used_by: currentUser.full_name,
-                notes: notes || null
-            });
-
-            if (error) {
-                alert('Error: ' + error.message);
-            } else {
-                alert('Usage logged: -' + qty + ' kg from ' + item.raw_material);
-            }
-
-            btn.disabled = false;
-            btn.innerHTML = 'Deduct from Stock';
-            this.reset();
-            closeLogUsageModal();
-            loadInventory();
-        });
-    </script>
+function closeAddModal() { document.getElementById('addModal').classList.add('hidden'); }
+function g(id) { const el = document.getElementById(id); return el ? el.value.trim() : ''; }
+function gn(id) { const v = parseFloat(g(id)); return isNaN(v) ? null : v; }
+</script>
 </body>
 </html>
