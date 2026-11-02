@@ -172,27 +172,47 @@
             e.preventDefault();
             const role = document.getElementById('roleSelect').value;
             const password = document.getElementById('passwordInput').value;
+            const btn = this.querySelector('button[type="submit"]');
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Logging in...';
 
-            const { data, error } = await supabase
-                .from('users')
-                .select('*')
-                .eq('username', role)
-                .eq('password', password)
-                .eq('is_active', true)
-                .single();
+            try {
+                const { data, error } = await supabase
+                    .from('users')
+                    .select('*')
+                    .eq('username', role)
+                    .eq('password', password)
+                    .eq('is_active', true);
 
-            if (error || !data) {
-                alert('Login failed: ' + (error ? error.message : 'User not found. Make sure you ran the SQL schema in Supabase.'));
-                return;
+                console.log('Login response:', { data, error });
+
+                if (error) {
+                    alert('Login error: ' + error.message);
+                    btn.disabled = false;
+                    btn.innerHTML = 'Login <i class="fas fa-arrow-right ml-2"></i>';
+                    return;
+                }
+
+                if (!data || data.length === 0) {
+                    alert('Invalid credentials');
+                    btn.disabled = false;
+                    btn.innerHTML = 'Login <i class="fas fa-arrow-right ml-2"></i>';
+                    return;
+                }
+
+                const user = data[0];
+                currentUser = { username: user.username, role: user.role, full_name: user.full_name };
+                document.getElementById('loginScreen').classList.add('hidden');
+                document.getElementById('dashboardScreen').classList.remove('hidden');
+                document.getElementById('userFullName').textContent = currentUser.full_name;
+                document.getElementById('userRole').textContent = user.role.replace('_', ' ').toUpperCase();
+                loadBatches();
+                setupNewBatchForm();
+            } catch (err) {
+                alert('Connection error: ' + err.message);
+                btn.disabled = false;
+                btn.innerHTML = 'Login <i class="fas fa-arrow-right ml-2"></i>';
             }
-
-            currentUser = { username: data.username, role: data.role, full_name: data.full_name };
-            document.getElementById('loginScreen').classList.add('hidden');
-            document.getElementById('dashboardScreen').classList.remove('hidden');
-            document.getElementById('userFullName').textContent = currentUser.full_name;
-            document.getElementById('userRole').textContent = data.role.replace('_', ' ').toUpperCase();
-            loadBatches();
-            setupNewBatchForm();
         });
 
         // Logout
