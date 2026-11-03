@@ -7,62 +7,38 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <script>
-        tailwind.config = { theme: { extend: {
-            colors: { primary: { 600: '#1e40af', 700: '#1e3a8a', 900: '#0f172a' }, accent: { 400: '#22d3ee', 500: '#06b6d4' }, emerald: { 500: '#10b981' } },
-            fontFamily: { sans: ['Inter', 'sans-serif'], display: ['Space Grotesk', 'sans-serif'] }
-        }}}
-    </script>
+    <script>tailwind.config={theme:{extend:{colors:{primary:{600:'#1e40af',700:'#1e3a8a',900:'#0f172a'},accent:{400:'#22d3ee',500:'#06b6d4'},emerald:{500:'#10b981'}},fontFamily:{sans:['Inter','sans-serif'],display:['Space Grotesk','sans-serif']}}}}</script>
     <style>
-        body { font-family: 'Inter', sans-serif; }
-        .glass-card { background: rgba(30,41,59,0.7); backdrop-filter: blur(20px); border: 1px solid rgba(71,85,105,0.4); }
-        .glass-nav { background: rgba(15,23,42,0.95); backdrop-filter: blur(20px); border: 1px solid rgba(100,116,139,0.3); }
-        .tab-active { background: linear-gradient(135deg, #06b6d4, #10b981); color: #fff; }
-        .tab-inactive { background: rgba(51,65,85,0.7); color: #94a3b8; }
-        .tab-inactive:hover { background: rgba(71,85,105,0.7); color: #e2e8f0; }
+        body{font-family:'Inter',sans-serif}.glass-card{background:rgba(30,41,59,.7);backdrop-filter:blur(20px);border:1px solid rgba(71,85,105,.4)}.glass-nav{background:rgba(15,23,42,.95);backdrop-filter:blur(20px);border:1px solid rgba(100,116,139,.3)}.tab-active{background:linear-gradient(135deg,#06b6d4,#10b981);color:#fff}.tab-inactive{background:rgba(51,65,85,.7);color:#94a3b8}.tab-inactive:hover{background:rgba(71,85,105,.7);color:#e2e8f0}
     </style>
 </head>
 <body class="bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 min-h-screen">
-
 <!-- LOGIN -->
 <div id="loginScreen" class="min-h-screen flex items-center justify-center p-6">
     <div class="glass-card rounded-2xl p-8 max-w-md w-full">
         <div class="text-center mb-6">
-            <div class="w-16 h-16 bg-gradient-to-br from-primary-600 to-primary-700 rounded-xl flex items-center justify-center mx-auto mb-4" style="clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%)">
-                <span class="text-white font-bold text-2xl">VP</span>
-            </div>
+            <div class="w-16 h-16 bg-gradient-to-br from-primary-600 to-primary-700 rounded-xl flex items-center justify-center mx-auto mb-4" style="clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%)"><span class="text-white font-bold text-2xl">VP</span></div>
             <h1 class="text-2xl font-bold text-white mb-1">Vivek Polymers</h1>
             <p class="text-slate-400 text-sm">Operations Dashboard</p>
         </div>
         <a href="./" class="inline-flex items-center gap-2 text-cyan-400 hover:text-cyan-300 text-sm mb-4 transition-colors"><i class="fas fa-arrow-left"></i> Back to Home</a>
         <form id="loginForm" class="space-y-4">
-            <div>
-                <label class="block text-slate-300 text-sm font-medium mb-2">Select Role</label>
+            <div><label class="block text-slate-300 text-sm font-medium mb-2">Select Role</label>
                 <select id="roleSelect" class="w-full px-4 py-3 bg-slate-800 border border-slate-600 rounded-xl text-white focus:border-cyan-500 focus:outline-none">
-                    <option value="admin">Administrator</option>
-                    <option value="store_admin">Store / Inward</option>
-                    <option value="prod_admin">Production</option>
-                    <option value="sales_admin">Sales / Outward</option>
-                    <option value="qc_admin">Job Work</option>
-                </select>
-            </div>
-            <div>
-                <label class="block text-slate-300 text-sm font-medium mb-2">Password</label>
-                <input type="password" id="passwordInput" class="w-full px-4 py-3 bg-slate-800 border border-slate-600 rounded-xl text-white focus:border-cyan-500 focus:outline-none" placeholder="Enter password">
-            </div>
+                    <option value="admin">Administrator</option><option value="store_admin">Store / Inward</option><option value="prod_admin">Production</option><option value="sales_admin">Sales / Outward</option><option value="qc_admin">Job Work</option>
+                </select></div>
+            <div><label class="block text-slate-300 text-sm font-medium mb-2">Password</label>
+                <input type="password" id="passwordInput" class="w-full px-4 py-3 bg-slate-800 border border-slate-600 rounded-xl text-white focus:border-cyan-500 focus:outline-none" placeholder="Enter password"></div>
             <button type="submit" class="w-full py-3 bg-gradient-to-r from-cyan-500 to-emerald-500 text-white font-semibold rounded-xl hover:shadow-lg transition-all">Login <i class="fas fa-arrow-right ml-2"></i></button>
         </form>
     </div>
 </div>
-
 <!-- DASHBOARD -->
 <div id="dashboardScreen" class="hidden min-h-screen">
     <nav class="glass-nav border-b border-slate-800 sticky top-0 z-40">
         <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
             <div class="flex items-center gap-3">
-                <div class="w-10 h-10 bg-gradient-to-br from-primary-600 to-primary-700 rounded-lg flex items-center justify-center" style="clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%)">
-                    <span class="text-white font-bold text-xs">VP</span>
-                </div>
+                <div class="w-10 h-10 bg-gradient-to-br from-primary-600 to-primary-700 rounded-lg flex items-center justify-center" style="clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%)"><span class="text-white font-bold text-xs">VP</span></div>
                 <div><h1 class="text-white font-bold text-sm">VIVEK POLYMERS</h1><p class="text-cyan-400 text-[10px]">Operations</p></div>
             </div>
             <div class="flex items-center gap-3">
@@ -71,50 +47,31 @@
             </div>
         </div>
     </nav>
-
     <div class="max-w-7xl mx-auto px-4 py-6">
-        <!-- Summary Cards (Admin) -->
-        <div id="summaryCards" class="hidden grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
-            <div class="glass-card rounded-xl p-4 text-center">
-                <p class="text-slate-400 text-xs">Today Inward</p>
-                <p class="text-2xl font-bold text-cyan-400" id="sumInward">-</p><p class="text-slate-500 text-xs">KG</p>
-            </div>
-            <div class="glass-card rounded-xl p-4 text-center">
-                <p class="text-slate-400 text-xs">Today Production</p>
-                <p class="text-2xl font-bold text-emerald-400" id="sumProd">-</p><p class="text-slate-500 text-xs">KG</p>
-            </div>
-            <div class="glass-card rounded-xl p-4 text-center">
-                <p class="text-slate-400 text-xs">Today Outward</p>
-                <p class="text-2xl font-bold text-amber-400" id="sumOutward">-</p><p class="text-slate-500 text-xs">KG</p>
-            </div>
-            <div class="glass-card rounded-xl p-4 text-center">
-                <p class="text-slate-400 text-xs">Today Job Work</p>
-                <p class="text-2xl font-bold text-purple-400" id="sumJob">-</p><p class="text-slate-500 text-xs">entries</p>
-            </div>
+        <div id="summaryCards" class="hidden grid grid-cols-2 md:grid-cols-5 gap-3 mb-6">
+            <div class="glass-card rounded-xl p-4 text-center"><p class="text-slate-400 text-xs">Today Inward</p><p class="text-2xl font-bold text-cyan-400" id="sumInward">-</p><p class="text-slate-500 text-xs">KG</p></div>
+            <div class="glass-card rounded-xl p-4 text-center"><p class="text-slate-400 text-xs">Today Production</p><p class="text-2xl font-bold text-emerald-400" id="sumProd">-</p><p class="text-slate-500 text-xs">KG</p></div>
+            <div class="glass-card rounded-xl p-4 text-center"><p class="text-slate-400 text-xs">Today Outward</p><p class="text-2xl font-bold text-amber-400" id="sumOutward">-</p><p class="text-slate-500 text-xs">KG</p></div>
+            <div class="glass-card rounded-xl p-4 text-center"><p class="text-slate-400 text-xs">Today Job Work</p><p class="text-2xl font-bold text-purple-400" id="sumJob">-</p><p class="text-slate-500 text-xs">entries</p></div>
+            <div class="glass-card rounded-xl p-4 text-center"><p class="text-slate-400 text-xs">Materials</p><p class="text-2xl font-bold text-white" id="sumMaterials">-</p><p class="text-slate-500 text-xs">in stock</p></div>
         </div>
-
-        <!-- Tabs -->
         <div class="flex flex-wrap gap-2 mb-6" id="tabBar">
             <button onclick="showTab('inward')" id="tabInward" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold transition-all tab-active"><i class="fas fa-arrow-down mr-1"></i>Inward</button>
             <button onclick="showTab('production')" id="tabProduction" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold transition-all tab-inactive"><i class="fas fa-industry mr-1"></i>Production</button>
             <button onclick="showTab('outward')" id="tabOutward" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold transition-all tab-inactive"><i class="fas fa-arrow-up mr-1"></i>Outward</button>
             <button onclick="showTab('jobwork')" id="tabJobwork" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold transition-all tab-inactive"><i class="fas fa-exchange-alt mr-1"></i>Job Work</button>
+            <button onclick="showTab('inventory')" id="tabInventory" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold transition-all tab-inactive"><i class="fas fa-warehouse mr-1"></i>Inventory</button>
         </div>
-
-        <!-- Filter + Add -->
-        <div class="flex flex-wrap items-center gap-3 mb-6">
+        <div class="flex flex-wrap items-center gap-3 mb-6" id="filterBar">
             <input type="date" id="dateFilter" onchange="loadCurrentTab()" class="px-3 py-2 bg-slate-800 border border-slate-600 rounded-xl text-white text-sm focus:border-cyan-500 focus:outline-none">
             <button onclick="clearFilter()" class="px-3 py-2 bg-slate-700 hover:bg-slate-600 text-slate-300 text-xs rounded-xl">Clear</button>
             <button onclick="refresh()" class="px-3 py-2 bg-slate-700 hover:bg-slate-600 text-white text-sm rounded-xl"><i class="fas fa-sync-alt"></i></button>
             <button id="addEntryBtn" onclick="openAddModal()" class="ml-auto px-4 py-2 bg-gradient-to-r from-cyan-500 to-emerald-500 text-white font-semibold rounded-xl text-sm hover:shadow-lg transition-all"><i class="fas fa-plus mr-2"></i>Add Entry</button>
         </div>
-
-        <!-- Data Grid -->
         <div id="dataGrid" class="space-y-3"></div>
     </div>
 </div>
-
-<!-- ADD ENTRY MODAL -->
+<!-- MODAL -->
 <div id="addModal" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 z-50">
     <div class="glass-card rounded-2xl p-6 max-w-lg w-full max-h-[90vh] overflow-y-auto">
         <div class="flex items-center justify-between mb-4">
@@ -124,335 +81,302 @@
         <form id="addForm" class="space-y-3"></form>
     </div>
 </div>
-
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-const db = window.supabase.createClient(
-    'https://pooemfcjiopldnojlrso.supabase.co',
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBvb2VtZmNqaW9wbGRub2pscnNvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTM2MTM3NDIsImV4cCI6MjEwOTE4OTc0Mn0.qOImzrhI12HdaxTaAezUteH5nlQuucYHK8P8w1cdI5c'
-);
+const db=window.supabase.createClient('https://pooemfcjiopldnojlrso.supabase.co','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBvb2VtZmNqaW9wbGRub2pscnNvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTM2MTM3NDIsImV4cCI6MjEwOTE4OTc0Mn0.qOImzrhI12HdaxTaAezUteH5nlQuucYHK8P8w1cdI5c');
+let currentUser=null,currentTab='inward';
+const today=new Date().toISOString().split('T')[0];
+const allTabs=['inward','production','outward','jobwork','inventory'];
 
-let currentUser = null;
-let currentTab = 'inward';
-const today = new Date().toISOString().split('T')[0];
-
-// === LOGIN ===
-document.getElementById('loginForm').addEventListener('submit', async function(e) {
+document.getElementById('loginForm').addEventListener('submit',async function(e){
     e.preventDefault();
-    const role = document.getElementById('roleSelect').value;
-    const pw = document.getElementById('passwordInput').value;
-    const btn = this.querySelector('button[type="submit"]');
-    btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Logging in...';
-
-    const { data, error } = await db.from('users').select('*').eq('username', role).eq('password', pw).eq('is_active', true);
-    if (error || !data || data.length === 0) {
-        alert('Invalid credentials');
-        btn.disabled = false; btn.innerHTML = 'Login <i class="fas fa-arrow-right ml-2"></i>';
-        return;
-    }
-    const u = data[0];
-    currentUser = { username: u.username, role: u.role, full_name: u.full_name };
+    const role=document.getElementById('roleSelect').value,pw=document.getElementById('passwordInput').value;
+    const btn=this.querySelector('button[type="submit"]');
+    btn.disabled=true;btn.innerHTML='<i class="fas fa-spinner fa-spin mr-2"></i>Logging in...';
+    const{data,error}=await db.from('users').select('*').eq('username',role).eq('password',pw).eq('is_active',true);
+    if(error||!data||data.length===0){alert('Invalid credentials');btn.disabled=false;btn.innerHTML='Login <i class="fas fa-arrow-right ml-2"></i>';return;}
+    const u=data[0];currentUser={username:u.username,role:u.role,full_name:u.full_name};
     document.getElementById('loginScreen').classList.add('hidden');
     document.getElementById('dashboardScreen').classList.remove('hidden');
-    document.getElementById('userFullName').textContent = u.full_name;
-    document.getElementById('userRole').textContent = u.role.replace(/_/g, ' ').toUpperCase();
-
-    // Show summary for admin
-    if (u.role === 'admin') document.getElementById('summaryCards').classList.remove('hidden');
-
-    // Restrict tabs + set default based on role
-    const roleTab = { store_admin: 'inward', prod_admin: 'production', sales_admin: 'outward', qc_admin: 'jobwork', admin: 'inward' };
-    showTab(roleTab[u.role] || 'inward');
-    if (u.role === 'admin') loadSummary();
+    document.getElementById('userFullName').textContent=u.full_name;
+    document.getElementById('userRole').textContent=u.role.replace(/_/g,' ').toUpperCase();
+    if(u.role==='admin')document.getElementById('summaryCards').classList.remove('hidden');
+    const roleTab={store_admin:'inward',prod_admin:'production',sales_admin:'outward',qc_admin:'jobwork',admin:'inward'};
+    showTab(roleTab[u.role]||'inward');
+    if(u.role==='admin')loadSummary();
 });
-
-function logout() {
-    currentUser = null;
-    document.getElementById('loginScreen').classList.remove('hidden');
-    document.getElementById('dashboardScreen').classList.add('hidden');
-    document.getElementById('summaryCards').classList.add('hidden');
-    const btn = document.querySelector('#loginForm button[type="submit"]');
-    btn.disabled = false; btn.innerHTML = 'Login <i class="fas fa-arrow-right ml-2"></i>';
-    document.getElementById('passwordInput').value = '';
+function logout(){
+    currentUser=null;document.getElementById('loginScreen').classList.remove('hidden');
+    document.getElementById('dashboardScreen').classList.add('hidden');document.getElementById('summaryCards').classList.add('hidden');
+    const btn=document.querySelector('#loginForm button[type="submit"]');btn.disabled=false;btn.innerHTML='Login <i class="fas fa-arrow-right ml-2"></i>';document.getElementById('passwordInput').value='';
 }
-
-// === TABS ===
-function showTab(tab) {
-    currentTab = tab;
-    const roleTabMap = { store_admin: ['inward'], prod_admin: ['production'], sales_admin: ['outward'], qc_admin: ['jobwork'], admin: ['inward','production','outward','jobwork'] };
-    const allowed = roleTabMap[currentUser.role] || [];
-    ['inward','production','outward','jobwork'].forEach(t => {
-        const btn = document.getElementById('tab' + t.charAt(0).toUpperCase() + t.slice(1));
-        if (!allowed.includes(t)) {
-            btn.style.display = 'none';
-        } else {
-            btn.style.display = '';
-            btn.className = 'tab-btn px-4 py-2 rounded-xl text-xs font-semibold transition-all ' + (t === tab ? 'tab-active' : 'tab-inactive');
-        }
-    });
+function showTab(tab){
+    currentTab=tab;
+    const roleTabMap={store_admin:['inward'],prod_admin:['production'],sales_admin:['outward'],qc_admin:['jobwork'],admin:allTabs};
+    const allowed=roleTabMap[currentUser.role]||[];
+    allTabs.forEach(t=>{const b=document.getElementById('tab'+t.charAt(0).toUpperCase()+t.slice(1));if(!b)return;if(!allowed.includes(t)){b.style.display='none'}else{b.style.display='';b.className='tab-btn px-4 py-2 rounded-xl text-xs font-semibold transition-all '+(t===tab?'tab-active':'tab-inactive')}});
+    // Hide filter bar + add button for inventory tab
+    document.getElementById('filterBar').style.display=tab==='inventory'?'none':'';
     loadCurrentTab();
 }
+function clearFilter(){document.getElementById('dateFilter').value='';loadCurrentTab();}
+function refresh(){loadCurrentTab();if(currentUser.role==='admin')loadSummary();}
 
-function clearFilter() { document.getElementById('dateFilter').value = ''; loadCurrentTab(); }
-function refresh() { loadCurrentTab(); if (currentUser.role === 'admin') loadSummary(); }
-
-// === SUMMARY (Admin) ===
-async function loadSummary() {
-    const { data: iw } = await db.from('inward').select('qty_kg').eq('entry_date', today);
-    const { data: pr } = await db.from('production').select('output_kg').eq('entry_date', today);
-    const { data: ow } = await db.from('outward').select('qty_kg').eq('entry_date', today);
-    const { data: jw } = await db.from('jobwork').select('id').eq('entry_date', today);
-    document.getElementById('sumInward').textContent = (iw || []).reduce((s, r) => s + parseFloat(r.qty_kg), 0).toFixed(0);
-    document.getElementById('sumProd').textContent = (pr || []).reduce((s, r) => s + parseFloat(r.output_kg), 0).toFixed(0);
-    document.getElementById('sumOutward').textContent = (ow || []).reduce((s, r) => s + parseFloat(r.qty_kg), 0).toFixed(0);
-    document.getElementById('sumJob').textContent = (jw || []).length;
+async function loadSummary(){
+    const{data:iw}=await db.from('inward').select('qty_kg').eq('entry_date',today);
+    const{data:pr}=await db.from('production').select('output_kg').eq('entry_date',today);
+    const{data:ow}=await db.from('outward').select('qty_kg').eq('entry_date',today);
+    const{data:jw}=await db.from('jobwork').select('id').eq('entry_date',today);
+    document.getElementById('sumInward').textContent=(iw||[]).reduce((s,r)=>s+parseFloat(r.qty_kg),0).toFixed(0);
+    document.getElementById('sumProd').textContent=(pr||[]).reduce((s,r)=>s+parseFloat(r.output_kg),0).toFixed(0);
+    document.getElementById('sumOutward').textContent=(ow||[]).reduce((s,r)=>s+parseFloat(r.qty_kg),0).toFixed(0);
+    document.getElementById('sumJob').textContent=(jw||[]).length;
 }
 
 // === LOAD DATA ===
-async function loadCurrentTab() {
-    const grid = document.getElementById('dataGrid');
-    grid.innerHTML = '<div class="glass-card rounded-xl p-8 text-center"><p class="text-slate-400"><i class="fas fa-spinner fa-spin mr-2"></i>Loading...</p></div>';
-    const dateVal = document.getElementById('dateFilter').value;
+async function loadCurrentTab(){
+    if(currentTab==='inventory'){loadInventory();return;}
+    const grid=document.getElementById('dataGrid');
+    grid.innerHTML='<div class="glass-card rounded-xl p-8 text-center"><p class="text-slate-400"><i class="fas fa-spinner fa-spin mr-2"></i>Loading...</p></div>';
+    const dateVal=document.getElementById('dateFilter').value;
+    const table=currentTab==='production'?'production':'';
 
-    let query = db.from(currentTab).select('*').order('entry_date', { ascending: false }).order('created_at', { ascending: false });
-    if (dateVal) query = query.eq('entry_date', dateVal);
-    else query = query.limit(50);
+    if(currentTab==='production'){
+        let q=db.from('production').select('*, production_materials(*)').order('entry_date',{ascending:false}).order('created_at',{ascending:false});
+        if(dateVal)q=q.eq('entry_date',dateVal);else q=q.limit(50);
+        const{data,error}=await q;
+        if(error){grid.innerHTML='<p class="text-red-400 p-8 text-center">'+error.message+'</p>';return;}
+        if(!data||data.length===0){grid.innerHTML='<div class="glass-card rounded-xl p-8 text-center"><p class="text-slate-400">No entries found</p></div>';return;}
+        renderGrouped(data,grid,'production');return;
+    }
 
-    const { data, error } = await query;
-    if (error) { grid.innerHTML = '<p class="text-red-400 p-8 text-center">' + error.message + '</p>'; return; }
-    if (!data || data.length === 0) { grid.innerHTML = '<div class="glass-card rounded-xl p-8 text-center"><p class="text-slate-400">No entries found</p></div>'; return; }
+    let query=db.from(currentTab).select('*').order('entry_date',{ascending:false}).order('created_at',{ascending:false});
+    if(dateVal)query=query.eq('entry_date',dateVal);else query=query.limit(50);
+    const{data,error}=await query;
+    if(error){grid.innerHTML='<p class="text-red-400 p-8 text-center">'+error.message+'</p>';return;}
+    if(!data||data.length===0){grid.innerHTML='<div class="glass-card rounded-xl p-8 text-center"><p class="text-slate-400">No entries found</p></div>';return;}
+    renderGrouped(data,grid,currentTab);
+}
 
-    // Group by date
-    const grouped = {};
-    data.forEach(r => { const d = r.entry_date; if (!grouped[d]) grouped[d] = []; grouped[d].push(r); });
-
-    let html = '';
-    Object.keys(grouped).sort((a, b) => b.localeCompare(a)).forEach(date => {
-        const disp = new Date(date + 'T00:00:00').toLocaleDateString('en-IN', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' });
-        const rows = grouped[date];
-        const dayTotal = rows.reduce((s, r) => s + parseFloat(r.qty_kg || r.output_kg || 0), 0);
-        html += `<div class="mb-4"><div class="flex items-center justify-between mb-2"><span class="text-slate-400 text-sm font-semibold"><i class="fas fa-calendar-day text-cyan-500 mr-1"></i>${disp} (${rows.length})</span><span class="text-cyan-400 text-sm font-semibold">${dayTotal.toFixed(0)} kg</span></div>`;
-        rows.forEach(r => { html += renderRow(r); });
-        html += '</div>';
+function renderGrouped(data,grid,tab){
+    const grouped={};
+    data.forEach(r=>{const d=r.entry_date;if(!grouped[d])grouped[d]=[];grouped[d].push(r);});
+    let html='';
+    Object.keys(grouped).sort((a,b)=>b.localeCompare(a)).forEach(date=>{
+        const disp=new Date(date+'T00:00:00').toLocaleDateString('en-IN',{weekday:'short',day:'numeric',month:'short',year:'numeric'});
+        const rows=grouped[date];
+        const dayTotal=rows.reduce((s,r)=>s+parseFloat(r.qty_kg||r.output_kg||0),0);
+        html+=`<div class="mb-4"><div class="flex items-center justify-between mb-2"><span class="text-slate-400 text-sm font-semibold"><i class="fas fa-calendar-day text-cyan-500 mr-1"></i>${disp} (${rows.length})</span><span class="text-cyan-400 text-sm font-semibold">${dayTotal.toFixed(0)} kg</span></div>`;
+        rows.forEach(r=>{html+=renderRow(r,tab);});
+        html+='</div>';
     });
-    grid.innerHTML = html;
+    grid.innerHTML=html;
+}
+
+// === INVENTORY (computed) ===
+async function loadInventory(){
+    const grid=document.getElementById('dataGrid');
+    grid.innerHTML='<div class="glass-card rounded-xl p-8 text-center"><p class="text-slate-400"><i class="fas fa-spinner fa-spin mr-2"></i>Computing inventory...</p></div>';
+    const stock={};
+    function add(m,qty){if(!m)return;const k=m.trim().toLowerCase();stock[k]=(stock[k]||{name:m.trim(),qty:0});stock[k].qty+=qty;}
+
+    const{data:iw}=await db.from('inward').select('material,qty_kg');
+    (iw||[]).forEach(r=>add(r.material,parseFloat(r.qty_kg)));
+
+    const{data:pr}=await db.from('production').select('finished_good,output_kg,lums_kg');
+    (pr||[]).forEach(r=>{add(r.finished_good,parseFloat(r.output_kg));if(r.lums_kg>0)add('Lums ('+r.finished_good+')',parseFloat(r.lums_kg));});
+
+    const{data:pm}=await db.from('production_materials').select('material,qty_kg');
+    (pm||[]).forEach(r=>add(r.material,-parseFloat(r.qty_kg)));
+
+    const{data:ow}=await db.from('outward').select('material,qty_kg');
+    (ow||[]).forEach(r=>add(r.material,-parseFloat(r.qty_kg)));
+
+    const{data:jw}=await db.from('jobwork').select('direction,material,qty_kg');
+    (jw||[]).forEach(r=>{const mult=r.direction==='IN'?1:-1;add(r.material,mult*parseFloat(r.qty_kg));});
+
+    const items=Object.values(stock).filter(i=>Math.abs(i.qty)>0.01).sort((a,b)=>a.name.localeCompare(b.name));
+    if(document.getElementById('sumMaterials'))document.getElementById('sumMaterials').textContent=items.length;
+
+    if(items.length===0){grid.innerHTML='<div class="glass-card rounded-xl p-8 text-center"><p class="text-slate-400">No inventory data</p></div>';return;}
+
+    let html='<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-3">';
+    items.forEach(i=>{
+        const isNeg=i.qty<0;
+        html+=`<div class="glass-card rounded-xl p-4"><p class="text-white font-semibold text-sm">${i.name}</p><p class="${isNeg?'text-red-400':'text-cyan-400'} font-bold text-xl mt-1">${i.qty.toFixed(1)} kg</p>${isNeg?'<p class="text-red-400 text-xs mt-1">Deficit</p>':''}</div>`;
+    });
+    html+='</div>';
+    grid.innerHTML=html;
 }
 
 // === RENDER ROWS ===
-function statusBadge(r) {
-    if (r.status === 'approved') return '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/20 text-emerald-400">APPROVED</span>';
-    return '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-500/20 text-amber-400">PENDING</span>';
+function statusBadge(r){
+    if(r.status==='approved')return'<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/20 text-emerald-400">APPROVED</span>';
+    return'<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-500/20 text-amber-400">PENDING</span>';
+}
+function actionButtons(r){
+    const isAdmin=currentUser.role==='admin',isPending=r.status!=='approved';let btns='';
+    if(isPending||isAdmin){btns+=`<button onclick="editEntry(${r.id})" class="px-2 py-1 bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-400 rounded text-[10px] font-medium transition-all"><i class="fas fa-edit mr-1"></i>Edit</button><button onclick="deleteEntry(${r.id})" class="px-2 py-1 bg-red-500/20 hover:bg-red-500/30 text-red-400 rounded text-[10px] font-medium transition-all"><i class="fas fa-trash"></i></button>`;}
+    if(isAdmin&&isPending){btns+=`<button onclick="approveEntry(${r.id})" class="px-2 py-1 bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-400 rounded text-[10px] font-medium transition-all"><i class="fas fa-check mr-1"></i>Approve</button>`;}
+    return btns?'<div class="flex gap-1 mt-2">'+btns+'</div>':'';
+}
+function renderRow(r,tab){
+    if(tab==='inward'){
+        return`<div class="glass-card rounded-lg p-4 mb-2"><div class="flex items-start justify-between"><div><p class="text-white font-semibold">${r.material} ${statusBadge(r)}</p><p class="text-slate-500 text-xs mt-1"><i class="fas fa-truck mr-1"></i>${r.supplier||'-'} ${r.vehicle_no?'· '+r.vehicle_no:''} ${r.plot?'· Plot '+r.plot:''}</p><p class="text-slate-600 text-xs mt-1">by ${r.entered_by||'-'}${r.notes?' · '+r.notes:''}</p>${actionButtons(r)}</div><div class="text-right flex-shrink-0 ml-4"><p class="text-cyan-400 font-bold text-lg">${parseFloat(r.qty_kg).toFixed(0)} kg</p>${r.rate?'<p class="text-slate-500 text-xs">@₹'+r.rate+'/kg</p>':''}</div></div></div>`;
+    }
+    if(tab==='production'){
+        const mats=(r.production_materials||[]).map(m=>`<span class="inline-block px-2 py-0.5 bg-slate-700 rounded text-[10px] text-slate-300 mr-1 mb-1">${m.material}: ${parseFloat(m.qty_kg).toFixed(0)}kg</span>`).join('');
+        return`<div class="glass-card rounded-lg p-4 mb-2"><div class="flex items-start justify-between"><div><p class="text-white font-semibold">${r.finished_good} ${statusBadge(r)}</p><p class="text-slate-500 text-xs mt-1"><i class="fas fa-cog mr-1"></i>${r.machine} · ${r.shift} shift</p>${mats?'<div class="mt-1"><span class="text-slate-500 text-[10px]">Raw materials: </span>'+mats+'</div>':''}<p class="text-slate-600 text-xs mt-1">by ${r.entered_by||'-'}${r.notes?' · '+r.notes:''}</p>${actionButtons(r)}</div><div class="text-right flex-shrink-0 ml-4"><p class="text-cyan-400 font-bold text-lg">${parseFloat(r.output_kg).toFixed(0)} kg</p>${r.lums_kg>0?'<p class="text-red-400 text-xs">Lums: '+parseFloat(r.lums_kg).toFixed(0)+' kg</p>':''}</div></div></div>`;
+    }
+    if(tab==='outward'){
+        return`<div class="glass-card rounded-lg p-4 mb-2"><div class="flex items-start justify-between"><div><p class="text-white font-semibold">${r.material} ${statusBadge(r)}</p><p class="text-slate-500 text-xs mt-1"><i class="fas fa-user mr-1"></i>${r.customer||'-'} ${r.vehicle_no?'· '+r.vehicle_no:''}</p><p class="text-slate-600 text-xs mt-1">by ${r.entered_by||'-'}${r.notes?' · '+r.notes:''}</p>${actionButtons(r)}</div><div class="text-right flex-shrink-0 ml-4"><p class="text-cyan-400 font-bold text-lg">${parseFloat(r.qty_kg).toFixed(0)} kg</p>${r.rate?'<p class="text-slate-500 text-xs">@₹'+r.rate+'/kg</p>':''}</div></div></div>`;
+    }
+    if(tab==='jobwork'){
+        const isIn=r.direction==='IN';
+        return`<div class="glass-card rounded-lg p-4 mb-2"><div class="flex items-start justify-between"><div><p class="text-white font-semibold">${r.material} <span class="px-2 py-0.5 rounded text-[10px] font-bold ${isIn?'bg-cyan-500/20 text-cyan-400':'bg-amber-500/20 text-amber-400'}">${r.direction}</span> ${statusBadge(r)}</p><p class="text-slate-500 text-xs mt-1"><i class="fas fa-handshake mr-1"></i>${r.party||'-'} ${r.vehicle_no?'· '+r.vehicle_no:''} ${r.plot?'· Plot '+r.plot:''}</p><p class="text-slate-600 text-xs mt-1">by ${r.entered_by||'-'}${r.notes?' · '+r.notes:''}</p>${actionButtons(r)}</div><div class="text-right flex-shrink-0 ml-4"><p class="text-cyan-400 font-bold text-lg">${parseFloat(r.qty_kg).toFixed(0)} kg</p></div></div></div>`;
+    }
+    return'';
 }
 
-function actionButtons(r) {
-    const isAdmin = currentUser.role === 'admin';
-    const isPending = r.status !== 'approved';
-    let btns = '';
+// === HELPERS ===
+function closeAddModal(){document.getElementById('addModal').classList.add('hidden');}
+function g(id){const el=document.getElementById(id);return el?el.value.trim():'';}
+function gn(id){const v=parseFloat(g(id));return isNaN(v)?null:v;}
+const inp=(id,label,type='text',req=true,ph='',val='')=>`<div><label class="block text-slate-300 text-xs font-medium mb-1">${label}</label><input type="${type}" id="${id}" value="${val}" class="w-full px-3 py-2.5 bg-slate-800 border border-slate-600 rounded-xl text-white text-sm focus:border-cyan-500 focus:outline-none" placeholder="${ph}" ${req?'required':''} ${type==='number'?'step="0.01" min="0"':''}></div>`;
+const sel=(id,label,opts,val='')=>`<div><label class="block text-slate-300 text-xs font-medium mb-1">${label}</label><select id="${id}" class="w-full px-3 py-2.5 bg-slate-800 border border-slate-600 rounded-xl text-white text-sm focus:border-cyan-500 focus:outline-none">${opts.map(o=>'<option value="'+o+'"'+(o===val?' selected':'')+'>'+o+'</option>').join('')}</select></div>`;
 
-    // Staff can edit/delete any pending entry in their own tab; admin can always edit
-    if (isPending || isAdmin) {
-        btns += `<button onclick="editEntry(${r.id})" class="px-2 py-1 bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-400 rounded text-[10px] font-medium transition-all"><i class="fas fa-edit mr-1"></i>Edit</button>`;
-        btns += `<button onclick="deleteEntry(${r.id})" class="px-2 py-1 bg-red-500/20 hover:bg-red-500/30 text-red-400 rounded text-[10px] font-medium transition-all"><i class="fas fa-trash"></i></button>`;
-    }
-
-    // Approve: admin only, on pending entries
-    if (isAdmin && isPending) {
-        btns += `<button onclick="approveEntry(${r.id})" class="px-2 py-1 bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-400 rounded text-[10px] font-medium transition-all"><i class="fas fa-check mr-1"></i>Approve</button>`;
-    }
-
-    return btns ? '<div class="flex gap-1 mt-2">' + btns + '</div>' : '';
+let rmCount=0;
+function addRawMaterialRow(mat='',qty=''){
+    rmCount++;
+    const div=document.createElement('div');div.className='grid grid-cols-12 gap-2 items-end rm-row';div.id='rm_row_'+rmCount;
+    div.innerHTML=`<div class="col-span-7"><input type="text" name="rm_mat" value="${mat}" class="w-full px-3 py-2 bg-slate-800 border border-slate-600 rounded-xl text-white text-sm focus:border-cyan-500 focus:outline-none" placeholder="Material name" required></div><div class="col-span-4"><input type="number" name="rm_qty" value="${qty}" step="0.01" min="0" class="w-full px-3 py-2 bg-slate-800 border border-slate-600 rounded-xl text-white text-sm focus:border-cyan-500 focus:outline-none" placeholder="KG" required></div><div class="col-span-1"><button type="button" onclick="this.parentElement.parentElement.remove()" class="px-2 py-2 bg-red-500/20 text-red-400 rounded-xl text-sm hover:bg-red-500/30"><i class="fas fa-minus"></i></button></div>`;
+    document.getElementById('rmContainer').appendChild(div);
 }
 
-function renderRow(r) {
-    if (currentTab === 'inward') {
-        return `<div class="glass-card rounded-lg p-4 mb-2">
-            <div class="flex items-start justify-between">
-                <div>
-                    <p class="text-white font-semibold">${r.material} ${statusBadge(r)}</p>
-                    <p class="text-slate-500 text-xs mt-1"><i class="fas fa-truck mr-1"></i>${r.supplier || '-'} ${r.vehicle_no ? '· ' + r.vehicle_no : ''} ${r.plot ? '· Plot ' + r.plot : ''}</p>
-                    <p class="text-slate-600 text-xs mt-1">by ${r.entered_by || '-'}${r.notes ? ' · ' + r.notes : ''}</p>
-                    ${actionButtons(r)}
-                </div>
-                <div class="text-right flex-shrink-0 ml-4">
-                    <p class="text-cyan-400 font-bold text-lg">${parseFloat(r.qty_kg).toFixed(0)} kg</p>
-                    ${r.rate ? '<p class="text-slate-500 text-xs">@₹' + r.rate + '/kg</p>' : ''}
-                </div>
-            </div>
-        </div>`;
-    }
-    if (currentTab === 'production') {
-        return `<div class="glass-card rounded-lg p-4 mb-2">
-            <div class="flex items-start justify-between">
-                <div>
-                    <p class="text-white font-semibold">${r.material} ${statusBadge(r)}</p>
-                    <p class="text-slate-500 text-xs mt-1"><i class="fas fa-cog mr-1"></i>${r.machine} · ${r.shift} shift</p>
-                    <p class="text-slate-600 text-xs mt-1">by ${r.entered_by || '-'}${r.notes ? ' · ' + r.notes : ''}</p>
-                    ${actionButtons(r)}
-                </div>
-                <div class="text-right flex-shrink-0 ml-4">
-                    <p class="text-emerald-400 font-bold text-lg">${parseFloat(r.output_kg).toFixed(0)} kg</p>
-                    ${r.lums_kg > 0 ? '<p class="text-red-400 text-xs">Lums: ' + parseFloat(r.lums_kg).toFixed(0) + ' kg</p>' : ''}
-                </div>
-            </div>
-        </div>`;
-    }
-    if (currentTab === 'outward') {
-        return `<div class="glass-card rounded-lg p-4 mb-2">
-            <div class="flex items-start justify-between">
-                <div>
-                    <p class="text-white font-semibold">${r.material} ${statusBadge(r)}</p>
-                    <p class="text-slate-500 text-xs mt-1"><i class="fas fa-user mr-1"></i>${r.customer || '-'} ${r.vehicle_no ? '· ' + r.vehicle_no : ''}</p>
-                    <p class="text-slate-600 text-xs mt-1">by ${r.entered_by || '-'}${r.notes ? ' · ' + r.notes : ''}</p>
-                    ${actionButtons(r)}
-                </div>
-                <div class="text-right flex-shrink-0 ml-4">
-                    <p class="text-cyan-400 font-bold text-lg">${parseFloat(r.qty_kg).toFixed(0)} kg</p>
-                    ${r.rate ? '<p class="text-slate-500 text-xs">@₹' + r.rate + '/kg</p>' : ''}
-                </div>
-            </div>
-        </div>`;
-    }
-    if (currentTab === 'jobwork') {
-        const isIn = r.direction === 'IN';
-        return `<div class="glass-card rounded-lg p-4 mb-2">
-            <div class="flex items-start justify-between">
-                <div>
-                    <p class="text-white font-semibold">${r.material} <span class="px-2 py-0.5 rounded text-[10px] font-bold ${isIn ? 'bg-cyan-500/20 text-cyan-400' : 'bg-amber-500/20 text-amber-400'}">${r.direction}</span> ${statusBadge(r)}</p>
-                    <p class="text-slate-500 text-xs mt-1"><i class="fas fa-handshake mr-1"></i>${r.party || '-'} ${r.vehicle_no ? '· ' + r.vehicle_no : ''} ${r.plot ? '· Plot ' + r.plot : ''}</p>
-                    <p class="text-slate-600 text-xs mt-1">by ${r.entered_by || '-'}${r.notes ? ' · ' + r.notes : ''}</p>
-                    ${actionButtons(r)}
-                </div>
-                <div class="text-right flex-shrink-0 ml-4">
-                    <p class="text-cyan-400 font-bold text-lg">${parseFloat(r.qty_kg).toFixed(0)} kg</p>
-                </div>
-            </div>
-        </div>`;
-    }
-    return '';
+function getRawMaterials(){
+    const rows=document.querySelectorAll('.rm-row');const mats=[];
+    rows.forEach(row=>{
+        const mat=row.querySelector('[name="rm_mat"]').value.trim();
+        const qty=parseFloat(row.querySelector('[name="rm_qty"]').value);
+        if(mat&&qty>0)mats.push({material:mat,qty_kg:qty});
+    });
+    return mats;
 }
 
-// === ADD ENTRY MODAL ===
-function openAddModal() {
+// === ADD ENTRY ===
+function openAddModal(){
     document.getElementById('addModal').classList.remove('hidden');
-    const form = document.getElementById('addForm');
-    const title = document.getElementById('modalTitle');
-    const inp = (id, label, type='text', req=true, ph='') => `<div><label class="block text-slate-300 text-xs font-medium mb-1">${label}</label><input type="${type}" id="${id}" class="w-full px-3 py-2.5 bg-slate-800 border border-slate-600 rounded-xl text-white text-sm focus:border-cyan-500 focus:outline-none" placeholder="${ph}" ${req ? 'required' : ''} ${type==='number' ? 'step="0.01" min="0"' : ''}></div>`;
-    const sel = (id, label, opts) => `<div><label class="block text-slate-300 text-xs font-medium mb-1">${label}</label><select id="${id}" class="w-full px-3 py-2.5 bg-slate-800 border border-slate-600 rounded-xl text-white text-sm focus:border-cyan-500 focus:outline-none">${opts.map(o => '<option value="'+o+'">'+o+'</option>').join('')}</select></div>`;
-    const btn = (text, color='from-cyan-500 to-emerald-500') => `<button type="submit" class="w-full py-3 bg-gradient-to-r ${color} text-white font-semibold rounded-xl hover:shadow-lg transition-all">${text}</button>`;
+    const form=document.getElementById('addForm'),title=document.getElementById('modalTitle');rmCount=0;
 
-    if (currentTab === 'inward') {
-        title.textContent = 'Log Inward Entry';
-        form.innerHTML = inp('f_date','Date','date') + inp('f_material','Material Name','text',true,'e.g., PP BK cutting') + '<div class="grid grid-cols-2 gap-3">' + inp('f_qty','Qty (KG)','number') + inp('f_rate','Rate ₹/kg','number',false) + '</div>' + inp('f_supplier','Supplier / Party','text',false) + '<div class="grid grid-cols-2 gap-3">' + inp('f_vehicle','Vehicle No.','text',false) + inp('f_plot','Plot','text',false) + '</div>' + inp('f_notes','Notes','text',false) + btn('Save Inward Entry');
-        document.getElementById('f_date').value = today;
-    } else if (currentTab === 'production') {
-        title.textContent = 'Log Production Entry';
-        form.innerHTML = inp('f_date','Date','date') + '<div class="grid grid-cols-2 gap-3">' + sel('f_shift','Shift',['Day','Night']) + inp('f_machine','Machine','text',true,'e.g., Machine A') + '</div>' + inp('f_material','Material','text',true,'e.g., ABS black') + '<div class="grid grid-cols-2 gap-3">' + inp('f_output','Output (KG)','number') + inp('f_lums','Lums/Waste (KG)','number',false) + '</div>' + inp('f_notes','Notes','text',false) + btn('Save Production Entry','from-emerald-500 to-green-600');
-        document.getElementById('f_date').value = today;
-    } else if (currentTab === 'outward') {
-        title.textContent = 'Log Outward Entry';
-        form.innerHTML = inp('f_date','Date','date') + inp('f_material','Material','text',true,'e.g., PPCP 910 BK') + '<div class="grid grid-cols-2 gap-3">' + inp('f_qty','Qty (KG)','number') + inp('f_rate','Rate ₹/kg','number',false) + '</div>' + inp('f_customer','Customer','text',false) + inp('f_vehicle','Vehicle No.','text',false) + inp('f_notes','Notes','text',false) + btn('Save Outward Entry','from-amber-500 to-orange-500');
-        document.getElementById('f_date').value = today;
-    } else if (currentTab === 'jobwork') {
-        title.textContent = 'Log Job Work Entry';
-        form.innerHTML = inp('f_date','Date','date') + sel('f_direction','Direction',['IN','OUT']) + inp('f_material','Material','text',true,'e.g., Pmma Granding') + inp('f_qty','Qty (KG)','number') + inp('f_party','Party','text',false) + '<div class="grid grid-cols-2 gap-3">' + inp('f_vehicle','Vehicle No.','text',false) + inp('f_plot','Plot','text',false) + '</div>' + inp('f_notes','Notes','text',false) + btn('Save Job Work Entry','from-purple-500 to-violet-600');
-        document.getElementById('f_date').value = today;
+    if(currentTab==='inward'){
+        title.textContent='Log Inward Entry';
+        form.innerHTML=inp('f_date','Date','date')+inp('f_material','Material Name','text',true,'e.g., PP BK cutting')+'<div class="grid grid-cols-2 gap-3">'+inp('f_qty','Qty (KG)','number')+inp('f_rate','Rate ₹/kg','number',false)+'</div>'+inp('f_supplier','Supplier / Party','text',false)+'<div class="grid grid-cols-2 gap-3">'+inp('f_vehicle','Vehicle No.','text',false)+inp('f_plot','Plot','text',false)+'</div>'+inp('f_notes','Notes','text',false)+'<button type="submit" class="w-full py-3 bg-gradient-to-r from-cyan-500 to-emerald-500 text-white font-semibold rounded-xl hover:shadow-lg transition-all">Save Inward Entry</button>';
+        document.getElementById('f_date').value=today;
+    } else if(currentTab==='production'){
+        title.textContent='Log Production Entry';
+        form.innerHTML=inp('f_date','Date','date')+'<div class="grid grid-cols-2 gap-3">'+sel('f_shift','Shift',['Day','Night'])+inp('f_machine','Machine','text',true,'e.g., Machine A')+'</div>'+
+            '<div class="glass-card rounded-xl p-3 my-2"><p class="text-slate-300 text-xs font-semibold mb-2"><i class="fas fa-cubes mr-1"></i>Raw Materials Used</p><div id="rmContainer"></div><button type="button" onclick="addRawMaterialRow()" class="mt-2 px-3 py-1.5 bg-slate-700 hover:bg-slate-600 text-cyan-400 rounded-lg text-xs transition-all"><i class="fas fa-plus mr-1"></i>Add Raw Material</button></div>'+
+            '<div class="glass-card rounded-xl p-3 my-2"><p class="text-slate-300 text-xs font-semibold mb-2"><i class="fas fa-box mr-1"></i>Finished Good Output</p>'+inp('f_fg','Finished Good Name','text',true,'e.g., ABS Black')+'<div class="grid grid-cols-2 gap-3">'+inp('f_output','Output (KG)','number')+inp('f_lums','Lums/Waste (KG)','number',false)+'</div></div>'+
+            inp('f_notes','Notes','text',false)+'<button type="submit" class="w-full py-3 bg-gradient-to-r from-emerald-500 to-green-600 text-white font-semibold rounded-xl hover:shadow-lg transition-all">Save Production Entry</button>';
+        document.getElementById('f_date').value=today;
+        addRawMaterialRow();
+    } else if(currentTab==='outward'){
+        title.textContent='Log Outward Entry';
+        form.innerHTML=inp('f_date','Date','date')+inp('f_material','Material','text',true,'e.g., PPCP 910 BK')+'<div class="grid grid-cols-2 gap-3">'+inp('f_qty','Qty (KG)','number')+inp('f_rate','Rate ₹/kg','number',false)+'</div>'+inp('f_customer','Customer','text',false)+inp('f_vehicle','Vehicle No.','text',false)+inp('f_notes','Notes','text',false)+'<button type="submit" class="w-full py-3 bg-gradient-to-r from-amber-500 to-orange-500 text-white font-semibold rounded-xl hover:shadow-lg transition-all">Save Outward Entry</button>';
+        document.getElementById('f_date').value=today;
+    } else if(currentTab==='jobwork'){
+        title.textContent='Log Job Work Entry';
+        form.innerHTML=inp('f_date','Date','date')+sel('f_direction','Direction',['IN','OUT'])+inp('f_material','Material','text',true,'e.g., Pmma Granding')+inp('f_qty','Qty (KG)','number')+inp('f_party','Party','text',false)+'<div class="grid grid-cols-2 gap-3">'+inp('f_vehicle','Vehicle No.','text',false)+inp('f_plot','Plot','text',false)+'</div>'+inp('f_notes','Notes','text',false)+'<button type="submit" class="w-full py-3 bg-gradient-to-r from-purple-500 to-violet-600 text-white font-semibold rounded-xl hover:shadow-lg transition-all">Save Job Work Entry</button>';
+        document.getElementById('f_date').value=today;
     }
 
-    form.onsubmit = async function(e) {
-        e.preventDefault();
-        const b = form.querySelector('button[type="submit"]');
-        b.disabled = true; b.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Saving...';
-        let row = {};
+    form.onsubmit=async function(e){
+        e.preventDefault();const b=form.querySelector('button[type="submit"]');b.disabled=true;b.innerHTML='<i class="fas fa-spinner fa-spin mr-2"></i>Saving...';
 
-        if (currentTab === 'inward') {
-            row = { entry_date: g('f_date'), material: g('f_material'), qty_kg: gn('f_qty'), rate: gn('f_rate') || null, supplier: g('f_supplier') || null, vehicle_no: g('f_vehicle') || null, plot: g('f_plot') || null, notes: g('f_notes') || null, entered_by: currentUser.full_name };
-        } else if (currentTab === 'production') {
-            row = { entry_date: g('f_date'), shift: g('f_shift'), machine: g('f_machine'), material: g('f_material'), output_kg: gn('f_output'), lums_kg: gn('f_lums') || 0, notes: g('f_notes') || null, entered_by: currentUser.full_name };
-        } else if (currentTab === 'outward') {
-            row = { entry_date: g('f_date'), material: g('f_material'), qty_kg: gn('f_qty'), rate: gn('f_rate') || null, customer: g('f_customer') || null, vehicle_no: g('f_vehicle') || null, notes: g('f_notes') || null, entered_by: currentUser.full_name };
-        } else if (currentTab === 'jobwork') {
-            row = { entry_date: g('f_date'), direction: g('f_direction'), material: g('f_material'), qty_kg: gn('f_qty'), party: g('f_party') || null, vehicle_no: g('f_vehicle') || null, plot: g('f_plot') || null, notes: g('f_notes') || null, entered_by: currentUser.full_name };
+        if(currentTab==='production'){
+            const mats=getRawMaterials();
+            const row={entry_date:g('f_date'),shift:g('f_shift'),machine:g('f_machine'),finished_good:g('f_fg'),output_kg:gn('f_output'),lums_kg:gn('f_lums')||0,notes:g('f_notes')||null,entered_by:currentUser.full_name};
+            const{data:prod,error}=await db.from('production').insert(row).select();
+            if(error){alert('Error: '+error.message);b.disabled=false;b.textContent='Retry';return;}
+            if(mats.length>0&&prod&&prod[0]){
+                const matRows=mats.map(m=>({production_id:prod[0].id,material:m.material,qty_kg:m.qty_kg}));
+                await db.from('production_materials').insert(matRows);
+            }
+        } else {
+            let row={};
+            if(currentTab==='inward')row={entry_date:g('f_date'),material:g('f_material'),qty_kg:gn('f_qty'),rate:gn('f_rate')||null,supplier:g('f_supplier')||null,vehicle_no:g('f_vehicle')||null,plot:g('f_plot')||null,notes:g('f_notes')||null,entered_by:currentUser.full_name};
+            else if(currentTab==='outward')row={entry_date:g('f_date'),material:g('f_material'),qty_kg:gn('f_qty'),rate:gn('f_rate')||null,customer:g('f_customer')||null,vehicle_no:g('f_vehicle')||null,notes:g('f_notes')||null,entered_by:currentUser.full_name};
+            else if(currentTab==='jobwork')row={entry_date:g('f_date'),direction:g('f_direction'),material:g('f_material'),qty_kg:gn('f_qty'),party:g('f_party')||null,vehicle_no:g('f_vehicle')||null,plot:g('f_plot')||null,notes:g('f_notes')||null,entered_by:currentUser.full_name};
+            const{error}=await db.from(currentTab).insert(row);
+            if(error){alert('Error: '+error.message);b.disabled=false;b.textContent='Retry';return;}
         }
-
-        const { error } = await db.from(currentTab).insert(row);
-        if (error) { alert('Error: ' + error.message); b.disabled = false; b.textContent = 'Retry'; return; }
-
-        closeAddModal();
-        loadCurrentTab();
-        if (currentUser.role === 'admin') loadSummary();
+        closeAddModal();loadCurrentTab();if(currentUser.role==='admin')loadSummary();
     };
 }
 
-function closeAddModal() { document.getElementById('addModal').classList.add('hidden'); }
-function g(id) { const el = document.getElementById(id); return el ? el.value.trim() : ''; }
-function gn(id) { const v = parseFloat(g(id)); return isNaN(v) ? null : v; }
-
-// === APPROVE ENTRY (Admin only) ===
-async function approveEntry(id) {
-    if (!confirm('Approve this entry? It will be locked from further edits.')) return;
-    const { error } = await db.from(currentTab).update({ status: 'approved' }).eq('id', id);
-    if (error) { alert('Error: ' + error.message); return; }
-    loadCurrentTab();
+// === APPROVE / DELETE ===
+async function approveEntry(id){
+    if(!confirm('Approve this entry?'))return;
+    const{error}=await db.from(currentTab).update({status:'approved'}).eq('id',id);
+    if(error)alert('Error: '+error.message);loadCurrentTab();
 }
-
-// === DELETE ENTRY ===
-async function deleteEntry(id) {
-    if (!confirm('Delete this entry? This cannot be undone.')) return;
-    const { error } = await db.from(currentTab).delete().eq('id', id);
-    if (error) { alert('Error: ' + error.message); return; }
-    loadCurrentTab();
-    if (currentUser.role === 'admin') loadSummary();
+async function deleteEntry(id){
+    if(!confirm('Delete this entry?'))return;
+    if(currentTab==='production')await db.from('production_materials').delete().eq('production_id',id);
+    const{error}=await db.from(currentTab).delete().eq('id',id);
+    if(error)alert('Error: '+error.message);loadCurrentTab();if(currentUser.role==='admin')loadSummary();
 }
 
 // === EDIT ENTRY ===
-async function editEntry(id) {
-    // Fetch the entry
-    const { data, error } = await db.from(currentTab).select('*').eq('id', id).single();
-    if (error || !data) { alert('Could not load entry'); return; }
-    const r = data;
+async function editEntry(id){
+    if(currentTab==='production'){
+        const{data:r}=await db.from('production').select('*, production_materials(*)').eq('id',id).single();
+        if(!r){alert('Could not load');return;}
+        document.getElementById('addModal').classList.remove('hidden');
+        const form=document.getElementById('addForm'),title=document.getElementById('modalTitle');rmCount=0;
+        title.textContent='Edit Production Entry';
+        form.innerHTML=inp('f_date','Date','date',true,'',r.entry_date)+'<div class="grid grid-cols-2 gap-3">'+sel('f_shift','Shift',['Day','Night'],r.shift)+inp('f_machine','Machine','text',true,'',r.machine)+'</div>'+
+            '<div class="glass-card rounded-xl p-3 my-2"><p class="text-slate-300 text-xs font-semibold mb-2"><i class="fas fa-cubes mr-1"></i>Raw Materials Used</p><div id="rmContainer"></div><button type="button" onclick="addRawMaterialRow()" class="mt-2 px-3 py-1.5 bg-slate-700 hover:bg-slate-600 text-cyan-400 rounded-lg text-xs transition-all"><i class="fas fa-plus mr-1"></i>Add Raw Material</button></div>'+
+            '<div class="glass-card rounded-xl p-3 my-2"><p class="text-slate-300 text-xs font-semibold mb-2"><i class="fas fa-box mr-1"></i>Finished Good Output</p>'+inp('f_fg','Finished Good','text',true,'',r.finished_good)+'<div class="grid grid-cols-2 gap-3">'+inp('f_output','Output (KG)','number',true,'',r.output_kg)+inp('f_lums','Lums (KG)','number',false,'',r.lums_kg||'')+'</div></div>'+
+            inp('f_notes','Notes','text',false,'',r.notes||'')+'<button type="submit" class="w-full py-3 bg-gradient-to-r from-emerald-500 to-green-600 text-white font-semibold rounded-xl hover:shadow-lg transition-all">Update Entry</button>';
+        (r.production_materials||[]).forEach(m=>addRawMaterialRow(m.material,m.qty_kg));
+        if((r.production_materials||[]).length===0)addRawMaterialRow();
 
-    document.getElementById('addModal').classList.remove('hidden');
-    const form = document.getElementById('addForm');
-    const title = document.getElementById('modalTitle');
-    const inp = (id, label, type='text', req=true, ph='', val='') => `<div><label class="block text-slate-300 text-xs font-medium mb-1">${label}</label><input type="${type}" id="${id}" value="${val}" class="w-full px-3 py-2.5 bg-slate-800 border border-slate-600 rounded-xl text-white text-sm focus:border-cyan-500 focus:outline-none" placeholder="${ph}" ${req ? 'required' : ''} ${type==='number' ? 'step="0.01" min="0"' : ''}></div>`;
-    const sel = (id, label, opts, val) => `<div><label class="block text-slate-300 text-xs font-medium mb-1">${label}</label><select id="${id}" class="w-full px-3 py-2.5 bg-slate-800 border border-slate-600 rounded-xl text-white text-sm focus:border-cyan-500 focus:outline-none">${opts.map(o => '<option value="'+o+'"'+(o===val?' selected':'')+'>'+o+'</option>').join('')}</select></div>`;
-
-    if (currentTab === 'inward') {
-        title.textContent = 'Edit Inward Entry';
-        form.innerHTML = inp('f_date','Date','date',true,'',r.entry_date) + inp('f_material','Material','text',true,'',r.material) + '<div class="grid grid-cols-2 gap-3">' + inp('f_qty','Qty (KG)','number',true,'',r.qty_kg) + inp('f_rate','Rate ₹/kg','number',false,'',r.rate||'') + '</div>' + inp('f_supplier','Supplier','text',false,'',r.supplier||'') + '<div class="grid grid-cols-2 gap-3">' + inp('f_vehicle','Vehicle No.','text',false,'',r.vehicle_no||'') + inp('f_plot','Plot','text',false,'',r.plot||'') + '</div>' + inp('f_notes','Notes','text',false,'',r.notes||'') + '<button type="submit" class="w-full py-3 bg-gradient-to-r from-cyan-500 to-emerald-500 text-white font-semibold rounded-xl hover:shadow-lg transition-all">Update Entry</button>';
-    } else if (currentTab === 'production') {
-        title.textContent = 'Edit Production Entry';
-        form.innerHTML = inp('f_date','Date','date',true,'',r.entry_date) + '<div class="grid grid-cols-2 gap-3">' + sel('f_shift','Shift',['Day','Night'],r.shift) + inp('f_machine','Machine','text',true,'',r.machine) + '</div>' + inp('f_material','Material','text',true,'',r.material) + '<div class="grid grid-cols-2 gap-3">' + inp('f_output','Output (KG)','number',true,'',r.output_kg) + inp('f_lums','Lums (KG)','number',false,'',r.lums_kg||'') + '</div>' + inp('f_notes','Notes','text',false,'',r.notes||'') + '<button type="submit" class="w-full py-3 bg-gradient-to-r from-emerald-500 to-green-600 text-white font-semibold rounded-xl hover:shadow-lg transition-all">Update Entry</button>';
-    } else if (currentTab === 'outward') {
-        title.textContent = 'Edit Outward Entry';
-        form.innerHTML = inp('f_date','Date','date',true,'',r.entry_date) + inp('f_material','Material','text',true,'',r.material) + '<div class="grid grid-cols-2 gap-3">' + inp('f_qty','Qty (KG)','number',true,'',r.qty_kg) + inp('f_rate','Rate ₹/kg','number',false,'',r.rate||'') + '</div>' + inp('f_customer','Customer','text',false,'',r.customer||'') + inp('f_vehicle','Vehicle No.','text',false,'',r.vehicle_no||'') + inp('f_notes','Notes','text',false,'',r.notes||'') + '<button type="submit" class="w-full py-3 bg-gradient-to-r from-amber-500 to-orange-500 text-white font-semibold rounded-xl hover:shadow-lg transition-all">Update Entry</button>';
-    } else if (currentTab === 'jobwork') {
-        title.textContent = 'Edit Job Work Entry';
-        form.innerHTML = inp('f_date','Date','date',true,'',r.entry_date) + sel('f_direction','Direction',['IN','OUT'],r.direction) + inp('f_material','Material','text',true,'',r.material) + inp('f_qty','Qty (KG)','number',true,'',r.qty_kg) + inp('f_party','Party','text',false,'',r.party||'') + '<div class="grid grid-cols-2 gap-3">' + inp('f_vehicle','Vehicle No.','text',false,'',r.vehicle_no||'') + inp('f_plot','Plot','text',false,'',r.plot||'') + '</div>' + inp('f_notes','Notes','text',false,'',r.notes||'') + '<button type="submit" class="w-full py-3 bg-gradient-to-r from-purple-500 to-violet-600 text-white font-semibold rounded-xl hover:shadow-lg transition-all">Update Entry</button>';
+        form.onsubmit=async function(e){
+            e.preventDefault();const b=form.querySelector('button[type="submit"]');b.disabled=true;b.innerHTML='<i class="fas fa-spinner fa-spin mr-2"></i>Updating...';
+            await db.from('production').update({entry_date:g('f_date'),shift:g('f_shift'),machine:g('f_machine'),finished_good:g('f_fg'),output_kg:gn('f_output'),lums_kg:gn('f_lums')||0,notes:g('f_notes')||null}).eq('id',id);
+            await db.from('production_materials').delete().eq('production_id',id);
+            const mats=getRawMaterials();
+            if(mats.length>0)await db.from('production_materials').insert(mats.map(m=>({production_id:id,material:m.material,qty_kg:m.qty_kg})));
+            closeAddModal();loadCurrentTab();if(currentUser.role==='admin')loadSummary();
+        };
+        return;
     }
 
-    form.onsubmit = async function(e) {
-        e.preventDefault();
-        const b = form.querySelector('button[type="submit"]');
-        b.disabled = true; b.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Updating...';
-        let upd = {};
-
-        if (currentTab === 'inward') {
-            upd = { entry_date: g('f_date'), material: g('f_material'), qty_kg: gn('f_qty'), rate: gn('f_rate') || null, supplier: g('f_supplier') || null, vehicle_no: g('f_vehicle') || null, plot: g('f_plot') || null, notes: g('f_notes') || null };
-        } else if (currentTab === 'production') {
-            upd = { entry_date: g('f_date'), shift: g('f_shift'), machine: g('f_machine'), material: g('f_material'), output_kg: gn('f_output'), lums_kg: gn('f_lums') || 0, notes: g('f_notes') || null };
-        } else if (currentTab === 'outward') {
-            upd = { entry_date: g('f_date'), material: g('f_material'), qty_kg: gn('f_qty'), rate: gn('f_rate') || null, customer: g('f_customer') || null, vehicle_no: g('f_vehicle') || null, notes: g('f_notes') || null };
-        } else if (currentTab === 'jobwork') {
-            upd = { entry_date: g('f_date'), direction: g('f_direction'), material: g('f_material'), qty_kg: gn('f_qty'), party: g('f_party') || null, vehicle_no: g('f_vehicle') || null, plot: g('f_plot') || null, notes: g('f_notes') || null };
-        }
-
-        const { error } = await db.from(currentTab).update(upd).eq('id', id);
-        if (error) { alert('Error: ' + error.message); b.disabled = false; b.textContent = 'Retry'; return; }
-
-        closeAddModal();
-        loadCurrentTab();
-        if (currentUser.role === 'admin') loadSummary();
+    // Non-production edit
+    const{data:r}=await db.from(currentTab).select('*').eq('id',id).single();
+    if(!r){alert('Could not load');return;}
+    document.getElementById('addModal').classList.remove('hidden');
+    const form=document.getElementById('addForm'),title=document.getElementById('modalTitle');
+    if(currentTab==='inward'){
+        title.textContent='Edit Inward Entry';
+        form.innerHTML=inp('f_date','Date','date',true,'',r.entry_date)+inp('f_material','Material','text',true,'',r.material)+'<div class="grid grid-cols-2 gap-3">'+inp('f_qty','Qty (KG)','number',true,'',r.qty_kg)+inp('f_rate','Rate','number',false,'',r.rate||'')+'</div>'+inp('f_supplier','Supplier','text',false,'',r.supplier||'')+'<div class="grid grid-cols-2 gap-3">'+inp('f_vehicle','Vehicle','text',false,'',r.vehicle_no||'')+inp('f_plot','Plot','text',false,'',r.plot||'')+'</div>'+inp('f_notes','Notes','text',false,'',r.notes||'')+'<button type="submit" class="w-full py-3 bg-gradient-to-r from-cyan-500 to-emerald-500 text-white font-semibold rounded-xl">Update</button>';
+    } else if(currentTab==='outward'){
+        title.textContent='Edit Outward Entry';
+        form.innerHTML=inp('f_date','Date','date',true,'',r.entry_date)+inp('f_material','Material','text',true,'',r.material)+'<div class="grid grid-cols-2 gap-3">'+inp('f_qty','Qty','number',true,'',r.qty_kg)+inp('f_rate','Rate','number',false,'',r.rate||'')+'</div>'+inp('f_customer','Customer','text',false,'',r.customer||'')+inp('f_vehicle','Vehicle','text',false,'',r.vehicle_no||'')+inp('f_notes','Notes','text',false,'',r.notes||'')+'<button type="submit" class="w-full py-3 bg-gradient-to-r from-amber-500 to-orange-500 text-white font-semibold rounded-xl">Update</button>';
+    } else if(currentTab==='jobwork'){
+        title.textContent='Edit Job Work Entry';
+        form.innerHTML=inp('f_date','Date','date',true,'',r.entry_date)+sel('f_direction','Direction',['IN','OUT'],r.direction)+inp('f_material','Material','text',true,'',r.material)+inp('f_qty','Qty','number',true,'',r.qty_kg)+inp('f_party','Party','text',false,'',r.party||'')+'<div class="grid grid-cols-2 gap-3">'+inp('f_vehicle','Vehicle','text',false,'',r.vehicle_no||'')+inp('f_plot','Plot','text',false,'',r.plot||'')+'</div>'+inp('f_notes','Notes','text',false,'',r.notes||'')+'<button type="submit" class="w-full py-3 bg-gradient-to-r from-purple-500 to-violet-600 text-white font-semibold rounded-xl">Update</button>';
+    }
+    form.onsubmit=async function(e){
+        e.preventDefault();const b=form.querySelector('button[type="submit"]');b.disabled=true;b.innerHTML='<i class="fas fa-spinner fa-spin mr-2"></i>Updating...';
+        let upd={};
+        if(currentTab==='inward')upd={entry_date:g('f_date'),material:g('f_material'),qty_kg:gn('f_qty'),rate:gn('f_rate')||null,supplier:g('f_supplier')||null,vehicle_no:g('f_vehicle')||null,plot:g('f_plot')||null,notes:g('f_notes')||null};
+        else if(currentTab==='outward')upd={entry_date:g('f_date'),material:g('f_material'),qty_kg:gn('f_qty'),rate:gn('f_rate')||null,customer:g('f_customer')||null,vehicle_no:g('f_vehicle')||null,notes:g('f_notes')||null};
+        else if(currentTab==='jobwork')upd={entry_date:g('f_date'),direction:g('f_direction'),material:g('f_material'),qty_kg:gn('f_qty'),party:g('f_party')||null,vehicle_no:g('f_vehicle')||null,plot:g('f_plot')||null,notes:g('f_notes')||null};
+        const{error}=await db.from(currentTab).update(upd).eq('id',id);
+        if(error){alert('Error: '+error.message);b.disabled=false;b.textContent='Retry';return;}
+        closeAddModal();loadCurrentTab();if(currentUser.role==='admin')loadSummary();
     };
 }
 </script>
