@@ -306,7 +306,7 @@ function renderRow(r) {
                     ${actionButtons(r)}
                 </div>
                 <div class="text-right flex-shrink-0 ml-4">
-                    <p class="text-amber-400 font-bold text-lg">${parseFloat(r.qty_kg).toFixed(0)} kg</p>
+                    <p class="text-cyan-400 font-bold text-lg">${parseFloat(r.qty_kg).toFixed(0)} kg</p>
                     ${r.rate ? '<p class="text-slate-500 text-xs">@₹' + r.rate + '/kg</p>' : ''}
                 </div>
             </div>
@@ -323,7 +323,7 @@ function renderRow(r) {
                     ${actionButtons(r)}
                 </div>
                 <div class="text-right flex-shrink-0 ml-4">
-                    <p class="${isIn ? 'text-cyan-400' : 'text-amber-400'} font-bold text-lg">${parseFloat(r.qty_kg).toFixed(0)} kg</p>
+                    <p class="text-cyan-400 font-bold text-lg">${parseFloat(r.qty_kg).toFixed(0)} kg</p>
                 </div>
             </div>
         </div>`;
