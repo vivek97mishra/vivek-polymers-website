@@ -1,0 +1,18 @@
+{
+  "name": "VP Operations",
+  "short_name": "VP Ops",
+  "description": "Vivek Polymers Operations Dashboard",
+  "start_url": "/vp-ops-panel.html",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#06b6d4",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/vp-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
