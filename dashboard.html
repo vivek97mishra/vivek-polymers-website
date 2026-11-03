@@ -160,15 +160,7 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
     // Show summary for admin
     if (u.role === 'admin') document.getElementById('summaryCards').classList.remove('hidden');
 
-    // Restrict tabs: staff sees only their tab, admin sees all
-    const roleTabMap = { store_admin: ['inward'], prod_admin: ['production'], sales_admin: ['outward'], qc_admin: ['jobwork'], admin: ['inward','production','outward','jobwork'] };
-    const allowedTabs = roleTabMap[u.role] || [];
-    ['inward','production','outward','jobwork'].forEach(t => {
-        const btn = document.getElementById('tab' + t.charAt(0).toUpperCase() + t.slice(1));
-        if (allowedTabs.includes(t)) { btn.classList.remove('hidden'); } else { btn.classList.add('hidden'); }
-    });
-
-    // Default tab based on role
+    // Restrict tabs + set default based on role
     const roleTab = { store_admin: 'inward', prod_admin: 'production', sales_admin: 'outward', qc_admin: 'jobwork', admin: 'inward' };
     showTab(roleTab[u.role] || 'inward');
     if (u.role === 'admin') loadSummary();
@@ -187,9 +179,16 @@ function logout() {
 // === TABS ===
 function showTab(tab) {
     currentTab = tab;
+    const roleTabMap = { store_admin: ['inward'], prod_admin: ['production'], sales_admin: ['outward'], qc_admin: ['jobwork'], admin: ['inward','production','outward','jobwork'] };
+    const allowed = roleTabMap[currentUser.role] || [];
     ['inward','production','outward','jobwork'].forEach(t => {
         const btn = document.getElementById('tab' + t.charAt(0).toUpperCase() + t.slice(1));
-        btn.className = 'tab-btn px-4 py-2 rounded-xl text-xs font-semibold transition-all ' + (t === tab ? 'tab-active' : 'tab-inactive');
+        if (!allowed.includes(t)) {
+            btn.style.display = 'none';
+        } else {
+            btn.style.display = '';
+            btn.className = 'tab-btn px-4 py-2 rounded-xl text-xs font-semibold transition-all ' + (t === tab ? 'tab-active' : 'tab-inactive');
+        }
     });
     loadCurrentTab();
 }
@@ -247,12 +246,11 @@ function statusBadge(r) {
 
 function actionButtons(r) {
     const isAdmin = currentUser.role === 'admin';
-    const isOwner = r.entered_by === currentUser.full_name;
     const isPending = r.status !== 'approved';
     let btns = '';
 
-    // Edit: owner can edit if pending, admin can always edit
-    if ((isOwner && isPending) || isAdmin) {
+    // Staff can edit/delete any pending entry in their own tab; admin can always edit
+    if (isPending || isAdmin) {
         btns += `<button onclick="editEntry(${r.id})" class="px-2 py-1 bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-400 rounded text-[10px] font-medium transition-all"><i class="fas fa-edit mr-1"></i>Edit</button>`;
         btns += `<button onclick="deleteEntry(${r.id})" class="px-2 py-1 bg-red-500/20 hover:bg-red-500/30 text-red-400 rounded text-[10px] font-medium transition-all"><i class="fas fa-trash"></i></button>`;
     }
