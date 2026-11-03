@@ -160,6 +160,14 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
     // Show summary for admin
     if (u.role === 'admin') document.getElementById('summaryCards').classList.remove('hidden');
 
+    // Restrict tabs: staff sees only their tab, admin sees all
+    const roleTabMap = { store_admin: ['inward'], prod_admin: ['production'], sales_admin: ['outward'], qc_admin: ['jobwork'], admin: ['inward','production','outward','jobwork'] };
+    const allowedTabs = roleTabMap[u.role] || [];
+    ['inward','production','outward','jobwork'].forEach(t => {
+        const btn = document.getElementById('tab' + t.charAt(0).toUpperCase() + t.slice(1));
+        if (allowedTabs.includes(t)) { btn.classList.remove('hidden'); } else { btn.classList.add('hidden'); }
+    });
+
     // Default tab based on role
     const roleTab = { store_admin: 'inward', prod_admin: 'production', sales_admin: 'outward', qc_admin: 'jobwork', admin: 'inward' };
     showTab(roleTab[u.role] || 'inward');
@@ -232,14 +240,39 @@ async function loadCurrentTab() {
 }
 
 // === RENDER ROWS ===
+function statusBadge(r) {
+    if (r.status === 'approved') return '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/20 text-emerald-400">APPROVED</span>';
+    return '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-500/20 text-amber-400">PENDING</span>';
+}
+
+function actionButtons(r) {
+    const isAdmin = currentUser.role === 'admin';
+    const isOwner = r.entered_by === currentUser.full_name;
+    const isPending = r.status !== 'approved';
+    let btns = '';
+
+    // Edit: owner can edit if pending, admin can always edit
+    if ((isOwner && isPending) || isAdmin) {
+        btns += `<button onclick="deleteEntry(${r.id})" class="px-2 py-1 bg-red-500/20 hover:bg-red-500/30 text-red-400 rounded text-[10px] font-medium transition-all"><i class="fas fa-trash"></i></button>`;
+    }
+
+    // Approve: admin only, on pending entries
+    if (isAdmin && isPending) {
+        btns += `<button onclick="approveEntry(${r.id})" class="px-2 py-1 bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-400 rounded text-[10px] font-medium transition-all"><i class="fas fa-check mr-1"></i>Approve</button>`;
+    }
+
+    return btns ? '<div class="flex gap-1 mt-2">' + btns + '</div>' : '';
+}
+
 function renderRow(r) {
     if (currentTab === 'inward') {
         return `<div class="glass-card rounded-lg p-4 mb-2">
             <div class="flex items-start justify-between">
                 <div>
-                    <p class="text-white font-semibold">${r.material}</p>
+                    <p class="text-white font-semibold">${r.material} ${statusBadge(r)}</p>
                     <p class="text-slate-500 text-xs mt-1"><i class="fas fa-truck mr-1"></i>${r.supplier || '-'} ${r.vehicle_no ? '· ' + r.vehicle_no : ''} ${r.plot ? '· Plot ' + r.plot : ''}</p>
                     <p class="text-slate-600 text-xs mt-1">by ${r.entered_by || '-'}${r.notes ? ' · ' + r.notes : ''}</p>
+                    ${actionButtons(r)}
                 </div>
                 <div class="text-right flex-shrink-0 ml-4">
                     <p class="text-cyan-400 font-bold text-lg">${parseFloat(r.qty_kg).toFixed(0)} kg</p>
@@ -252,9 +285,10 @@ function renderRow(r) {
         return `<div class="glass-card rounded-lg p-4 mb-2">
             <div class="flex items-start justify-between">
                 <div>
-                    <p class="text-white font-semibold">${r.material}</p>
+                    <p class="text-white font-semibold">${r.material} ${statusBadge(r)}</p>
                     <p class="text-slate-500 text-xs mt-1"><i class="fas fa-cog mr-1"></i>${r.machine} · ${r.shift} shift</p>
                     <p class="text-slate-600 text-xs mt-1">by ${r.entered_by || '-'}${r.notes ? ' · ' + r.notes : ''}</p>
+                    ${actionButtons(r)}
                 </div>
                 <div class="text-right flex-shrink-0 ml-4">
                     <p class="text-emerald-400 font-bold text-lg">${parseFloat(r.output_kg).toFixed(0)} kg</p>
@@ -267,9 +301,10 @@ function renderRow(r) {
         return `<div class="glass-card rounded-lg p-4 mb-2">
             <div class="flex items-start justify-between">
                 <div>
-                    <p class="text-white font-semibold">${r.material}</p>
+                    <p class="text-white font-semibold">${r.material} ${statusBadge(r)}</p>
                     <p class="text-slate-500 text-xs mt-1"><i class="fas fa-user mr-1"></i>${r.customer || '-'} ${r.vehicle_no ? '· ' + r.vehicle_no : ''}</p>
                     <p class="text-slate-600 text-xs mt-1">by ${r.entered_by || '-'}${r.notes ? ' · ' + r.notes : ''}</p>
+                    ${actionButtons(r)}
                 </div>
                 <div class="text-right flex-shrink-0 ml-4">
                     <p class="text-amber-400 font-bold text-lg">${parseFloat(r.qty_kg).toFixed(0)} kg</p>
@@ -283,9 +318,10 @@ function renderRow(r) {
         return `<div class="glass-card rounded-lg p-4 mb-2">
             <div class="flex items-start justify-between">
                 <div>
-                    <p class="text-white font-semibold">${r.material} <span class="px-2 py-0.5 rounded text-[10px] font-bold ${isIn ? 'bg-cyan-500/20 text-cyan-400' : 'bg-amber-500/20 text-amber-400'}">${r.direction}</span></p>
+                    <p class="text-white font-semibold">${r.material} <span class="px-2 py-0.5 rounded text-[10px] font-bold ${isIn ? 'bg-cyan-500/20 text-cyan-400' : 'bg-amber-500/20 text-amber-400'}">${r.direction}</span> ${statusBadge(r)}</p>
                     <p class="text-slate-500 text-xs mt-1"><i class="fas fa-handshake mr-1"></i>${r.party || '-'} ${r.vehicle_no ? '· ' + r.vehicle_no : ''} ${r.plot ? '· Plot ' + r.plot : ''}</p>
                     <p class="text-slate-600 text-xs mt-1">by ${r.entered_by || '-'}${r.notes ? ' · ' + r.notes : ''}</p>
+                    ${actionButtons(r)}
                 </div>
                 <div class="text-right flex-shrink-0 ml-4">
                     <p class="${isIn ? 'text-cyan-400' : 'text-amber-400'} font-bold text-lg">${parseFloat(r.qty_kg).toFixed(0)} kg</p>
@@ -351,6 +387,23 @@ function openAddModal() {
 function closeAddModal() { document.getElementById('addModal').classList.add('hidden'); }
 function g(id) { const el = document.getElementById(id); return el ? el.value.trim() : ''; }
 function gn(id) { const v = parseFloat(g(id)); return isNaN(v) ? null : v; }
+
+// === APPROVE ENTRY (Admin only) ===
+async function approveEntry(id) {
+    if (!confirm('Approve this entry? It will be locked from further edits.')) return;
+    const { error } = await db.from(currentTab).update({ status: 'approved' }).eq('id', id);
+    if (error) { alert('Error: ' + error.message); return; }
+    loadCurrentTab();
+}
+
+// === DELETE ENTRY ===
+async function deleteEntry(id) {
+    if (!confirm('Delete this entry? This cannot be undone.')) return;
+    const { error } = await db.from(currentTab).delete().eq('id', id);
+    if (error) { alert('Error: ' + error.message); return; }
+    loadCurrentTab();
+    if (currentUser.role === 'admin') loadSummary();
+}
 </script>
 </body>
 </html>
