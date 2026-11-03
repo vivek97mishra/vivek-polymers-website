@@ -246,10 +246,36 @@ const inp=(id,label,type='text',req=true,ph='',val='')=>`<div><label class="bloc
 const sel=(id,label,opts,val='')=>`<div><label class="block text-slate-300 text-xs font-medium mb-1">${label}</label><select id="${id}" class="w-full px-3 py-2.5 bg-slate-800 border border-slate-600 rounded-xl text-white text-sm focus:border-cyan-500 focus:outline-none">${opts.map(o=>'<option value="'+o+'"'+(o===val?' selected':'')+'>'+o+'</option>').join('')}</select></div>`;
 
 let rmCount=0;
-function addRawMaterialRow(mat='',qty=''){
+
+// Compute available stock from all tables
+async function getAvailableStock(){
+    const stock={};
+    function add(m,qty){if(!m)return;const k=m.trim();if(!stock[k])stock[k]=0;stock[k]+=qty;}
+    const{data:iw}=await db.from('inward').select('material,qty_kg');
+    (iw||[]).forEach(r=>add(r.material,parseFloat(r.qty_kg)));
+    const{data:pr}=await db.from('production').select('finished_good,output_kg,lums_kg');
+    (pr||[]).forEach(r=>{add(r.finished_good,parseFloat(r.output_kg));if(r.lums_kg>0)add('Lums ('+r.finished_good+')',parseFloat(r.lums_kg));});
+    const{data:pm}=await db.from('production_materials').select('material,qty_kg');
+    (pm||[]).forEach(r=>add(r.material,-parseFloat(r.qty_kg)));
+    const{data:ow}=await db.from('outward').select('material,qty_kg');
+    (ow||[]).forEach(r=>add(r.material,-parseFloat(r.qty_kg)));
+    const{data:jw}=await db.from('jobwork').select('direction,material,qty_kg');
+    (jw||[]).forEach(r=>{add(r.material,(r.direction==='IN'?1:-1)*parseFloat(r.qty_kg));});
+    // Return only items with positive stock
+    return Object.entries(stock).filter(([k,v])=>v>0.01).map(([name,qty])=>({name,qty})).sort((a,b)=>a.name.localeCompare(b.name));
+}
+
+function addRawMaterialRow(mat='',qty='',stockItems=[]){
     rmCount++;
     const div=document.createElement('div');div.className='grid grid-cols-12 gap-2 items-end rm-row';div.id='rm_row_'+rmCount;
-    div.innerHTML=`<div class="col-span-7"><input type="text" name="rm_mat" value="${mat}" class="w-full px-3 py-2 bg-slate-800 border border-slate-600 rounded-xl text-white text-sm focus:border-cyan-500 focus:outline-none" placeholder="Material name" required></div><div class="col-span-4"><input type="number" name="rm_qty" value="${qty}" step="0.01" min="0" class="w-full px-3 py-2 bg-slate-800 border border-slate-600 rounded-xl text-white text-sm focus:border-cyan-500 focus:outline-none" placeholder="KG" required></div><div class="col-span-1"><button type="button" onclick="this.parentElement.parentElement.remove()" class="px-2 py-2 bg-red-500/20 text-red-400 rounded-xl text-sm hover:bg-red-500/30"><i class="fas fa-minus"></i></button></div>`;
+    let matInput;
+    if(stockItems.length>0){
+        const opts=stockItems.map(s=>`<option value="${s.name}"${s.name===mat?' selected':''}>${s.name} (${s.qty.toFixed(0)} kg)</option>`).join('');
+        matInput=`<select name="rm_mat" class="w-full px-3 py-2 bg-slate-800 border border-slate-600 rounded-xl text-white text-sm focus:border-cyan-500 focus:outline-none" required><option value="">Select material</option>${opts}</select>`;
+    } else {
+        matInput=`<input type="text" name="rm_mat" value="${mat}" class="w-full px-3 py-2 bg-slate-800 border border-slate-600 rounded-xl text-white text-sm focus:border-cyan-500 focus:outline-none" placeholder="Material name" required>`;
+    }
+    div.innerHTML=`<div class="col-span-7">${matInput}</div><div class="col-span-4"><input type="number" name="rm_qty" value="${qty}" step="0.01" min="0" class="w-full px-3 py-2 bg-slate-800 border border-slate-600 rounded-xl text-white text-sm focus:border-cyan-500 focus:outline-none" placeholder="KG" required></div><div class="col-span-1"><button type="button" onclick="this.parentElement.parentElement.remove()" class="px-2 py-2 bg-red-500/20 text-red-400 rounded-xl text-sm hover:bg-red-500/30"><i class="fas fa-minus"></i></button></div>`;
     document.getElementById('rmContainer').appendChild(div);
 }
 
@@ -264,9 +290,15 @@ function getRawMaterials(){
 }
 
 // === ADD ENTRY ===
-function openAddModal(){
+let _stockItems=[];
+async function openAddModal(){
     document.getElementById('addModal').classList.remove('hidden');
     const form=document.getElementById('addForm'),title=document.getElementById('modalTitle');rmCount=0;
+
+    // Pre-fetch stock for production and outward
+    if(currentTab==='production'||currentTab==='outward'){
+        _stockItems=await getAvailableStock();
+    }
 
     if(currentTab==='inward'){
         title.textContent='Log Inward Entry';
@@ -275,14 +307,16 @@ function openAddModal(){
     } else if(currentTab==='production'){
         title.textContent='Log Production Entry';
         form.innerHTML=inp('f_date','Date','date')+'<div class="grid grid-cols-2 gap-3">'+sel('f_shift','Shift',['Day','Night'])+inp('f_machine','Machine','text',true,'e.g., Machine A')+'</div>'+
-            '<div class="glass-card rounded-xl p-3 my-2"><p class="text-slate-300 text-xs font-semibold mb-2"><i class="fas fa-cubes mr-1"></i>Raw Materials Used</p><div id="rmContainer"></div><button type="button" onclick="addRawMaterialRow()" class="mt-2 px-3 py-1.5 bg-slate-700 hover:bg-slate-600 text-cyan-400 rounded-lg text-xs transition-all"><i class="fas fa-plus mr-1"></i>Add Raw Material</button></div>'+
+            '<div class="glass-card rounded-xl p-3 my-2"><p class="text-slate-300 text-xs font-semibold mb-2"><i class="fas fa-cubes mr-1"></i>Raw Materials Used</p><div id="rmContainer"></div><button type="button" onclick="addRawMaterialRow(\'\',\'\',_stockItems)" class="mt-2 px-3 py-1.5 bg-slate-700 hover:bg-slate-600 text-cyan-400 rounded-lg text-xs transition-all"><i class="fas fa-plus mr-1"></i>Add Raw Material</button></div>'+
             '<div class="glass-card rounded-xl p-3 my-2"><p class="text-slate-300 text-xs font-semibold mb-2"><i class="fas fa-box mr-1"></i>Finished Good Output</p>'+inp('f_fg','Finished Good Name','text',true,'e.g., ABS Black')+'<div class="grid grid-cols-2 gap-3">'+inp('f_output','Output (KG)','number')+inp('f_lums','Lums/Waste (KG)','number',false)+'</div></div>'+
             inp('f_notes','Notes','text',false)+'<button type="submit" class="w-full py-3 bg-gradient-to-r from-emerald-500 to-green-600 text-white font-semibold rounded-xl hover:shadow-lg transition-all">Save Production Entry</button>';
         document.getElementById('f_date').value=today;
-        addRawMaterialRow();
+        addRawMaterialRow('','',_stockItems);
     } else if(currentTab==='outward'){
         title.textContent='Log Outward Entry';
-        form.innerHTML=inp('f_date','Date','date')+inp('f_material','Material','text',true,'e.g., PPCP 910 BK')+'<div class="grid grid-cols-2 gap-3">'+inp('f_qty','Qty (KG)','number')+inp('f_rate','Rate ₹/kg','number',false)+'</div>'+inp('f_customer','Customer','text',false)+inp('f_vehicle','Vehicle No.','text',false)+inp('f_notes','Notes','text',false)+'<button type="submit" class="w-full py-3 bg-gradient-to-r from-amber-500 to-orange-500 text-white font-semibold rounded-xl hover:shadow-lg transition-all">Save Outward Entry</button>';
+        const matOpts=_stockItems.map(s=>`<option value="${s.name}">${s.name} (${s.qty.toFixed(0)} kg)</option>`).join('');
+        const matSelect=`<div><label class="block text-slate-300 text-xs font-medium mb-1">Material</label><select id="f_material" class="w-full px-3 py-2.5 bg-slate-800 border border-slate-600 rounded-xl text-white text-sm focus:border-cyan-500 focus:outline-none" required><option value="">Select from stock</option>${matOpts}</select></div>`;
+        form.innerHTML=inp('f_date','Date','date')+matSelect+'<div class="grid grid-cols-2 gap-3">'+inp('f_qty','Qty (KG)','number')+inp('f_rate','Rate ₹/kg','number',false)+'</div>'+inp('f_customer','Customer','text',false)+inp('f_vehicle','Vehicle No.','text',false)+inp('f_notes','Notes','text',false)+'<button type="submit" class="w-full py-3 bg-gradient-to-r from-amber-500 to-orange-500 text-white font-semibold rounded-xl hover:shadow-lg transition-all">Save Outward Entry</button>';
         document.getElementById('f_date').value=today;
     } else if(currentTab==='jobwork'){
         title.textContent='Log Job Work Entry';
