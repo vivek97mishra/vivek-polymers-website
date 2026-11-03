@@ -253,6 +253,7 @@ function actionButtons(r) {
 
     // Edit: owner can edit if pending, admin can always edit
     if ((isOwner && isPending) || isAdmin) {
+        btns += `<button onclick="editEntry(${r.id})" class="px-2 py-1 bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-400 rounded text-[10px] font-medium transition-all"><i class="fas fa-edit mr-1"></i>Edit</button>`;
         btns += `<button onclick="deleteEntry(${r.id})" class="px-2 py-1 bg-red-500/20 hover:bg-red-500/30 text-red-400 rounded text-[10px] font-medium transition-all"><i class="fas fa-trash"></i></button>`;
     }
 
@@ -403,6 +404,58 @@ async function deleteEntry(id) {
     if (error) { alert('Error: ' + error.message); return; }
     loadCurrentTab();
     if (currentUser.role === 'admin') loadSummary();
+}
+
+// === EDIT ENTRY ===
+async function editEntry(id) {
+    // Fetch the entry
+    const { data, error } = await db.from(currentTab).select('*').eq('id', id).single();
+    if (error || !data) { alert('Could not load entry'); return; }
+    const r = data;
+
+    document.getElementById('addModal').classList.remove('hidden');
+    const form = document.getElementById('addForm');
+    const title = document.getElementById('modalTitle');
+    const inp = (id, label, type='text', req=true, ph='', val='') => `<div><label class="block text-slate-300 text-xs font-medium mb-1">${label}</label><input type="${type}" id="${id}" value="${val}" class="w-full px-3 py-2.5 bg-slate-800 border border-slate-600 rounded-xl text-white text-sm focus:border-cyan-500 focus:outline-none" placeholder="${ph}" ${req ? 'required' : ''} ${type==='number' ? 'step="0.01" min="0"' : ''}></div>`;
+    const sel = (id, label, opts, val) => `<div><label class="block text-slate-300 text-xs font-medium mb-1">${label}</label><select id="${id}" class="w-full px-3 py-2.5 bg-slate-800 border border-slate-600 rounded-xl text-white text-sm focus:border-cyan-500 focus:outline-none">${opts.map(o => '<option value="'+o+'"'+(o===val?' selected':'')+'>'+o+'</option>').join('')}</select></div>`;
+
+    if (currentTab === 'inward') {
+        title.textContent = 'Edit Inward Entry';
+        form.innerHTML = inp('f_date','Date','date',true,'',r.entry_date) + inp('f_material','Material','text',true,'',r.material) + '<div class="grid grid-cols-2 gap-3">' + inp('f_qty','Qty (KG)','number',true,'',r.qty_kg) + inp('f_rate','Rate ₹/kg','number',false,'',r.rate||'') + '</div>' + inp('f_supplier','Supplier','text',false,'',r.supplier||'') + '<div class="grid grid-cols-2 gap-3">' + inp('f_vehicle','Vehicle No.','text',false,'',r.vehicle_no||'') + inp('f_plot','Plot','text',false,'',r.plot||'') + '</div>' + inp('f_notes','Notes','text',false,'',r.notes||'') + '<button type="submit" class="w-full py-3 bg-gradient-to-r from-cyan-500 to-emerald-500 text-white font-semibold rounded-xl hover:shadow-lg transition-all">Update Entry</button>';
+    } else if (currentTab === 'production') {
+        title.textContent = 'Edit Production Entry';
+        form.innerHTML = inp('f_date','Date','date',true,'',r.entry_date) + '<div class="grid grid-cols-2 gap-3">' + sel('f_shift','Shift',['Day','Night'],r.shift) + inp('f_machine','Machine','text',true,'',r.machine) + '</div>' + inp('f_material','Material','text',true,'',r.material) + '<div class="grid grid-cols-2 gap-3">' + inp('f_output','Output (KG)','number',true,'',r.output_kg) + inp('f_lums','Lums (KG)','number',false,'',r.lums_kg||'') + '</div>' + inp('f_notes','Notes','text',false,'',r.notes||'') + '<button type="submit" class="w-full py-3 bg-gradient-to-r from-emerald-500 to-green-600 text-white font-semibold rounded-xl hover:shadow-lg transition-all">Update Entry</button>';
+    } else if (currentTab === 'outward') {
+        title.textContent = 'Edit Outward Entry';
+        form.innerHTML = inp('f_date','Date','date',true,'',r.entry_date) + inp('f_material','Material','text',true,'',r.material) + '<div class="grid grid-cols-2 gap-3">' + inp('f_qty','Qty (KG)','number',true,'',r.qty_kg) + inp('f_rate','Rate ₹/kg','number',false,'',r.rate||'') + '</div>' + inp('f_customer','Customer','text',false,'',r.customer||'') + inp('f_vehicle','Vehicle No.','text',false,'',r.vehicle_no||'') + inp('f_notes','Notes','text',false,'',r.notes||'') + '<button type="submit" class="w-full py-3 bg-gradient-to-r from-amber-500 to-orange-500 text-white font-semibold rounded-xl hover:shadow-lg transition-all">Update Entry</button>';
+    } else if (currentTab === 'jobwork') {
+        title.textContent = 'Edit Job Work Entry';
+        form.innerHTML = inp('f_date','Date','date',true,'',r.entry_date) + sel('f_direction','Direction',['IN','OUT'],r.direction) + inp('f_material','Material','text',true,'',r.material) + inp('f_qty','Qty (KG)','number',true,'',r.qty_kg) + inp('f_party','Party','text',false,'',r.party||'') + '<div class="grid grid-cols-2 gap-3">' + inp('f_vehicle','Vehicle No.','text',false,'',r.vehicle_no||'') + inp('f_plot','Plot','text',false,'',r.plot||'') + '</div>' + inp('f_notes','Notes','text',false,'',r.notes||'') + '<button type="submit" class="w-full py-3 bg-gradient-to-r from-purple-500 to-violet-600 text-white font-semibold rounded-xl hover:shadow-lg transition-all">Update Entry</button>';
+    }
+
+    form.onsubmit = async function(e) {
+        e.preventDefault();
+        const b = form.querySelector('button[type="submit"]');
+        b.disabled = true; b.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Updating...';
+        let upd = {};
+
+        if (currentTab === 'inward') {
+            upd = { entry_date: g('f_date'), material: g('f_material'), qty_kg: gn('f_qty'), rate: gn('f_rate') || null, supplier: g('f_supplier') || null, vehicle_no: g('f_vehicle') || null, plot: g('f_plot') || null, notes: g('f_notes') || null };
+        } else if (currentTab === 'production') {
+            upd = { entry_date: g('f_date'), shift: g('f_shift'), machine: g('f_machine'), material: g('f_material'), output_kg: gn('f_output'), lums_kg: gn('f_lums') || 0, notes: g('f_notes') || null };
+        } else if (currentTab === 'outward') {
+            upd = { entry_date: g('f_date'), material: g('f_material'), qty_kg: gn('f_qty'), rate: gn('f_rate') || null, customer: g('f_customer') || null, vehicle_no: g('f_vehicle') || null, notes: g('f_notes') || null };
+        } else if (currentTab === 'jobwork') {
+            upd = { entry_date: g('f_date'), direction: g('f_direction'), material: g('f_material'), qty_kg: gn('f_qty'), party: g('f_party') || null, vehicle_no: g('f_vehicle') || null, plot: g('f_plot') || null, notes: g('f_notes') || null };
+        }
+
+        const { error } = await db.from(currentTab).update(upd).eq('id', id);
+        if (error) { alert('Error: ' + error.message); b.disabled = false; b.textContent = 'Retry'; return; }
+
+        closeAddModal();
+        loadCurrentTab();
+        if (currentUser.role === 'admin') loadSummary();
+    };
 }
 </script>
 </body>
