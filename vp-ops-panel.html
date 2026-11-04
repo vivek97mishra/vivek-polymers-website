@@ -31,7 +31,7 @@
         <form id="loginForm" class="space-y-4">
             <div><label class="block text-slate-300 text-sm font-medium mb-2">Select Role</label>
                 <select id="roleSelect" class="w-full px-4 py-3 bg-slate-800 border border-slate-600 rounded-xl text-white focus:border-cyan-500 focus:outline-none">
-                    <option value="admin">Administrator</option><option value="store_admin">Store / Inward</option><option value="prod_admin">Production</option><option value="sales_admin">Sales / Outward</option><option value="qc_admin">Job Work</option>
+                    <option value="admin@vivekpolymers.com">Administrator</option><option value="store@vivekpolymers.com">Store / Inward</option><option value="production@vivekpolymers.com">Production</option><option value="quality@vivekpolymers.com">Quality Inspector</option><option value="sales@vivekpolymers.com">Sales / Outward</option><option value="jobwork@vivekpolymers.com">Job Work</option>
                 </select></div>
             <div><label class="block text-slate-300 text-sm font-medium mb-2">Password</label>
                 <input type="password" id="passwordInput" class="w-full px-4 py-3 bg-slate-800 border border-slate-600 rounded-xl text-white focus:border-cyan-500 focus:outline-none" placeholder="Enter password"></div>
@@ -99,26 +99,30 @@ document.getElementById('loginForm').addEventListener('submit',async function(e)
     const role=document.getElementById('roleSelect').value,pw=document.getElementById('passwordInput').value;
     const btn=this.querySelector('button[type="submit"]');
     btn.disabled=true;btn.innerHTML='<i class="fas fa-spinner fa-spin mr-2"></i>Logging in...';
-    const{data,error}=await db.rpc('login',{p_username:role,p_password:pw});
-    if(error||!data||!data.success){alert(data?.error||'Invalid credentials');btn.disabled=false;btn.innerHTML='Login <i class="fas fa-arrow-right ml-2"></i>';return;}
-    const u=data.user;currentUser={username:u.username,role:u.role,full_name:u.full_name};
+    const{data,error}=await db.auth.signInWithPassword({email:role,password:pw});
+    if(error){alert('Invalid credentials: '+error.message);btn.disabled=false;btn.innerHTML='Login <i class="fas fa-arrow-right ml-2"></i>';return;}
+    // Get role from user_roles table
+    const{data:roleData}=await db.rpc('get_my_role');
+    if(!roleData||!roleData.role){alert('No role assigned');await db.auth.signOut();btn.disabled=false;btn.innerHTML='Login <i class="fas fa-arrow-right ml-2"></i>';return;}
+    const u=roleData;currentUser={username:data.user.email,role:u.role,full_name:u.full_name};
     document.getElementById('loginScreen').classList.add('hidden');
     document.getElementById('dashboardScreen').classList.remove('hidden');
     document.getElementById('userFullName').textContent=u.full_name;
     document.getElementById('userRole').textContent=u.role.replace(/_/g,' ').toUpperCase();
     if(u.role==='admin')document.getElementById('summaryCards').classList.remove('hidden');
-    const roleTab={store_admin:'inward',prod_admin:'production',sales_admin:'outward',qc_admin:'jobwork',admin:'inward'};
+    const roleTab={store_admin:'inward',prod_admin:'production',quality_admin:'production',sales_admin:'outward',qc_admin:'jobwork',admin:'inward'};
     showTab(roleTab[u.role]||'inward');
     if(u.role==='admin')loadSummary();
 });
 function logout(){
+    db.auth.signOut();
     currentUser=null;document.getElementById('loginScreen').classList.remove('hidden');
     document.getElementById('dashboardScreen').classList.add('hidden');document.getElementById('summaryCards').classList.add('hidden');
     const btn=document.querySelector('#loginForm button[type="submit"]');btn.disabled=false;btn.innerHTML='Login <i class="fas fa-arrow-right ml-2"></i>';document.getElementById('passwordInput').value='';
 }
 function showTab(tab){
     currentTab=tab;
-    const roleTabMap={store_admin:['inward'],prod_admin:['production'],sales_admin:['outward'],qc_admin:['jobwork'],admin:allTabs};
+    const roleTabMap={store_admin:['inward'],prod_admin:['production'],quality_admin:['production','inventory'],sales_admin:['outward'],qc_admin:['jobwork'],admin:allTabs};
     const allowed=roleTabMap[currentUser.role]||[];
     allTabs.forEach(t=>{const b=document.getElementById('tab'+t.charAt(0).toUpperCase()+t.slice(1));if(!b)return;if(!allowed.includes(t)){b.style.display='none'}else{b.style.display='';b.className='tab-btn px-4 py-2 rounded-xl text-xs font-semibold transition-all '+(t===tab?'tab-active':'tab-inactive')}});
     // Hide filter bar + add button for inventory tab
