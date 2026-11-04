@@ -99,9 +99,9 @@ document.getElementById('loginForm').addEventListener('submit',async function(e)
     const role=document.getElementById('roleSelect').value,pw=document.getElementById('passwordInput').value;
     const btn=this.querySelector('button[type="submit"]');
     btn.disabled=true;btn.innerHTML='<i class="fas fa-spinner fa-spin mr-2"></i>Logging in...';
-    const{data,error}=await db.from('users').select('*').eq('username',role).eq('password',pw).eq('is_active',true);
-    if(error||!data||data.length===0){alert('Invalid credentials');btn.disabled=false;btn.innerHTML='Login <i class="fas fa-arrow-right ml-2"></i>';return;}
-    const u=data[0];currentUser={username:u.username,role:u.role,full_name:u.full_name};
+    const{data,error}=await db.rpc('login',{p_username:role,p_password:pw});
+    if(error||!data||!data.success){alert(data?.error||'Invalid credentials');btn.disabled=false;btn.innerHTML='Login <i class="fas fa-arrow-right ml-2"></i>';return;}
+    const u=data.user;currentUser={username:u.username,role:u.role,full_name:u.full_name};
     document.getElementById('loginScreen').classList.add('hidden');
     document.getElementById('dashboardScreen').classList.remove('hidden');
     document.getElementById('userFullName').textContent=u.full_name;
