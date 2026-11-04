@@ -62,6 +62,7 @@
         <div class="flex flex-wrap gap-2 mb-6" id="tabBar">
             <button onclick="showTab('inward')" id="tabInward" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold transition-all tab-active"><i class="fas fa-arrow-down mr-1"></i>Inward</button>
             <button onclick="showTab('production')" id="tabProduction" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold transition-all tab-inactive"><i class="fas fa-industry mr-1"></i>Production</button>
+            <button onclick="showTab('quality')" id="tabQuality" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold transition-all tab-inactive"><i class="fas fa-flask mr-1"></i>Quality</button>
             <button onclick="showTab('outward')" id="tabOutward" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold transition-all tab-inactive"><i class="fas fa-arrow-up mr-1"></i>Outward</button>
             <button onclick="showTab('jobwork')" id="tabJobwork" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold transition-all tab-inactive"><i class="fas fa-exchange-alt mr-1"></i>Job Work</button>
             <button onclick="showTab('inventory')" id="tabInventory" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold transition-all tab-inactive"><i class="fas fa-warehouse mr-1"></i>Inventory</button>
@@ -90,7 +91,7 @@
 const db=window.supabase.createClient('https://pooemfcjiopldnojlrso.supabase.co','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBvb2VtZmNqaW9wbGRub2pscnNvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTM2MTM3NDIsImV4cCI6MjEwOTE4OTc0Mn0.qOImzrhI12HdaxTaAezUteH5nlQuucYHK8P8w1cdI5c');
 let currentUser=null,currentTab='inward';
 const today=new Date().toISOString().split('T')[0];
-const allTabs=['inward','production','outward','jobwork','inventory'];
+const allTabs=['inward','production','quality','outward','jobwork','inventory'];
 
 document.getElementById('loginForm').addEventListener('submit',async function(e){
     e.preventDefault();
@@ -108,7 +109,7 @@ document.getElementById('loginForm').addEventListener('submit',async function(e)
     document.getElementById('userFullName').textContent=u.full_name;
     document.getElementById('userRole').textContent=u.role.replace(/_/g,' ').toUpperCase();
     if(u.role==='admin')document.getElementById('summaryCards').classList.remove('hidden');
-    const roleTab={store_admin:'inward',prod_admin:'production',quality_admin:'production',sales_admin:'outward',qc_admin:'jobwork',admin:'inward'};
+    const roleTab={store_admin:'inward',prod_admin:'production',quality_admin:'quality',sales_admin:'outward',qc_admin:'jobwork',admin:'inward'};
     showTab(roleTab[u.role]||'inward');
     if(u.role==='admin')loadSummary();
 });
@@ -120,11 +121,11 @@ function logout(){
 }
 function showTab(tab){
     currentTab=tab;
-    const roleTabMap={store_admin:['inward'],prod_admin:['production'],quality_admin:['production','inventory'],sales_admin:['outward'],qc_admin:['jobwork'],admin:allTabs};
+    const roleTabMap={store_admin:['inward'],prod_admin:['production'],quality_admin:['quality'],sales_admin:['outward'],qc_admin:['jobwork'],admin:allTabs};
     const allowed=roleTabMap[currentUser.role]||[];
     allTabs.forEach(t=>{const b=document.getElementById('tab'+t.charAt(0).toUpperCase()+t.slice(1));if(!b)return;if(!allowed.includes(t)){b.style.display='none'}else{b.style.display='';b.className='tab-btn px-4 py-2 rounded-xl text-xs font-semibold transition-all '+(t===tab?'tab-active':'tab-inactive')}});
-    // Hide filter bar + add button for inventory tab
-    document.getElementById('filterBar').style.display=tab==='inventory'?'none':'';
+    // Hide filter bar + add button for inventory and quality tabs
+    document.getElementById('filterBar').style.display=(tab==='inventory'||tab==='quality')?'none':'';
     loadCurrentTab();
 }
 function clearFilter(){document.getElementById('dateFilter').value='';loadCurrentTab();}
@@ -144,6 +145,7 @@ async function loadSummary(){
 // === LOAD DATA ===
 async function loadCurrentTab(){
     if(currentTab==='inventory'){loadInventory();return;}
+    if(currentTab==='quality'){loadQualityTab();return;}
     const grid=document.getElementById('dataGrid');
     grid.innerHTML='<div class="glass-card rounded-xl p-8 text-center"><p class="text-slate-400"><i class="fas fa-spinner fa-spin mr-2"></i>Loading...</p></div>';
     const dateVal=document.getElementById('dateFilter').value;
@@ -181,6 +183,103 @@ function renderGrouped(data,grid,tab){
     grid.innerHTML=html;
 }
 
+// === QUALITY TAB ===
+async function loadQualityTab(){
+    const grid=document.getElementById('dataGrid');
+    grid.innerHTML='<div class="glass-card rounded-xl p-8 text-center"><p class="text-slate-400"><i class="fas fa-spinner fa-spin mr-2"></i>Loading...</p></div>';
+
+    // Get production entries with their QC status
+    const{data,error}=await db.from('production').select('*, production_materials(*), quality_check(*)').order('entry_date',{ascending:false}).order('created_at',{ascending:false}).limit(50);
+    if(error){grid.innerHTML='<p class="text-red-400 p-8 text-center">'+error.message+'</p>';return;}
+    if(!data||data.length===0){grid.innerHTML='<div class="glass-card rounded-xl p-8 text-center"><p class="text-slate-400">No production entries to review</p></div>';return;}
+
+    // Split into pending and completed
+    const pending=data.filter(r=>r.qc_status==='pending');
+    const completed=data.filter(r=>r.qc_status!=='pending');
+
+    let html='';
+    if(pending.length>0){
+        html+='<h3 class="text-amber-400 font-semibold text-sm mb-3"><i class="fas fa-clock mr-1"></i>Pending QC ('+pending.length+')</h3>';
+        pending.forEach(r=>{html+=renderQCCard(r,true);});
+    }
+    if(completed.length>0){
+        html+='<h3 class="text-emerald-400 font-semibold text-sm mb-3 mt-6"><i class="fas fa-check-circle mr-1"></i>Completed QC</h3>';
+        completed.forEach(r=>{html+=renderQCCard(r,false);});
+    }
+    grid.innerHTML=html;
+}
+
+function renderQCCard(r,canCheck){
+    const mats=(r.production_materials||[]).map(m=>m.material+': '+parseFloat(m.qty_kg).toFixed(0)+'kg').join(', ');
+    const qc=r.quality_check&&r.quality_check.length>0?r.quality_check[0]:null;
+    const statusBg=r.qc_status==='passed'?'bg-emerald-500/20 text-emerald-400':r.qc_status==='failed'?'bg-red-500/20 text-red-400':'bg-amber-500/20 text-amber-400';
+    const statusText=r.qc_status.toUpperCase();
+
+    return `<div class="glass-card rounded-lg p-4 mb-2">
+        <div class="flex items-start justify-between">
+            <div class="flex-1">
+                <p class="text-white font-semibold">${r.finished_good} <span class="px-2 py-0.5 rounded text-[10px] font-bold ${statusBg}">${statusText}</span></p>
+                <p class="text-slate-500 text-xs mt-1"><i class="fas fa-cog mr-1"></i>${r.machine} · ${r.shift} shift · ${r.entry_date}</p>
+                ${mats?'<p class="text-slate-600 text-xs mt-1">Raw: '+mats+'</p>':''}
+                <p class="text-slate-600 text-xs mt-1">by ${r.entered_by||'-'}</p>
+                ${qc?'<div class="mt-2 p-2 bg-slate-800/50 rounded-lg"><p class="text-slate-400 text-xs">Impact: <span class="text-white">'+(qc.impact_value||'-')+'</span> · MFI: <span class="text-white">'+(qc.mfi_value||'-')+'</span> · Tensile: <span class="text-white">'+(qc.tensile_value||'-')+'</span> · Content: <span class="text-white">'+(qc.content_value||'-')+'</span></p><p class="text-slate-500 text-xs mt-1">by '+qc.checked_by+(qc.remarks?' · '+qc.remarks:'')+'</p></div>':''}
+                ${canCheck?'<button onclick="openQCForm('+r.id+',\''+r.finished_good.replace(/'/g,"\\'")+'\')" class="mt-2 px-3 py-1.5 bg-gradient-to-r from-purple-500 to-violet-600 text-white rounded-lg text-xs font-medium"><i class="fas fa-flask mr-1"></i>Run QC Check</button>':''}
+            </div>
+            <div class="text-right flex-shrink-0 ml-4">
+                <p class="text-cyan-400 font-bold text-lg">${parseFloat(r.output_kg).toFixed(0)} kg</p>
+                ${r.lums_kg>0?'<p class="text-red-400 text-xs">Lums: '+parseFloat(r.lums_kg).toFixed(0)+' kg</p>':''}
+            </div>
+        </div>
+    </div>`;
+}
+
+function openQCForm(prodId,material){
+    document.getElementById('addModal').classList.remove('hidden');
+    const form=document.getElementById('addForm');
+    const title=document.getElementById('modalTitle');
+    title.textContent='QC Check: '+material;
+    form.innerHTML=`
+        <div class="grid grid-cols-2 gap-3">
+            <div><label class="block text-slate-300 text-xs font-medium mb-1">Impact Value</label><input type="text" id="qc_impact" class="w-full px-3 py-2.5 bg-slate-800 border border-slate-600 rounded-xl text-white text-sm focus:border-cyan-500 focus:outline-none" placeholder="e.g., 12.5 kJ/m²"></div>
+            <div><label class="block text-slate-300 text-xs font-medium mb-1">MFI Value</label><input type="text" id="qc_mfi" class="w-full px-3 py-2.5 bg-slate-800 border border-slate-600 rounded-xl text-white text-sm focus:border-cyan-500 focus:outline-none" placeholder="e.g., 8.2 g/10min"></div>
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+            <div><label class="block text-slate-300 text-xs font-medium mb-1">Tensile Value</label><input type="text" id="qc_tensile" class="w-full px-3 py-2.5 bg-slate-800 border border-slate-600 rounded-xl text-white text-sm focus:border-cyan-500 focus:outline-none" placeholder="e.g., 45 MPa"></div>
+            <div><label class="block text-slate-300 text-xs font-medium mb-1">Content Value</label><input type="text" id="qc_content" class="w-full px-3 py-2.5 bg-slate-800 border border-slate-600 rounded-xl text-white text-sm focus:border-cyan-500 focus:outline-none" placeholder="e.g., 98.5%"></div>
+        </div>
+        <div><label class="block text-slate-300 text-xs font-medium mb-1">Result</label>
+            <select id="qc_result" class="w-full px-3 py-2.5 bg-slate-800 border border-slate-600 rounded-xl text-white text-sm focus:border-cyan-500 focus:outline-none" required>
+                <option value="PASS">PASS</option><option value="FAIL">FAIL</option>
+            </select></div>
+        <div><label class="block text-slate-300 text-xs font-medium mb-1">Remarks (optional)</label><input type="text" id="qc_remarks" class="w-full px-3 py-2.5 bg-slate-800 border border-slate-600 rounded-xl text-white text-sm focus:border-cyan-500 focus:outline-none" placeholder="Any notes"></div>
+        <button type="submit" class="w-full py-3 bg-gradient-to-r from-purple-500 to-violet-600 text-white font-semibold rounded-xl hover:shadow-lg transition-all">Submit QC Result</button>`;
+
+    form.onsubmit=async function(e){
+        e.preventDefault();
+        const b=form.querySelector('button[type="submit"]');b.disabled=true;b.innerHTML='<i class="fas fa-spinner fa-spin mr-2"></i>Saving...';
+        const result=document.getElementById('qc_result').value;
+
+        // Insert QC check
+        const{error:qcErr}=await db.from('quality_check').insert({
+            production_id:prodId,
+            impact_value:document.getElementById('qc_impact').value||null,
+            mfi_value:document.getElementById('qc_mfi').value||null,
+            tensile_value:document.getElementById('qc_tensile').value||null,
+            content_value:document.getElementById('qc_content').value||null,
+            result:result,
+            remarks:document.getElementById('qc_remarks').value||null,
+            checked_by:currentUser.full_name
+        });
+        if(qcErr){alert('Error: '+qcErr.message);b.disabled=false;b.textContent='Retry';return;}
+
+        // Update production qc_status
+        await db.from('production').update({qc_status:result==='PASS'?'passed':'failed'}).eq('id',prodId);
+
+        closeAddModal();
+        loadQualityTab();
+    };
+}
+
 // === INVENTORY (computed) ===
 async function loadInventory(){
     const grid=document.getElementById('dataGrid');
@@ -191,8 +290,8 @@ async function loadInventory(){
     const{data:iw}=await db.from('inward').select('material,qty_kg');
     (iw||[]).forEach(r=>add(r.material,parseFloat(r.qty_kg)));
 
-    const{data:pr}=await db.from('production').select('finished_good,output_kg,lums_kg');
-    (pr||[]).forEach(r=>{add(r.finished_good,parseFloat(r.output_kg));if(r.lums_kg>0)add('Lums ('+r.finished_good+')',parseFloat(r.lums_kg));});
+    const{data:pr}=await db.from('production').select('finished_good,output_kg,lums_kg,qc_status');
+    (pr||[]).forEach(r=>{if(r.qc_status==='passed'){add(r.finished_good,parseFloat(r.output_kg));if(r.lums_kg>0)add('Lums ('+r.finished_good+')',parseFloat(r.lums_kg));}});
 
     const{data:pm}=await db.from('production_materials').select('material,qty_kg');
     (pm||[]).forEach(r=>add(r.material,-parseFloat(r.qty_kg)));
@@ -261,8 +360,10 @@ async function getAvailableStock(){
     function add(m,qty){if(!m)return;const k=m.trim();if(!stock[k])stock[k]=0;stock[k]+=qty;}
     const{data:iw}=await db.from('inward').select('material,qty_kg');
     (iw||[]).forEach(r=>add(r.material,parseFloat(r.qty_kg)));
-    const{data:pr}=await db.from('production').select('finished_good,output_kg,lums_kg');
-    (pr||[]).forEach(r=>{add(r.finished_good,parseFloat(r.output_kg));if(r.lums_kg>0)add('Lums ('+r.finished_good+')',parseFloat(r.lums_kg));});
+
+    const{data:pr}=await db.from('production').select('finished_good,output_kg,lums_kg,qc_status');
+    (pr||[]).forEach(r=>{if(r.qc_status==='passed'){add(r.finished_good,parseFloat(r.output_kg));if(r.lums_kg>0)add('Lums ('+r.finished_good+')',parseFloat(r.lums_kg));}});
+
     const{data:pm}=await db.from('production_materials').select('material,qty_kg');
     (pm||[]).forEach(r=>add(r.material,-parseFloat(r.qty_kg)));
     const{data:ow}=await db.from('outward').select('material,qty_kg');
